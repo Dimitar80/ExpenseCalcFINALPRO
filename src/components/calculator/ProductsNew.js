@@ -23,7 +23,8 @@ class ProductsNew extends React.Component  {
             //  console.log('hovered')
          }
 
-        
+        //    Prilagodi ja funkcijava kako kaj HEADER-ot vo react-app-Redux
+        //    Bidejki vaka e samo On/Off
            //e- event object//
          CldBtn = (e) => {
             console.log(e.target.id)
