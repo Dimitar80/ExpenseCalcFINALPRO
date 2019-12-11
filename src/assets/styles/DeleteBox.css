@@ -1,0 +1,96 @@
+/*DP30-08-2019*/
+html,body {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    font-family: 'Roboto', sans-serif;
+    background-color: #E5EDF5;
+    /* overflow: hidden; */
+}
+
+/* login - flex container -parent element */
+#delproducts {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
+#general-screen {
+    background-color: 
+    rgba(66, 66, 66, 0.5);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+}
+
+/*DELETE BOX - start*/
+#delbox {
+    position: fixed;
+    width: 400px;
+    height: 200px;;
+    box-sizing: border-box;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 10px;
+    padding: 20px;
+    /* top: 150; */
+}
+
+
+#boxtext {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 20px;
+}
+
+#delbox h2 {
+    font-size: 18px;
+    color: #576574;
+    font-weight: bold;
+    /* margin-right: auto; */
+}
+#delbox p {
+    font-size: 16px;
+    color: #576574;
+}
+
+#buttons {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 20px;
+    box-sizing: border-box;
+    padding-bottom: 20px;
+}
+
+#delbox #cancel, #delete {
+    font-size: 15px;
+    color: #576574;
+    background-color: #fff;
+    border: none;
+    outline: none;
+    padding: 8px 15px 8px 15px;
+    border-radius: 3px;
+    Box-shadow: 
+    0px 0px 16px  rgba(0, 0, 0, 0.17);
+    cursor: pointer;
+}
+#delbox #delete {
+    background-color: #576574;
+    color: #fff;
+    /* font-weight: 500; */
+}
+/*DELETE BOX - end*/
+
+
+
+
+
+

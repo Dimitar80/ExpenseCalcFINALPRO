@@ -1,0 +1,47 @@
+    /* TABLE */
+    .products-table{
+        table-layout: fixed;
+        width: 100%;
+        border-collapse:separate;
+        border-spacing:0 5px;
+    }
+    
+    .products-table thead {
+        font-size: 16px;
+        color: #404040;
+    }
+    
+    .products-table thead th {
+        border-bottom: 1px solid;
+        border-color: #707070;
+        padding: 15px;
+        text-align: start;
+    }
+    
+    tbody:before { 
+    /* ZA DA IMA MALCE PROSTOR MEGJU THEAD I TBODY DODAVA EDEN PRAZEN CELL*/
+        content:"@";
+        display:block;
+        line-height:1em;
+        background: #E5EDF5;
+        text-indent:-99999px;
+    }
+    
+    .products-table tbody {
+        font-size: 16px;
+        color: #575757;
+        background: #fff;
+    }
+    
+    
+    .products-table tbody tr td {
+        padding: 15px;
+    }
+    
+    .edit-del-btn{
+        font-size: 16px;
+        border: none;
+        background: transparent;
+        outline-color: #1DD1A1;
+    }
+      
