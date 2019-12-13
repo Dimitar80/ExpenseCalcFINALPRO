@@ -69,7 +69,7 @@ class Navbar extends React.Component {
             // <React.Fragment>
            <header id='header'>
                <nav id='mainnav'>
-               < Link to= '/' style={{textDecoration: 'none', color: '#576574'}}>
+               < Link to= '/' >
                    <button id='bthome' >
                        HOME
                    </button>

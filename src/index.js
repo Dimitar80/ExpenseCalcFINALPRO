@@ -17,9 +17,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import ProLogin from './components/home/ProLogin'
 import Register from './components/home/Register'
 import Expenses from './components/calculator/Expenses'
-// import Products from './components/calculator/Products'
 import ProductsNew from './components/calculator/ProductsNew'
-import DeleteBox from './components/calculator/DeleteBox'
+// import DeleteBox from './components/calculator/DeleteBox'
 import NewProduct from './components/newProduct/NewProduct'
 
 const app = document.getElementById('app')
