@@ -1,46 +1,40 @@
 /*DP30-08-2019*/
-html,body {
-    width: 100%;
-    height: 100%;
-    margin: 0px;
-    font-family: 'Roboto', sans-serif;
-    background-color: #E5EDF5;
-    /* overflow: hidden; */
-}
 
-/* login - flex container -parent element */
 #delproducts {
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
-    align-content: center;
+    /* flex-wrap: wrap; */
+    /* align-content: center; */
 }
 
-#general-screen {
-    background-color: 
-    rgba(66, 66, 66, 0.5);
+#back-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    background-color: rgba(66, 66, 66,   0.5);
     width: 100%;
     height: 100%;
+    /* height: calc(100% - 170px); */
     position: fixed;
+    top: 0;
+    left: 0;
 }
 
-/*DELETE BOX - start*/
 #delbox {
     position: fixed;
-    width: 400px;
-    height: 200px;;
+    width: 450px;
+    height: 225px;;
     box-sizing: border-box;
     background-color: #fff;
     display: flex;
     align-items: center;
-    flex-direction: column;
     justify-content: center;
+    flex-direction: column;
     border-radius: 10px;
-    padding: 20px;
-    /* top: 150; */
 }
 
 
@@ -51,13 +45,13 @@ html,body {
 }
 
 #delbox h2 {
-    font-size: 18px;
+    font-size: 19px;
     color: #576574;
     font-weight: bold;
     /* margin-right: auto; */
 }
 #delbox p {
-    font-size: 16px;
+    font-size: 17px;
     color: #576574;
 }
 
@@ -65,7 +59,7 @@ html,body {
     display: flex;
     align-items: center;
     margin-left: auto;
-    margin-right: 20px;
+    margin-right: 50px;
     box-sizing: border-box;
     padding-bottom: 20px;
 }
@@ -76,7 +70,8 @@ html,body {
     background-color: #fff;
     border: none;
     outline: none;
-    padding: 8px 15px 8px 15px;
+    margin-left: 8px;
+    padding: 8px 18px 8px 18px;
     border-radius: 3px;
     Box-shadow: 
     0px 0px 16px  rgba(0, 0, 0, 0.17);
@@ -87,7 +82,6 @@ html,body {
     color: #fff;
     /* font-weight: 500; */
 }
-/*DELETE BOX - end*/
 
 
 

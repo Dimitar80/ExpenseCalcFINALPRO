@@ -2,7 +2,7 @@ import React from 'react'
 import '../../assets/styles/NewProduct.css'
 import '../../assets/styles/shared.css'
 import { Link } from 'react-router-dom'
-// import { Link } from './node_modules/react-router-dom'
+import Navbar from '../calculator/Navbar'
 
 class NewProduct extends React.Component {
     constructor(props) {
@@ -28,30 +28,8 @@ class NewProduct extends React.Component {
     return (
         <React.Fragment>
     <div id='newproducts'>
-    <header id='header'>
-        <nav id='mainnav'>
-            < Link to= '/' style={{textDecoration: 'none', color: '#576574'}}>
-                <button id='bthome'>HOME</button>
-            </Link>
-            
-            < Link to= 'products' style={{textDecoration: 'none', color: '#1DD1A1'}}>
-                <button id='btproducts' onClick={this.ClickedBtn} className={btn_class}>
-                    PRODUCTS
-                </button>
-            </Link>
-
-            < Link to= 'expenses' style={{textDecoration: 'none', color: '#576574'}}>
-                <button id='btexpenses'onClick={this.ClickedBtn} className={btn_class}>
-                    EXPENSES
-                </button>
-            </Link>
-        </nav>
-        <div className="user">
-            <img src="../img/DPPHOTO.jpg" alt="profileimg" />
-            <h2>User name</h2>
-        </div>
-    </header>
-    {/* BODY */}
+        <Navbar />
+    {/* Portal */}
     <div id='npmain-container'> 
     <div id='npmaintitle'>
         <h1>New Product</h1>

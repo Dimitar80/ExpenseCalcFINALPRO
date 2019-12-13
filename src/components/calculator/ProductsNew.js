@@ -3,6 +3,8 @@ import '../../assets/styles/Products.css'
 import '../../assets/styles/shared.css'
 import { Link } from 'react-router-dom'
 import Table from '../table/Table'
+import Navbar from './Navbar'
+import DeleteBox from './DeleteBox'
 
 // document.body.style.backgroundColor = 'blue';
 
@@ -14,7 +16,7 @@ class ProductsNew extends React.Component  {
             // showAlert: false,
             // didUpdate: false
             clicked: false,
-            orange: true
+            show: false
         }
     }
 
@@ -66,37 +68,22 @@ class ProductsNew extends React.Component  {
         //     })
         // }
 
-    render() {
-        
-        let btn_class = this.state.orange ? "orangeButton" : "whiteButton";
+        delBox = (event) => {
+            // if(!)
+            this.setState({ show: !this.state.show })
+        }
 
+        closeBt = (event) => {
+            this.setState({ show: false })
+        }
+
+    render() {
+    
          return (
              <React.Fragment>
              <div id='products'>
-             <header id='header'>
-                 <nav id='mainnav'>
-                 < Link to= '/' style={{textDecoration: 'none', color: '#576574'}}>
-                     <button id='bthome' >HOME</button>
-                 </Link>  
-
-                 < Link to= 'products' style={{textDecoration: 'none', color: '#1DD1A1'}} >
-                     <button id='btproducts' onClick={this.CldBtn} onMouseOver={this.handleMouseOver}
-                     className={btn_class} >
-                         PRODUCTS
-                     </button>
-                 </Link>
-            
-                 < Link to= 'expenses' /*style={{textDecoration: 'none', color: '#576574'}}*/>
-                     <button id='btexpenses'onClick={this.CldBtn} className={btn_class} >
-                         EXPENSES
-                     </button>
-                 </Link>
-                 </nav>
-                 <div className="user">
-                     <img src="../img/DPPHOTO.jpg" alt="profileimg" />
-                     <h2>User name</h2>
-                 </div>
-             </header>
+                 <Navbar />
+             
         {/* PORTAL */}
            <div className='prmain-container'>
                   <div id='pmaintitle'>
@@ -133,19 +120,20 @@ class ProductsNew extends React.Component  {
                       <td>carbonated soft drink</td>
                       <td>19.04.2019</td>
                       <td>75</td>
-                      <td><span><i className="far fa-edit"></i></span>
-                      <Link to='delbox' style={{textDecoration: 'none', color: '#576574'}}>
-                          <span>
-                          <i className="far fa-trash-alt"></i>
-                          </span>
-                      </Link>
+                      <td /*style={{textAlign:'center'}}*/ >     
+                      <button id='editbtn'><i className="far fa-edit" /></button>
+                      <button id='delbtn' onClick={this.delBox}><i className="far fa-trash-alt" /></button>
                       </td>
                   </tr>
                   </tbody>
+                  {this.state.show && <DeleteBox  clBtn={this.closeBt} />}
               </table>
+              {/* {this.state.show && <DeleteBox  clBtn={this.closeBt} />} */}
               {/* Static Table END*/}
+
               <h2 id='testTitle'>Testing FInal Expense Calculator - NEW</h2>
               <hr id='testing'/>
+              {/* Header Title part START */}
               <div id='pmaintitle'>
                      <div className='tit'>
                          <h1>Products</h1>
@@ -160,13 +148,14 @@ class ProductsNew extends React.Component  {
                          </select>
                      </div>
                   </div>
+                  {/* Header Title part END */}
               <Table />
                   {/* <Table showProducts={this.state.showProducts} 
                             deleteAlert={this.deleteAlert} /> */}
           </div>
                 <div id='mainonebtn'>
-                      < Link to= 'newproduct' style={{textDecoration: 'none', color: '#fff'}}>
-                  <button id='btnnewproduct'>NEW PRODUCT</button>
+                      < Link to = 'newproduct' style={{textDecoration: 'none', color: '#fff'}}>
+                  <button id ='btnnewproduct'>NEW PRODUCT</button>
                       </ Link>
                    </div>
                 </div>

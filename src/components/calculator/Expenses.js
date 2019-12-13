@@ -2,6 +2,7 @@ import React from 'react'
 import '../../assets/styles/Expenses.css'
 import '../../assets/styles/shared.css'
 import { Link } from 'react-router-dom'
+import Navbar from './Navbar'
 
 // const exbody = document.getElementsByTagName('body')
 // document.body.style.backgroundColor = 'red';
@@ -28,34 +29,13 @@ class Expenses extends React.Component {
 
     render () {
 
-        let btn_class = this.state.orange ? "orangeButton" : "whiteButton";
+        // let btn_class = this.state.orange ? "orangeButton" : "whiteButton";
 
      return (
         <React.Fragment>
            <div id='expenses'>
-           <header id="header">
-               <nav id='mainnav'>
-                   < Link to= '/' style={{textDecoration: 'none', color: '#576574'}}>
-                       <button id='bthome'>HOME</button>
-                   </Link>
-            
-                   < Link to= 'products' style={{textDecoration: 'none', color: '#1DD1A1'}}>
-                       <button id='btproducts' onClick={this.ClickedBtn} className={btn_class} >
-                           PRODUCTS
-                        </button>
-                   </Link>
-
-                   < Link to= 'expenses' style={{textDecoration: 'none', color: '#576574'}}>
-                       <button id='btexpenses' onClick={this.ClickedBtn} className={btn_class} >
-                           EXPENSES
-                       </button>
-                   </Link>
-               </nav>
-               <div className="user">
-                   <img src="../img/DPPHOTO.jpg" alt="profileimg" />
-                   <h2>User name</h2>
-               </div>
-           </header>
+           <Navbar />
+           
             {/* BODY */}
         <div className='exmain-container'>
             <div id='emaintitle'>
@@ -153,78 +133,6 @@ class Expenses extends React.Component {
                     <td></td>
                 </tr>
                     <tr>
-                    <td>Coca-cola</td>
-                    <td>Drink</td>
-                    <td>carbonated soft drink</td>
-                    <td>19.04.2019</td>
-                    <td>75</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Coca-cola</td>
-                    <td>Drink</td>
-                    <td>carbonated soft drink</td>
-                    <td>19.04.2019</td>
-                    <td>75</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Coca-cola</td>
-                    <td>Drink</td>
-                    <td>carbonated soft drink</td>
-                    <td>19.04.2019</td>
-                    <td>75</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Coca-cola</td>
-                    <td>Drink</td>
-                    <td>carbonated soft drink</td>
-                    <td>19.04.2019</td>
-                    <td>75</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Coca-cola</td>
-                    <td>Drink</td>
-                    <td>carbonated soft drink</td>
-                    <td>19.04.2019</td>
-                    <td>75</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Coca-cola</td>
-                    <td>Drink</td>
-                    <td>carbonated soft drink</td>
-                    <td>19.04.2019</td>
-                    <td>75</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Coca-cola</td>
-                    <td>Drink</td>
-                    <td>carbonated soft drink</td>
-                    <td>19.04.2019</td>
-                    <td>75</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Coca-cola</td>
-                    <td>Drink</td>
-                    <td>carbonated soft drink</td>
-                    <td>19.04.2019</td>
-                    <td>75</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Coca-cola</td>
-                    <td>Drink</td>
-                    <td>carbonated soft drink</td>
-                    <td>19.04.2019</td>
-                    <td>75</td>
-                    <td></td>
-                 </tr>
-                <tr>
                     <td>Coca-cola</td>
                     <td>Drink</td>
                     <td>carbonated soft drink</td>
