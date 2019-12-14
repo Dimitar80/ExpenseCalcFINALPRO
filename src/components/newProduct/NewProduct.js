@@ -62,8 +62,16 @@ class NewProduct extends React.Component {
                         Product Price</label>
                     <input type="text" className="nptextfield" />
                </p>
+               <div id='btnsNp'>
                <button className='cp-button'>
-                   CREATE PRODUCT</button>
+                   CREATE PRODUCT
+               </button>
+               <Link to='products'>
+               <button className='cl-button'>
+                   CLOSE
+               </button>
+               </Link>
+               </div>
             </form>
             </div>
         <div id='right-page'>

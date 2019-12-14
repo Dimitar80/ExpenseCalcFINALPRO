@@ -15,25 +15,19 @@ class ProductsNew extends React.Component  {
             // showProducts: true,
             // showAlert: false,
             // didUpdate: false
-            clicked: false,
             show: false
         }
     }
 
-         handleMouseOver(e) {
-             console.log(e.target, e.target.id, e.pageX)
-            //  console.log('hovered')
-         }
+        //  handleMouseOver(e) {
+        //      console.log(e.target, e.target.id, e.pageX)
+        //      console.log('hovered')
+        //  }
 
         //    Prilagodi ja funkcijava kako kaj HEADER-ot vo react-app-Redux
         //    Bidejki vaka e samo On/Off
            //e- event object//
-         CldBtn = (e) => {
-            console.log(e.target.id)
-            // this.setState({ clicked: !this.state.clicked });
-            this.setState({ orange: !this.state.orange });
-            // alert("Kliknato")
-        }
+        
 
         // componentDidMount () {
         //     // this.setState({ loading: true })
@@ -66,6 +60,12 @@ class ProductsNew extends React.Component  {
         //         console.log(error + ' Greska')
         //         this.setState({ error: <Error />, loading: false })
         //     })
+        // }
+
+        // CldBtn = (e) => {
+        //     console.log(e.target.id)
+        //     this.setState({ orange: !this.state.orange });
+        //     alert("Kliknato")
         // }
 
         delBox = (event) => {

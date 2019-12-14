@@ -17,8 +17,6 @@ class Expenses extends React.Component {
             showMonhtly: false,
             showYearly: true,
             toggle: true,
-            clicked:false,
-            orange: true,
         }
     }
     
@@ -62,7 +60,7 @@ class Expenses extends React.Component {
         })
     }
 
-    showYearly = () => {
+    showYearly = (e) => {
         alert("Yearly WORKS!")
         this.setState({
             showYearly: true,
@@ -92,17 +90,18 @@ class Expenses extends React.Component {
                     <div id='experiod'>
                          <div className='periodbtns'> 
                             <button type="button" /*id='btnmonth'*/
-                            className={!this.state.toggle? "tab-btn active-tab-btn " : "tab-btn"}
+                            className={!this.state.toggle ? "mY-btn active-mY-btn" : "mY-btn"}
                              onClick={this.showMonhtly}>
                                 MONTHLY
                             </button>
                             <button type="button" /*id='btnyear'*/ 
-                            className={this.state.toggle? "tab-btn active-tab-btn " : "tab-btn"}
+                            className={this.state.toggle ? "mY-btn active-mY-btn" : "mY-btn"}
                              onClick={this.showYearly}>
                                 YEARLY
                             </button>
                          </div>
                       <div id='months'>
+                          Sredi M/Y Drop down i so queries
                           {this.state.showMonthly ?{monthOpt} : null}
                           {/* <h2>Choose Month</h2>
                           <select id='select'>

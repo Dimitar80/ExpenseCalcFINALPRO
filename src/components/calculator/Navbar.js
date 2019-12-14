@@ -9,7 +9,7 @@ class Navbar extends React.Component {
         super(props)
         this.state = {
              active: null,
-             orange: true,
+             toggle: true,
              btn: 'orangeButton'
         }
     }
@@ -30,40 +30,31 @@ class Navbar extends React.Component {
     toggle = (position) => {
         if (this.state.active === position) {
           this.setState({active : null}) 
-          this.setState({ orange: !this.state.orange });   
+          this.setState({ toggle: false });   
         } else {
           this.setState({active : position})
         }
       }
       
-      myColor = (position) => {
-        // var style = {
-        //       backgroundColor: 'red',
-        //       color: 'green'
-        // }
-        if (this.state.active === position) {
-          return  'red'/*(this.state.style)*/
-        }
-        return "";
-      }
+      showProducts = () => {
+        // alert("Products WORKS!")
+        this.setState({
+            toggle: false
+        })
+    }
+
+      showExpenses = () => {
+        // alert("Expenses WORKS!")
+        this.setState({
+            toggle: true
+        })
+    }
 
       
-        // var _style;
-        // if (this.state.onClicked) { // clicked button style
-        //     _style = {
-        //         backgroundColor: "red"
-        //     }
-        // }
-        // else { // default button style
-        //     _style = {
-        //         backgroundColor: "blue"
-        //     }
-        // }
-
+        
 
     render() {
 
-        // let btn_class = this.state.orange ? "orangeButton" : "whiteButton";
 
         return(
             // <React.Fragment>
@@ -76,16 +67,16 @@ class Navbar extends React.Component {
                </Link>  
 
                < Link to='products'>
-                   <button /*id='btproducts' style={{color: this.myColor(0)}}*/ onClick={() => {this.toggle(0)}}
-                   className={this.state.orange ? "orangeButton" : "whiteButton"}
+                   <button /*id='btproducts'*/ onClick={this.showProducts}
+                   className={!this.state.toggle ? "navbar-button active" : "navbar-button"}
                    /*className={btn_class}*/  >
                        PRODUCTS
                    </button>
                </Link>
        
                < Link to='expenses'>
-                   <button /*id='btexpenses'  style={{color: this.myColor(1)}}*/ onClick={() => {this.toggle(1)}}
-                   className={!this.state.orange ? "orangeButton" : "whiteButton"} >
+                   <button /*id='btexpenses'*/ onClick={this.showExpenses}
+                   className={this.state.toggle ? "navbar-button active" : "navbar-button"} >
                        EXPENSES
                    </button>
                </Link>

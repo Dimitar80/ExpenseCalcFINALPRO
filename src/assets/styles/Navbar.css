@@ -20,13 +20,15 @@
 #mainnav #bthome {
     font-size: 15px;
     font-weight: bold;
-    /* border: 2px solid #576574; */
+    border: 2px solid #576574;
     color: #576574;
     border-radius: 5px;
     /* background-color: #576574 ; */
     margin-right: 30px;
     height: 40px;
     width: 80px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     outline: none;
     cursor: pointer;
 }
@@ -44,7 +46,7 @@
     cursor: pointer;
   } */
 
-  #mainnav #btproducts{
+  /* #mainnav #btproducts{
     font-size: 15px;
     font-weight: bold;
     border: 1.5px solid #576574;
@@ -68,7 +70,26 @@
     width: 110px;
     height: 40px;
     cursor: pointer;
-  }
+  } */
+
+  .navbar-button {
+    width: 120px;
+    height: 40px;
+    font-size: 15px;
+    font-weight: bold;
+    background: transparent;
+    border: 2px solid;
+    border-color: #576574;
+    border-radius: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-right: 15px;
+    outline: 0;
+}
+.active {
+    color: #1DD1A1;
+    border-color: #1DD1A1;
+}
 
 
 
