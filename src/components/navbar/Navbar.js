@@ -54,8 +54,7 @@ class Navbar extends React.Component {
 
                < Link to='/products'  /*exact activeClassName="navbar-button active"*/>
                    <button /*id='btproducts'*/ onClick={this.showProducts}
-                   className={!this.state.toggle ? "navbar-button active" : "navbar-button"}
-                  /* className={}*/>
+                   className={!this.state.toggle ? "navbar-button active" : "navbar-button"}>
                        PRODUCTS
                    </button>
                </Link>

@@ -3,8 +3,8 @@ import '../../assets/styles/ProductsNew.css'
 import '../../assets/styles/shared.css'
 import { Link } from 'react-router-dom'
 import Table from '../table/Table'
-import Navbar from '../navbar/Navbar'
 import DeleteBox from './DeleteBox'
+import EditProduct from './EditProduct'
 
 // document.body.style.backgroundColor = 'blue';
 
@@ -15,7 +15,8 @@ class ProductsNew extends React.Component  {
             // showProducts: true,
             // showAlert: false,
             // didUpdate: false
-            show: false
+            show: false,
+            edit: false
         }
     }
 
@@ -69,8 +70,11 @@ class ProductsNew extends React.Component  {
         // }
 
         delBox = (event) => {
-            // if(!)
             this.setState({ show: !this.state.show })
+        }
+
+        edit = (event) => {
+            this.setState({ edit: !this.state.edit })
         }
 
         closeBt = (event) => {
@@ -122,11 +126,14 @@ class ProductsNew extends React.Component  {
                       <td>19.04.2019</td>
                       <td>75</td>
                       <td /*style={{textAlign:'center'}}*/ >     
-                      <button id='editbtn'><i className="far fa-edit" /></button>
-                      <button id='delbtn' onClick={this.delBox}><i className="far fa-trash-alt" /></button>
+                      <button id='editbtn' onClick={this.edit}className="far fa-edit">
+                      </button>
+                      <button id='delbtn' onClick={this.delBox} className="far fa-trash-alt">
+                      </button>
                       </td>
                   </tr>
                   </tbody>
+                  {this.state.edit && <EditProduct  clBtn={this.closeBt} />}
                   {this.state.show && <DeleteBox  clBtn={this.closeBt} />}
               </table>
               {/* {this.state.show && <DeleteBox  clBtn={this.closeBt} />} */}
@@ -156,7 +163,7 @@ class ProductsNew extends React.Component  {
           </div>
                 <div id='mainonebtn'>
                       < Link to = 'newproduct' style={{textDecoration: 'none', color: '#fff'}}>
-                  <button id ='btnnewproduct'>NEW PRODUCT</button>
+                          <button id ='btnnewproduct'>NEW PRODUCT</button>
                       </ Link>
                    </div>
                 </div>

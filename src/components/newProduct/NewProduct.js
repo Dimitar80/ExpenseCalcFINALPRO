@@ -2,7 +2,7 @@ import React from 'react'
 import '../../assets/styles/NewProduct.css'
 import '../../assets/styles/shared.css'
 import { Link } from 'react-router-dom'
-import Navbar from '../navbar/Navbar'
+
 
 class NewProduct extends React.Component {
     constructor(props) {
