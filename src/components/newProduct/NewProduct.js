@@ -2,7 +2,7 @@ import React from 'react'
 import '../../assets/styles/NewProduct.css'
 import '../../assets/styles/shared.css'
 import { Link } from 'react-router-dom'
-import Navbar from '../calculator/Navbar'
+import Navbar from '../navbar/Navbar'
 
 class NewProduct extends React.Component {
     constructor(props) {
@@ -23,12 +23,14 @@ class NewProduct extends React.Component {
   
     render () {
 
-        let btn_class = this.state.orange ? "orangeButton" : "whiteButton";
+        // let btn_class = this.state.orange ? "orangeButton" : "whiteButton";
 
     return (
         <React.Fragment>
+            {/* <Navbar /> */}
+            <this.props.component toggle={false}/>
     <div id='newproducts'>
-        <Navbar />
+        
     {/* Portal */}
     <div id='npmain-container'> 
     <div id='npmaintitle'>

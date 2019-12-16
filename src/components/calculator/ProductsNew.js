@@ -1,16 +1,16 @@
 import React from 'react'
-import '../../assets/styles/Products.css'
+import '../../assets/styles/ProductsNew.css'
 import '../../assets/styles/shared.css'
 import { Link } from 'react-router-dom'
 import Table from '../table/Table'
-import Navbar from './Navbar'
+import Navbar from '../navbar/Navbar'
 import DeleteBox from './DeleteBox'
 
 // document.body.style.backgroundColor = 'blue';
 
 class ProductsNew extends React.Component  {
-    constructor(props) {
-        super(props)
+    constructor() {
+        super()
         this.state = {
             // showProducts: true,
             // showAlert: false,
@@ -81,10 +81,11 @@ class ProductsNew extends React.Component  {
     
          return (
              <React.Fragment>
+                 {/* <Navbar /> */}
+                 <this.props.component toggle={false}/>
              <div id='products'>
-                 <Navbar />
-             
-        {/* PORTAL */}
+                 
+             {/* PORTAL */}
            <div className='prmain-container'>
                   <div id='pmaintitle'>
                      <div className='tit'>

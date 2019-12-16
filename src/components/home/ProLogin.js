@@ -28,14 +28,14 @@ class ProLogin extends React.Component {
                            <label className="text-field-input" >Password</label>
                            <input type="text" className="text-field" />
                        </p>
-                           < Link to='expenses' style={{textDecoration: 'none', color: '#fff'}}>
+                           < Link to='/products' style={{textDecoration: 'none', color: '#fff'}}>
                            <button className='primary-button'>SIGN IN</button>
                            </Link>
                     </form>
                 </div>
                 <div className='additional-info'>
                         <p> Or if you don't have an account,
-                           <Link to='register' activestyle={{color: 'red'}} 
+                           <Link to='/register' activestyle={{color: 'red'}} 
                                  style={{textDecoration: 'none', color:'#8d8d8d', fontWeight: 700}}> 
                                  &nbsp;
                                  Register.

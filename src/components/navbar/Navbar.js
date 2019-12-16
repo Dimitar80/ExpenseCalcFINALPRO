@@ -9,32 +9,19 @@ class Navbar extends React.Component {
         super(props)
         this.state = {
              active: null,
-             toggle: true,
-             btn: 'orangeButton'
+            //  toggle: true,
+             toggle: this.props.toggle
+    
         }
     }
-
-
-
-
     // toggle = (position) => {
-    //     if (this.state.active === position && this.state.orange) {
-    //       this.setState({active : null})
-    //     //   let btn_class = this.state.orange ? "orangeButton" : "whiteButton"
-          
+    //     if (this.state.active === position) {
+    //       this.setState({active : null}) 
+    //       this.setState({ toggle: false });   
     //     } else {
     //       this.setState({active : position})
     //     }
     //   }
-
-    toggle = (position) => {
-        if (this.state.active === position) {
-          this.setState({active : null}) 
-          this.setState({ toggle: false });   
-        } else {
-          this.setState({active : position})
-        }
-      }
       
       showProducts = () => {
         // alert("Products WORKS!")
@@ -51,14 +38,13 @@ class Navbar extends React.Component {
     }
 
       
-        
-
-    render() {
+     render() {
 
 
         return(
-            // <React.Fragment>
-           <header id='header'>
+            <React.Fragment>
+          {/* <header id='header'> */}
+          <div id='header'>
                <nav id='mainnav'>
                < Link to= '/' >
                    <button id='bthome' >
@@ -66,17 +52,18 @@ class Navbar extends React.Component {
                    </button>
                </Link>  
 
-               < Link to='products'>
+               < Link to='/products'  /*exact activeClassName="navbar-button active"*/>
                    <button /*id='btproducts'*/ onClick={this.showProducts}
                    className={!this.state.toggle ? "navbar-button active" : "navbar-button"}
-                   /*className={btn_class}*/  >
+                  /* className={}*/>
                        PRODUCTS
                    </button>
                </Link>
        
-               < Link to='expenses'>
+               < Link to='/expenses' /*exact activeClassName="navbar-button active"*/>
                    <button /*id='btexpenses'*/ onClick={this.showExpenses}
-                   className={this.state.toggle ? "navbar-button active" : "navbar-button"} >
+                   className={this.state.toggle ? "navbar-button active" : "navbar-button"}
+                   /*activeClassName="navbar-button active"*/ >
                        EXPENSES
                    </button>
                </Link>
@@ -85,8 +72,9 @@ class Navbar extends React.Component {
                    <img src="../../assets/img/DPPHOTO.jpg" alt="profileimg" />
                    <h2>User name</h2>
                </div>
-           </header>
-           // </React.Fragment>
+               </div>
+           {/* </header> */}
+           </React.Fragment>
         )
     }
 }

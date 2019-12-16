@@ -2,37 +2,31 @@ import React from 'react'
 import '../../assets/styles/Expenses.css'
 import '../../assets/styles/shared.css'
 import { Link } from 'react-router-dom'
-import Navbar from './Navbar'
+import Navbar from '../navbar/Navbar'
 
 // const exbody = document.getElementsByTagName('body')
 // document.body.style.backgroundColor = 'red';
 
 class Expenses extends React.Component {
-    constructor(props) {
-        super(props)
+    constructor() {
+        super()
         this.state = {
             // showProducts: true,
             // showAlert: false,
             // didUpdate: false
-            showMonhtly: false,
+            showMonthly: false,
             showYearly: true,
             toggle: true,
         }
     }
     
-    // Funkcijata od kaj NAVBAR-ot od react-app-Redux ili nesto slicno bidejki ovaa e samo On/Off //
-    ClickedBtn = (event) => {
-        console.log(event.target.id)
-        this.setState({ orange: !this.state.orange });
-        // alert("Kliknato")
-    }
-
+    
      
     monthOpt = () => {
           return ( 
               <div>
                <h2>Choose Month</h2>
-                 <select id='select'>
+                 {/* <select id='select'>
                     <option>January</option>
                     <option>February</option>
                     <option>March</option>
@@ -45,26 +39,26 @@ class Expenses extends React.Component {
                     <option>October</option>
                     <option>November</option>
                     <option>December</option>
-                 </select>
+                 </select> */}
               </div>
           )
         }
                     
 
-    showMonhtly = (e) => {
-        alert("Monthly WORKS!")
+    showMonthly = (e) => {
+        // alert("Monthly WORKS!")
         this.setState({
             showYearly: false,
-            showMonhtly: true,
+            showMonthly: true,
             toggle: false
         })
     }
 
     showYearly = (e) => {
-        alert("Yearly WORKS!")
+        // alert("Yearly WORKS!")
         this.setState({
             showYearly: true,
-            showMonhtly: false,
+            showMonthly: false,
             toggle: true
         })
     }
@@ -75,12 +69,21 @@ class Expenses extends React.Component {
 
     render () {
 
-        // let btn_class = this.state.orange ? "orangeButton" : "whiteButton";
+      // Za options na selectbox od Year
+      let today = new Date();
+      let year = today.getFullYear();
+      let selectOptions= []
+      for (let i = 2000; i <= year; i++) {
+      selectOptions.push(<option key={i} value={i}> {i} </option>)
+      }
+      selectOptions.reverse();
 
      return (
         <React.Fragment>
+            {/* <Navbar /> */}
+            <this.props.component toggle={true}/>
            <div id='expenses'>
-           <Navbar />
+           
            
             {/* BODY */}
                 <div className='exmain-container'>
@@ -91,7 +94,7 @@ class Expenses extends React.Component {
                          <div className='periodbtns'> 
                             <button type="button" /*id='btnmonth'*/
                             className={!this.state.toggle ? "mY-btn active-mY-btn" : "mY-btn"}
-                             onClick={this.showMonhtly}>
+                             onClick={this.showMonthly}>
                                 MONTHLY
                             </button>
                             <button type="button" /*id='btnyear'*/ 
@@ -100,9 +103,22 @@ class Expenses extends React.Component {
                                 YEARLY
                             </button>
                          </div>
-                      <div id='months'>
-                          Sredi M/Y Drop down i so queries
-                          {this.state.showMonthly ?{monthOpt} : null}
+                      {/* <div id='months'> */}
+                      {this.state.showYearly ? 
+                            <p /*id="select-box-container"*/ id='years'>
+                                {/* <label htmlFor="expenses-filter">Choose Year </label> */}
+                                <h2>Choose Year</h2>
+                                <select /*name="expenses-filter" className="select-box"*/ id="select" 
+                                /*onChange={this.searchFilter}*/>
+                                    <option>----</option>
+                                    {/* <option value={'total'}>Total</option> */}
+                                    {selectOptions}
+                                </select>
+                            </p> : null}
+
+
+                          {/* Sredi M/Y Drop down i so queries
+                          {this.state.showMonthly ?{monthOpt} : null} */}
                           {/* <h2>Choose Month</h2>
                           <select id='select'>
                             <option>January</option>
@@ -118,7 +134,7 @@ class Expenses extends React.Component {
                             <option>November</option>
                             <option>December</option>
                           </select> */}
-                       </div> 
+                       {/* </div>  */}
                     </div>
                     <table id='emaintable'>
                         <thead>
