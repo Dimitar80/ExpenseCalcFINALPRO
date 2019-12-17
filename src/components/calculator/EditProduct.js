@@ -17,7 +17,6 @@ class EditProduct extends React.Component {
         return (
             <React.Fragment>
                 <div id="ep-main-container">
-                
                     <div className="edit-container" id="editproduct-container">
                         <div id='npmaintitle'>
                          <h1>Edit Product</h1>
@@ -47,15 +46,15 @@ class EditProduct extends React.Component {
                             <button className="sS-btn" id="ss-btn" >
                             SAVE
                             </button>
-                            <button className="cls-btn" id="cl-btn"  
+                            <button className="cls-btn" /*id="cl-btn"*/  
                             /*onClick={this.props.close}*/>
                             CLOSE
                             </button>
                         </div>
                         </form>
                     </div>
-                    </div>
-                    </React.Fragment>
+                </div>
+            </React.Fragment>
            
         )
     }

@@ -16,16 +16,16 @@
     /* background-color: rgb(11, 45, 78); */
     background-color: #fff;
     padding: 25px 50px;
-    border: 1px solid grey;
+    /* border: 1px solid grey; */
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     /* overflow-x: hidden; */
     /* box-sizing: border-box; */
 }
 
-.text-field-label {
+/* .text-field-label {
     font-size: 16px;
     color: black; 
     font-family: Arial, Helvetica, sans-serif;
@@ -38,13 +38,12 @@
     color: black;
     width: 370px;
     height: 35px;
-    /* background: rgb(210, 238, 247); */
     background-color: #fff;
     border: 2px solid;
     border-color:  #C6C6C6;
     border-radius:  5px;
     margin-top: 7px;
-}
+} */
 
 #btnsSC{
     display: flex;
