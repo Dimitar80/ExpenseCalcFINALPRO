@@ -1,7 +1,7 @@
 import React from 'react'
 import '../../assets/styles/DeleteBox.css'
 import '../../assets/styles/shared.css'
-import { Link } from 'react-router-dom'
+
 
 class DeleteBox extends React.Component {
   constructor(props) {
@@ -10,8 +10,8 @@ class DeleteBox extends React.Component {
         // showProducts: true,
         // showAlert: false,
         // didUpdate: false
-        clicked: false,
-        show: false
+      //   clicked: false,
+      //   show: false
     }
 }
 

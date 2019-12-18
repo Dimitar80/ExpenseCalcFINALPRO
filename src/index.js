@@ -11,8 +11,10 @@ import ProLogin from './components/home/ProLogin'
 import Register from './components/home/Register'
 import Expenses from './components/calculator/Expenses'
 import ProductNew from './components/calculator/ProductsNew'
+import EditProduct from './components/calculator/EditProduct'
 import NewProduct from './components/newProduct/NewProduct'
 import Navbar from './components/navbar/Navbar'
+
 
 const app = document.getElementById('app')
 
@@ -26,7 +28,7 @@ const Routes = () => {
                   < Route exact path = '/expenses' render={() => <Expenses component={Navbar}/>} />
                   < Route exact path = '/products' render={() => <ProductNew component={Navbar}/>} />
                   < Route exact path = '/newproduct' render={() => <NewProduct component={Navbar}/>} />
-                  {/* < Route exact path = '/editproduct' component = {EditProduct} /> */}
+                  < Route exact path = '/editproduct'  render={() => <EditProduct component={Navbar}/>} />
              </Switch>
           </Router>
         )

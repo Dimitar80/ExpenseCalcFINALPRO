@@ -22,6 +22,7 @@
     position: fixed;
     top: 0;
     left: 0;
+    margin:0px;
 }
 
 #delbox {
@@ -35,6 +36,7 @@
     justify-content: center;
     flex-direction: column;
     border-radius: 10px;
+    margin:0px;
 }
 
 

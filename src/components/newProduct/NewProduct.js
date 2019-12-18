@@ -41,31 +41,36 @@ class NewProduct extends React.Component {
             <form>
                <p className='input-container'>
                     <label className="nplabel" >
-                        Product Name</label>
+                        Product Name
+                    </label>
                     <input type="text" className="nptextfield" />
                </p>
                <p className='input-container'>
                     <label className="nplabel" >
-                        Product Description</label>
+                        Product Description
+                    </label>
                     <input type="text" className="nptextfield" />
                </p>
                <p className='input-container'>
                     <label className="nplabel" >
-                        Product Type</label>
+                        Product Type
+                    </label>
                     <input type="email" className="nptextfield" />
                </p>
                <p className='input-container'>
                     <label className="nplabel" >
-                        Purchase Date</label>
+                        Purchase Date
+                    </label>
                     <input type="text" className="nptextfield" />
                </p>
                <p className='input-container'>
                     <label className="nplabel" >
-                        Product Price</label>
+                        Product Price
+                    </label>
                     <input type="text" className="nptextfield" />
                </p>
                <div id='btnsNp'>
-               <button className='cp-button'>
+               <button type='button' className='cp-button'>
                    CREATE PRODUCT
                </button>
                <Link to='products'>

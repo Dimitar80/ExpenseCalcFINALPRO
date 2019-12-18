@@ -1,63 +1,95 @@
 import React from 'react'
 import '../../assets/styles/EditProduct.css'
 import '../../assets/styles/shared.css'
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 
 class EditProduct extends React.Component {
-    constructor (/*props*/) {
-        super(/*props*/)
-        /*Initial State*/ 
+    constructor(props) {
+        super(props)
         this.state = {
-            // show: false
+            // showProducts: true,
+            // showAlert: false,
+            // didUpdate: false
+            show: true
+           
         }
     }
 
-    render () {
-        return (
-            <React.Fragment>
-                <div id="ep-main-container">
-                    <div className="edit-container" id="editproduct-container">
-                        <div id='npmaintitle'>
-                         <h1>Edit Product</h1>
-                        </div>
-                        <form >
-                            <p>
-                                <label className="text-field-label">Product Name</label> <br/>
-                                <input type='text' className="text-field-input" defaultValue={this.props.id}></input>
-                            </p>
-                            <p>
-                                <label className="text-field-label">Product Type</label> <br/>
-                                <input type='text' className="text-field-input" defaultValue={this.props.name}></input>
-                            </p>
-                            <p>
-                                <label className="text-field-label">Product Description</label> <br/>
-                                <input type='text' className="text-field-input" defaultValue={this.props.username}></input>
-                            </p>
-                            <p>
-                                <label className="text-field-label">Purchase Date</label> <br/>
-                                <input type='text' className="text-field-input" defaultValue={this.props.email}></input>
-                            </p>
-                            <p>
-                                <label className="text-field-label">Product Price</label> <br/>
-                                <input type='text' className="text-field-input" defaultValue={this.props.street}></input>
-                            </p>
-                        <div id='btnsSC'>
-                            <button className="sS-btn" id="ss-btn" >
-                            SAVE
-                            </button>
-                            <button className="cls-btn" /*id="cl-btn"*/  
-                            /*onClick={this.props.close}*/>
-                            CLOSE
-                            </button>
-                        </div>
-                        </form>
-                    </div>
-                </div>
-            </React.Fragment>
-           
-        )
+    closeBt = () => {
+        this.setState({ show: false })
     }
+  
+    render () {
+
+        // let btn_class = this.state.orange ? "orangeButton" : "whiteButton";
+
+    return (
+        <React.Fragment>
+            {/* <Navbar /> */}
+            <this.props.component toggle={false}/>
+    <div id='newproducts'>
+        
+    {/* Portal */}
+    <div id='npmain-container'> 
+    <div id='npmaintitle'>
+        <h1>Edit Product</h1>
+    </div>
+    <div className='form-container'>
+        <div id='fpage'>
+            <form>
+               <p className='input-container'>
+                    <label className="nplabel" >
+                        Product Name
+                    </label>
+                    <input type="text" className="nptextfield" />
+               </p>
+               <p className='input-container'>
+                    <label className="nplabel" >
+                        Product Description
+                    </label>
+                    <input type="text" className="nptextfield" />
+               </p>
+               <p className='input-container'>
+                    <label className="nplabel" >
+                        Product Type
+                    </label>
+                    <input type="email" className="nptextfield" />
+               </p>
+               <p className='input-container'>
+                    <label className="nplabel" >
+                        Purchase Date
+                    </label>
+                    <input type="text" className="nptextfield" />
+               </p>
+               <p className='input-container'>
+                    <label className="nplabel" >
+                        Product Price
+                    </label>
+                    <input type="text" className="nptextfield" />
+               </p>
+               <div id='btnsNp'>
+               <button type='button' className='cp-button'>
+                   SAVE
+               </button>
+               <Link to='products'>
+               <button className='cl-button' /*onClick={this.closeBt}*/>
+                   CLOSE
+               </button>
+               </Link>
+               </div>
+            </form>
+            </div>
+        <div id='right-page'>
+            <p id='simbol'><i className="fas fa-plus-circle"></i></p>
+                <p id='title'>You are editing an existing product</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</React.Fragment>
+   )
+  }
 }
 
 export default EditProduct
