@@ -1,15 +1,18 @@
 import React from 'react'
+import axios from 'axios'
 import '../../assets/styles/shared.css'
 import '../../assets/styles/Table.css'
 import { Link } from 'react-router-dom'
 import DeleteBox from '../calculator/DeleteBox'
+import Product from './Product'
 
 
-class Table extends React.Component {
+class TableNew extends React.Component {
     constructor(props){
         super(props)
         this.state = {
             show: false,
+            udata: []
 
         }
     }
@@ -21,18 +24,44 @@ class Table extends React.Component {
     closeBt = () => {
         this.setState({ show: false })
    }
-
+    
+   componentDidMount () {
+    // this.setState({ loading: true })
+    // console.log(loading)
+    axios.get('http://127.0.0.1:8081/api/v1/products' /*, 
+    { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}}*/)
+    .then((response) => {
+        var c = response.data
+        // let users = []
+        console.log(c)
+               let users = c.map((product) => {
+                return (<Product      
+                      key={product._id} 
+                      id={product._id}
+                      productName={product.productName}
+                      productType={product.productType}
+                      productDescription={product.productDescription}
+                      purchaseDate={product.purchaseDate}
+                      productPrice={product.productPrice}
+                    //   showEdDel={this.showEditDelete}
+                      /*del={this.delrow}*/ />
+                    )
+                })
+                this.setState({ udata: users })
+                // console.log(users)
+                console.log(this.state.udata)
+                // console.log(this.state.udata.length - 1)
+                // console.log(this.state.udata.name)
+            })
+    .catch((error) => {
+        console.log(error + ' Greska')
+        // this.setState({ error: <Error />, loading: false })
+    })
+}
 
 
     
-
-
-
-
-
-
-
-    render () {
+  render () {
         return (
             <div className="products-table-container">
                 <table id="pmaintable">
@@ -50,17 +79,17 @@ class Table extends React.Component {
                     </thead>
                     <tbody className="products-table-body">
                         {/* <TbodyData {...this.props}/> */}
+                        {/* {this.state.udata} */}
                     <tr>
                         <td>TEST</td>
                         <td>TEST</td>
                         <td>TEST</td>
                         <td>TEST</td>
                         <td>TEST</td>
-
-                       {this.props.showEdDel ? 
+                        {this.props.showEdDel ? 
                         <td>
                             <Link to='/editproduct'>
-                               <button id='editbtn' className="far fa-edit" /*onClick={this.sendEditItemToStore}*/>
+                               <button id='editbtn' className="far fa-edit">
                                </button>
                             </Link>
                                <button id='delbtn' className="far fa-trash-alt" onClick={this.delBox}>
@@ -76,4 +105,4 @@ class Table extends React.Component {
     }
 }
 
-export default Table
+export default TableNew

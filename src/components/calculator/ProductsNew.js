@@ -2,7 +2,8 @@ import React from 'react'
 import '../../assets/styles/ProductsNew.css'
 import '../../assets/styles/shared.css'
 import { Link } from 'react-router-dom'
-import Table from '../table/Table'
+// import Table from '../table/Table'
+import TableNew from '../table/TableNew'
 
 
 // document.body.style.backgroundColor = 'blue';
@@ -24,12 +25,7 @@ class ProductsNew extends React.Component  {
         //      console.log(e.target, e.target.id, e.pageX)
         //      console.log('hovered')
         //  }
-
-        //    Prilagodi ja funkcijava kako kaj HEADER-ot vo react-app-Redux
-        //    Bidejki vaka e samo On/Off
-           //e- event object//
         
-
         // componentDidMount () {
         //     // this.setState({ loading: true })
         //     // console.log(loading)
@@ -105,7 +101,7 @@ class ProductsNew extends React.Component  {
                          </div>
                          {/* Header Title part END */}
                          {/* Table part START */}
-                             <Table showEdDel={this.state.showEditDelete} />
+                             <TableNew showEdDel={this.state.showEditDelete} />
                          {/* Table part END */}
                    </div>
                    <div id='mainonebtn'>

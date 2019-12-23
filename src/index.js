@@ -17,7 +17,7 @@ import Navbar from './components/navbar/Navbar'
 
 
 const app = document.getElementById('app')
-
+// console.log('DP')
 
 const Routes = () => {
     return (
