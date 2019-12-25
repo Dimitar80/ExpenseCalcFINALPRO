@@ -23,16 +23,7 @@ class Table extends React.Component {
    }
 
 
-
-    
-
-
-
-
-
-
-
-    render () {
+ render () {
         return (
             <div className="products-table-container">
                 <table id="pmaintable">

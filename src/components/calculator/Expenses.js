@@ -84,7 +84,7 @@ class Expenses extends React.Component {
       let selOptionsMonth= []
       for (let i = 0; i < monthsList.length; i++) {
           selOptionsMonth.push(<option key={i} value={i}> {monthsList[i]} </option>);
-          console.log(selOptionsMonth);
+        //   console.log(selOptionsMonth);
       }
     //   console.log(selOptionsMonth);
       

@@ -14,14 +14,7 @@ class Navbar extends React.Component {
     
         }
     }
-    // toggle = (position) => {
-    //     if (this.state.active === position) {
-    //       this.setState({active : null}) 
-    //       this.setState({ toggle: false });   
-    //     } else {
-    //       this.setState({active : position})
-    //     }
-    //   }
+    
       
       showProducts = () => {
         // alert("Products WORKS!")

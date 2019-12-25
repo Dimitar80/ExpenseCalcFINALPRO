@@ -2,8 +2,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-
-
+import { Provider } from 'react-redux'
+import store from './redux/store.js'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 // import { BrowserRouter as Router, Route, Switch, } from 'react-router-dom'
 /*PRO*/
@@ -15,7 +15,7 @@ import EditProduct from './components/calculator/EditProduct'
 import NewProduct from './components/newProduct/NewProduct'
 import Navbar from './components/navbar/Navbar'
 
-
+// HTML
 const app = document.getElementById('app')
 // console.log('DP')
 
@@ -35,6 +35,11 @@ const Routes = () => {
    }
 
 ReactDOM.render(<Routes />, app)
+
+// ReactDOM.render(
+//     <Provider store={store}>
+//         <Routes/>
+//     </Provider>, app)
 
 
 // const Routes = () => {

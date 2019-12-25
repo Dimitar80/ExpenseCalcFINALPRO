@@ -12,7 +12,8 @@ class TableNew extends React.Component {
         super(props)
         this.state = {
             show: false,
-            udata: []
+            udata: [],
+            // showEditDelete: true,
 
         }
     }
@@ -28,26 +29,31 @@ class TableNew extends React.Component {
    componentDidMount () {
     // this.setState({ loading: true })
     // console.log(loading)
-    axios.get('http://127.0.0.1:8081/api/v1/products' /*, 
+    axios.get('http://127.0.0.1:8082/api/v1/products?sort=purchaseDate:desc' /*, 
     { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}}*/)
     .then((response) => {
         var c = response.data
-        // let users = []
-        console.log(c)
-               let users = c.map((product) => {
+        // console.log(c)
+        // for (let i = 0; i < c.length; i++) {
+        //     let dateTime = c[i].purchaseDate
+        //     let date = dateTime.slice(0, 10)
+        //     console.log(date)
+        // }
+        // kako da go ubacam date na Product ili da go konvertiram?
+            let products = c.map((product) => {       
                 return (<Product      
                       key={product._id} 
-                      id={product._id}
+                    //   id={product._id}
                       productName={product.productName}
                       productType={product.productType}
                       productDescription={product.productDescription}
                       purchaseDate={product.purchaseDate}
                       productPrice={product.productPrice}
-                    //   showEdDel={this.showEditDelete}
-                      /*del={this.delrow}*/ />
+                      showEdDel={this.props.showEdDel}
+                      del={this.delBox} />
                     )
                 })
-                this.setState({ udata: users })
+                this.setState({ udata: products })
                 // console.log(users)
                 console.log(this.state.udata)
                 // console.log(this.state.udata.length - 1)
@@ -79,8 +85,8 @@ class TableNew extends React.Component {
                     </thead>
                     <tbody className="products-table-body">
                         {/* <TbodyData {...this.props}/> */}
-                        {/* {this.state.udata} */}
-                    <tr>
+                        {this.state.udata}
+                    {/* <tr>
                         <td>TEST</td>
                         <td>TEST</td>
                         <td>TEST</td>
@@ -96,7 +102,7 @@ class TableNew extends React.Component {
                                </button>
                         </td> 
                          : <td></td>}
-                    </tr>
+                    </tr> */}
                     </tbody>
                        {this.state.show && <DeleteBox  clBtn={this.closeBt} />}
                 </table>

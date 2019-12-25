@@ -1,5 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import '../../assets/styles/ProductsNew.css'
+import '../../assets/styles/shared.css'
+import DeleteBox from '../calculator/DeleteBox'
 
 
 class Product extends React.Component {
@@ -22,17 +25,18 @@ class Product extends React.Component {
                 <td>{this.props.productDescription}</td>
                 <td>{this.props.purchaseDate}</td>
                 <td>{this.props.productPrice}</td>
-                {/* {this.props.showEdDel ? 
+                {this.props.showEdDel ? 
                 <td>
                     <Link to='/editproduct'>
                         <button id='editbtn' className="far fa-edit">
                         </button>
                     </Link>
-                        <button id='delbtn' className="far fa-trash-alt" onClick={this.delBox}>
+                        <button id='delbtn' className="far fa-trash-alt" onClick={this.props.del}>
                         </button>
                 </td> 
-              : <td></td>} */}
-            </tr>  
+              : <td></td>}
+            </tr> 
+
         )
     }
 }
