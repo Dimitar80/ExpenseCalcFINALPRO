@@ -64,33 +64,6 @@ class Expenses extends React.Component {
       selOptionsYear.push(<option key={i} value={i}> {i} </option>)
       }
       selOptionsYear.reverse();
-
-
-      // Za options na selectbox od Month
-      let monthsList = [
-        "January", 
-        "February", 
-        "March", 
-        "April", 
-        "May", 
-        "June", 
-        "July", 
-        "August", 
-        "September",
-        "October",
-        "November",
-        "December"
-      ]
-      let selOptionsMonth= []
-      for (let i = 0; i < monthsList.length; i++) {
-          selOptionsMonth.push(<option key={i} value={i}> {monthsList[i]} </option>);
-        //   console.log(selOptionsMonth);
-      }
-    //   console.log(selOptionsMonth);
-      
-
-
-      
       
      return (
         <React.Fragment>
@@ -124,10 +97,9 @@ class Expenses extends React.Component {
                       <p id='years'>
                        <h2>Choose Month</h2>
                        <input type="month" id="start" name="start"
-                       min="2016-03" value="2018-05">
-                       </input>
+                       min="2000-01" value=/*"current"*/"2018-05" />
                       </p> : null}
-                      
+
                       {/* {this.state.showMonthly ?
                       <p id="select-box-container" id='years'>
                        <label htmlFor="expenses-filter">Choose Year </label> 

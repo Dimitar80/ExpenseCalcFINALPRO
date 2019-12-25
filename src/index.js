@@ -42,20 +42,7 @@ ReactDOM.render(<Routes />, app)
 //     </Provider>, app)
 
 
-// const Routes = () => {
-//     return (
-//           <Router>
-//               <Switch>
-//                   < Route exact path = '/' component = {ProLogin} />
-//                   < Route exact path = '/register' component = {Register} />
-//                   < Route exact path = '/expenses' component = {Expenses} />
-//                   < Route exact path = '/products' component = {ProductsNew} />
-//                   < Route exact path = '/newproduct' component = {NewProduct} />
-//                   {/* < Route exact path = '/editproduct' component = {EditProduct} /> */}
-//              </Switch>
-//           </Router>
-//         )
-//    }
+
 
 
 

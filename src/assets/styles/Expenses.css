@@ -92,6 +92,8 @@
     outline: none;
     border-radius: 5px;
     margin-left: 20px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
     /* margin-right: 720px; */
 }
 
