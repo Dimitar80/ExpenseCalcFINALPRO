@@ -121,16 +121,24 @@ class Expenses extends React.Component {
                          </div>
                       {/* <div id='months'> */}
                       {this.state.showMonthly ?
-                      <p /*id="select-box-container"*/ id='years'>
-                      {/* <label htmlFor="expenses-filter">Choose Year </label> */}
+                      <p id='years'>
+                       <h2>Choose Month</h2>
+                       <input type="month" id="start" name="start"
+                       min="2016-03" value="2018-05">
+                       </input>
+                      </p> : null}
+                      
+                      {/* {this.state.showMonthly ?
+                      <p id="select-box-container" id='years'>
+                       <label htmlFor="expenses-filter">Choose Year </label> 
                       <h2>Choose Month</h2>
-                      <select /*name="expenses-filter" className="select-box"*/ id="select" 
-                      /*onChange={this.searchFilter}*/>
+                      <select name="expenses-filter" className="select-box" id="select" 
+                      onChange={this.searchFilter}>
                           <option>Months</option>
-                          {/* <option value={'total'}>Total</option> */}
+                          <option value={'total'}>Total</option>
                           {selOptionsMonth}
                       </select>
-                  </p> : null}
+                  </p> : null} */}
 
                       {this.state.showYearly ? 
                             <p /*id="select-box-container"*/ id='years'>
