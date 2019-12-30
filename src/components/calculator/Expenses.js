@@ -1,8 +1,7 @@
 import React from 'react'
 import '../../assets/styles/Expenses.css'
 import '../../assets/styles/shared.css'
-// import Table from '../table/Table'
-import TableNew from '../table/TableNew'
+import TableData from '../table/TableData'
 
 
 // const exbody = document.getElementsByTagName('body')
@@ -15,15 +14,13 @@ class Expenses extends React.Component {
             // showProducts: true,
             // showAlert: false,
             // didUpdate: false
-            showMonthly: false,
-            showYearly: true,
-            toggle: true
+            showMonthly: true,
+            showYearly: false,
+            toggle: false
         }
     }
     
     
-           
-
     showMonthly = (/*e*/) => {
         // alert("Monthly WORKS!")
         this.setState({
@@ -34,7 +31,7 @@ class Expenses extends React.Component {
     }
 
     showYearly = (e) => {
-        console.log(e.target)
+        // console.log(e.target)
         // alert("Yearly WORKS!")
         this.setState({
             showYearly: true,
@@ -42,11 +39,9 @@ class Expenses extends React.Component {
             toggle: true
         })
     }
+    
 
-
-
-
-
+    
     render () {
 
       // Za options na selectbox od Year
@@ -54,25 +49,38 @@ class Expenses extends React.Component {
     //   console.log(today)
     //   let month = today.getMonth();
     //   console.log(month)
-      let month = today.toLocaleString('default', { month: 'long' })
-      console.log(month)
+    //   let month = today.toLocaleString('default', { month: 'long' })
+    //   console.log(month)
       
       let year = today.getFullYear();
-      console.log(year)
+    //   console.log(year)
       let selOptionsYear= []
       for (let i = 2000; i <= year; i++) {
       selOptionsYear.push(<option key={i} value={i}> {i} </option>)
       }
       selOptionsYear.reverse();
+
+      // Za options na selectbox od Month
+      let monthsList = [
+        "January", 
+        "February", 
+        "March", 
+        "April", 
+        "May", 
+        "June", 
+        "July", 
+        "August", 
+        "September",
+        "October",
+        "November",
+        "December"
+      ];
       
      return (
         <React.Fragment>
             {/* <Navbar /> */}
             <this.props.component toggle={true}/>
            <div id='expenses'>
-           
-           
-            {/* BODY */}
                 <div className='exmain-container'>
                     <div id='emaintitle'>
                         <h1>Expenses</h1>
@@ -94,23 +102,28 @@ class Expenses extends React.Component {
                          </div>
                       {/* <div id='months'> */}
                       {this.state.showMonthly ?
-                      <p id='years'>
-                       <h2>Choose Month</h2>
-                       <input type="month" id="start" name="start"
-                       min="2000-01" value=/*"current"*/"2018-05" />
-                      </p> : null}
-
-                      {/* {this.state.showMonthly ?
-                      <p id="select-box-container" id='years'>
-                       <label htmlFor="expenses-filter">Choose Year </label> 
+                      <p /*id="select-box-container"*/ id='years'>
+                       {/* <label htmlFor="expenses-filter">Choose Year </label>  */}
                       <h2>Choose Month</h2>
-                      <select name="expenses-filter" className="select-box" id="select" 
-                      onChange={this.searchFilter}>
+                      <select /*name="expenses-filter" className="select-box"*/ id="select" 
+                      /*onChange={this.searchFilter}*/>
                           <option>Months</option>
-                          <option value={'total'}>Total</option>
-                          {selOptionsMonth}
+                          {/* <option value={'total'}>Total</option> */}
+                          {monthsList.map((month, i) => (
+                            //   console.log(i, month),
+                          <option key={month} value={i}>
+                          {month}
+                          </option>
+                        ))}
                       </select>
-                  </p> : null} */}
+                      <h2>Choose Year</h2>
+                      <select /*name="expenses-filter" className="select-box"*/ id="select" 
+                      /*onChange={this.searchFilter}*/>
+                          <option>Years</option>
+                          {/* <option value={'total'}>Total</option> */}
+                          {selOptionsYear}
+                      </select>
+                  </p> : null}
 
                       {this.state.showYearly ? 
                             <p /*id="select-box-container"*/ id='years'>
@@ -125,12 +138,11 @@ class Expenses extends React.Component {
                             </p> : null}
                               {/* Sredi M/Y Drop down i so queries*/}
                      </div>
-                     <TableNew />
+                     <TableData />
                 </div>
-                        <div id='saldo'>
-                           <h2><span id='wh'>
-                           Total spent:</span> 1205 den.</h2>
-                        </div>
+                    <div id='saldo'>
+                        <h2><span id='wh'>Total spent:</span> 1205 den.</h2>
+                    </div>
             </div>
           </React.Fragment>
         )

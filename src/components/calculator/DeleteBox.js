@@ -7,11 +7,7 @@ class DeleteBox extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-        // showProducts: true,
-        // showAlert: false,
-        // didUpdate: false
-      //   clicked: false,
-      //   show: false
+        
     }
 }
 

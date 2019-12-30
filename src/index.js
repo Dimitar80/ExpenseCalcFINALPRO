@@ -2,18 +2,18 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import { Provider } from 'react-redux'
-import store from './redux/store.js'
+// import { Provider } from 'react-redux'
+// import store from './redux/store.js'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-// import { BrowserRouter as Router, Route, Switch, } from 'react-router-dom'
-/*PRO*/
+
+import Navbar from './components/navbar/Navbar'
 import ProLogin from './components/home/ProLogin'
 import Register from './components/home/Register'
 import Expenses from './components/calculator/Expenses'
-import ProductNew from './components/calculator/ProductsNew'
-import EditProduct from './components/calculator/EditProduct'
+import ProductsNew from './components/calculator/ProductsNew'
 import NewProduct from './components/newProduct/NewProduct'
-import Navbar from './components/navbar/Navbar'
+// import EditProduct from './components/table/EditProduct'
+
 
 // HTML
 const app = document.getElementById('app')
@@ -26,9 +26,9 @@ const Routes = () => {
                   < Route exact path = '/' component = {ProLogin} />
                   < Route exact path = '/register' component = {Register} />
                   < Route exact path = '/expenses' render={() => <Expenses component={Navbar}/>} />
-                  < Route exact path = '/products' render={() => <ProductNew component={Navbar}/>} />
+                  < Route exact path = '/products' render={() => <ProductsNew component={Navbar}/>} />
                   < Route exact path = '/newproduct' render={() => <NewProduct component={Navbar}/>} />
-                  < Route exact path = '/editproduct'  render={() => <EditProduct component={Navbar}/>} />
+                  {/* < Route exact path = '/editproduct'  render={() => <EditProduct component={Navbar}/>} /> */}
              </Switch>
           </Router>
         )
