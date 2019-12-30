@@ -4,7 +4,7 @@ import '../../assets/styles/shared.css'
 import '../../assets/styles/Table.css'
 import DeleteBox from '../calculator/DeleteBox'
 import ProductRow from './ProductRow'
-// import EditProduct from './EditProduct'
+import EditProduct from './EditProduct'
 
 
 
@@ -34,7 +34,7 @@ class TableData extends React.Component {
     { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}}*/)
     .then((response) => {
         var p = response.data
-        // console.log(c)
+        // console.log(p)
         // for (let i = 0; i < p.length; i++) {
         //     let dateTime = p[i].purchaseDate
         //     let date = dateTime.slice(0, 10)
@@ -55,7 +55,7 @@ class TableData extends React.Component {
                     )
                 })
                 this.setState({ udata: products })
-                // console.log(this.state.udata[0].props.productName)
+                console.log(this.state.udata[0].props.productName)
            })
           .catch((error) => {
            console.log(error + ' Greska')
@@ -84,14 +84,9 @@ class TableData extends React.Component {
                         {/* <TbodyData {...this.props}/> */}
                         {this.state.udata}
                     </tbody>
-                       {/* <EditProduct {...this.props} 
-                          key={this.props.id}
-                          /> */}
                        {/* {this.state.show && <DeleteBox  clBtn={this.closeBt} />} */}
                        {/* {this.state.show && <EditProduct  data={this.state.udata} />} */}
                 </table>
-                {/* {this.state.show && <EditProduct   
-                edname={this.state.udata[0].props.productName}/>} */}
                 {this.state.show && <DeleteBox  clBtn={this.closeBt} />}
             </div>
             </React.Fragment>

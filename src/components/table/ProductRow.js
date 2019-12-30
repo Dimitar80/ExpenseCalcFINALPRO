@@ -32,7 +32,7 @@ class ProductRow extends React.Component {
     render () {
         return (
             <React.Fragment>
-            <tr>
+            <tr /*{...this.props.key}*/>
                 {/* <td>{this.props.id}</td> */}
                 <td>{this.props.productName}</td>
                 <td>{this.props.productType}</td>
@@ -41,22 +41,14 @@ class ProductRow extends React.Component {
                 <td>{this.props.productPrice}</td>
                 {this.props.EdDel ? 
                 <td>
-                    <Link to='/editproduct'>
+                       {/* <Link to='/editproduct'> */}
+                    <Link to={"/editproduct/:id" + this.props.productId}>
                         <button id='editbtn' className="far fa-edit" /*onClick={this.showOrHide}*/ />
                     </Link>
                         <button id='delbtn' className="far fa-trash-alt" onClick={this.props.del} />
                 </td> 
               : <td></td>}
             </tr>
-             {this.state.show && <EditProduct 
-            //    key={this.props.key} 
-            //    Edid={this.props.id}
-               EdProductName={this.props.productName} 
-               EdProductType={this.props.productType} 
-               EdProductDescription={this.props.productDescription} 
-               EdPurchaseDate={this.props.purchaseDate} 
-               EdProductPrice={this.props.productPrice} 
-               /> }
              </React.Fragment>
         )
     }

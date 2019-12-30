@@ -28,7 +28,8 @@ const Routes = () => {
                   < Route exact path = '/expenses' render={() => <Expenses component={Navbar}/>} />
                   < Route exact path = '/products' render={() => <ProductsNew component={Navbar}/>} />
                   < Route exact path = '/newproduct' render={() => <NewProduct component={Navbar}/>} />
-                  < Route exact path = '/editproduct'  render={() => <EditProduct component={Navbar}/>} />
+                  < Route exact path = '/editproduct' render={() => <EditProduct component={Navbar}/>} />
+                  < Route exact path = '/editproduct/:id' render={() => <EditProduct component={Navbar}/>} />
              </Switch>
           </Router>
         )

@@ -2,13 +2,14 @@ import React from 'react'
 import '../../assets/styles/EditProduct.css'
 import '../../assets/styles/shared.css'
 import { Link } from 'react-router-dom'
-// import axios from 'axios'
+import axios from 'axios'
 
 
 class EditProduct extends React.Component {
-    constructor(/*props*/) {
-        super(/*props*/)
+    constructor(props) {
+        super(props)
         this.state = {
+            edata: [],
             // productName: null /*this.props.productName*/,
             // productType: null,
             // productDescription: null,
@@ -58,7 +59,25 @@ class EditProduct extends React.Component {
     //         // store.dispatch(changeNewToEditProduct(false))
     //     }
     // }
-  
+
+
+    
+
+    componentDidMount () {
+        // this.setState({ loading: true })
+        // console.log(loading)
+        axios.get('http://127.0.0.1:8082/api/v1/products/' + this.props.match.params.id /*, 
+        { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}}*/)
+        .then((res) => {
+                    this.setState({ edata: res.data })
+                    console.log(edata)
+               })
+              .catch((error) => {
+               console.log(error + ' Greska')
+             // this.setState({ error: <Error />, loading: false })
+        })
+    }
+
     render () {
 
          return (
@@ -78,8 +97,8 @@ class EditProduct extends React.Component {
                                     Product Name
                                 </label>
                                 <input type="text" className="nptextfield" id='productName' 
-                                 onChange={this.saveInputValue} defaultValue={this.props.EdProductName}
-                                 /*defaultValue={this.props.edname}*/ /*defaultValue={this.props.data}*/ 
+                                //  onChange={this.saveInputValue} defaultValue={this.props.EdProductName}
+                                 defaultValue={this.props.edname} /*defaultValue={this.props.data}*/ 
                                  /*value={this.EdProductName}*/ />
                            </p>
                            <p className='input-container'>
