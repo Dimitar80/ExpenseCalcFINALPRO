@@ -12,7 +12,7 @@ import Register from './components/home/Register'
 import Expenses from './components/calculator/Expenses'
 import ProductsNew from './components/calculator/ProductsNew'
 import NewProduct from './components/newProduct/NewProduct'
-// import EditProduct from './components/table/EditProduct'
+import EditProduct from './components/table/EditProduct'
 
 
 // HTML
@@ -28,7 +28,7 @@ const Routes = () => {
                   < Route exact path = '/expenses' render={() => <Expenses component={Navbar}/>} />
                   < Route exact path = '/products' render={() => <ProductsNew component={Navbar}/>} />
                   < Route exact path = '/newproduct' render={() => <NewProduct component={Navbar}/>} />
-                  {/* < Route exact path = '/editproduct'  render={() => <EditProduct component={Navbar}/>} /> */}
+                  < Route exact path = '/editproduct'  render={() => <EditProduct component={Navbar}/>} />
              </Switch>
           </Router>
         )

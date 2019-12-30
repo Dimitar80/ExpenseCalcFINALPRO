@@ -1,5 +1,5 @@
 import React from 'react'
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import '../../assets/styles/shared.css'
 import EditProduct from './EditProduct'
 
@@ -41,9 +41,9 @@ class ProductRow extends React.Component {
                 <td>{this.props.productPrice}</td>
                 {this.props.EdDel ? 
                 <td>
-                    {/* <Link to='/editproduct'> */}
-                        <button id='editbtn' className="far fa-edit" onClick={this.showOrHide} />
-                    {/* </Link> */}
+                    <Link to='/editproduct'>
+                        <button id='editbtn' className="far fa-edit" /*onClick={this.showOrHide}*/ />
+                    </Link>
                         <button id='delbtn' className="far fa-trash-alt" onClick={this.props.del} />
                 </td> 
               : <td></td>}
