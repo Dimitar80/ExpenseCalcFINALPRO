@@ -16,19 +16,7 @@ class ProductRow extends React.Component {
     //     this.setState({ show: !this.state.show })
     // }
 
-    showOrHide = (event) => {
-        console.log(event.target.id)
-        /* menuvanje na state so setState() metoda
-        otkako state-ot kje se smeni,
-        komponentata si go vika svojot render metod odnovo
-        (ASINHRONA E, PAZETE! noviot state moze da go procitate
-            samo vo render i so callback) */
-        this.setState({ show: !this.state.show });
-        console.log("Button clicked...")
-        // let buttonText = this.state.expText === "Expand" ? "Close" : "Expand"
-        // this.setState({expText: buttonText});
-    }
-
+   
     render () {
         return (
             <React.Fragment>
@@ -42,8 +30,8 @@ class ProductRow extends React.Component {
                 {this.props.EdDel ? 
                 <td>
                        {/* <Link to='/editproduct'> */}
-                    <Link to={"/editproduct/:id" + this.props.productId}>
-                        <button id='editbtn' className="far fa-edit" /*onClick={this.showOrHide}*/ />
+                    <Link to={"/editproduct/" + this.props.productId}>
+                        <button id='editbtn' className="far fa-edit" />
                     </Link>
                         <button id='delbtn' className="far fa-trash-alt" onClick={this.props.del} />
                 </td> 

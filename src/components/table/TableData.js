@@ -44,7 +44,7 @@ class TableData extends React.Component {
             let products = p.map((product) => {       
                 return (<ProductRow      
                       key={product._id} 
-                    //   id={product._id}
+                      productId={product._id}
                       productName={product.productName}
                       productType={product.productType}
                       productDescription={product.productDescription}
@@ -55,7 +55,7 @@ class TableData extends React.Component {
                     )
                 })
                 this.setState({ udata: products })
-                console.log(this.state.udata[0].props.productName)
+                // console.log(this.state.udata[0].props.productName)
            })
           .catch((error) => {
            console.log(error + ' Greska')

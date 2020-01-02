@@ -22,17 +22,18 @@ const app = document.getElementById('app')
 const Routes = () => {
     return (
           <Router>
-              <Switch>
-                  < Route exact path = '/' component = {ProLogin} />
-                  < Route exact path = '/register' component = {Register} />
-                  < Route exact path = '/expenses' render={() => <Expenses component={Navbar}/>} />
-                  < Route exact path = '/products' render={() => <ProductsNew component={Navbar}/>} />
-                  < Route exact path = '/newproduct' render={() => <NewProduct component={Navbar}/>} />
-                  < Route exact path = '/editproduct' render={() => <EditProduct component={Navbar}/>} />
-                  < Route exact path = '/editproduct/:id' render={() => <EditProduct component={Navbar}/>} />
-             </Switch>
+           <Switch>
+             < Route exact path = '/' component = {ProLogin} />
+             < Route exact path = '/register' component = {Register} />
+             < Route exact path = '/expenses' render={() => <Expenses component={Navbar}/>} />
+             < Route exact path = '/products' render={() => <ProductsNew component={Navbar}/>} />
+             < Route exact path = '/newproduct' render={() => <NewProduct component={Navbar}/>} />
+             {/* < Route exact path = '/editproduct' render={() => <EditProduct component={Navbar}/>} /> */}
+             < Route exact path = '/editproduct/:id' render={() => <EditProduct 
+             /*key={this.props.productId}*/ component={Navbar}/>} />
+           </Switch>
           </Router>
-        )
+       )
    }
 
 ReactDOM.render(<Routes />, app)

@@ -69,8 +69,11 @@ class EditProduct extends React.Component {
         axios.get('http://127.0.0.1:8082/api/v1/products/' + this.props.match.params.id /*, 
         { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}}*/)
         .then((res) => {
-                    this.setState({ edata: res.data })
-                    console.log(edata)
+            var ep = res.data
+            console.log(ep)
+                    this.setState({ edata: ep })
+                    console.log(this.state.edata)
+                    console.log(this.state.edata[0]._id)
                })
               .catch((error) => {
                console.log(error + ' Greska')
@@ -79,10 +82,9 @@ class EditProduct extends React.Component {
     }
 
     render () {
-
+        //  console.log(this.state.edata)
          return (
             <React.Fragment>
-                   {/* <Navbar /> */}
                    <this.props.component toggle={false}/>
                 <div id='newproducts'>
                 <div id='npmain-container'> 
@@ -98,8 +100,7 @@ class EditProduct extends React.Component {
                                 </label>
                                 <input type="text" className="nptextfield" id='productName' 
                                 //  onChange={this.saveInputValue} defaultValue={this.props.EdProductName}
-                                 defaultValue={this.props.edname} /*defaultValue={this.props.data}*/ 
-                                 /*value={this.EdProductName}*/ />
+                                 value={this.state.edata.map[this.props.match.params.id].name} />
                            </p>
                            <p className='input-container'>
                                 <label className="nplabel" >
@@ -138,7 +139,7 @@ class EditProduct extends React.Component {
                                SAVE
                            </button>
                            <Link to='products'>
-                           <button className='cl-button' /*onClick={this.closeBt}*/>
+                           <button className='cl-button' >
                                CLOSE
                            </button>
                            </Link>
