@@ -30,17 +30,10 @@ class TableData extends React.Component {
    componentDidMount () {
     // this.setState({ loading: true })
     // console.log(loading)
-    axios.get('http://127.0.0.1:8082/api/v1/products/' /*, 
+    axios.get('http://127.0.0.1:8082/api/v1/products/?sort=purchaseDate:desc' /*, 
     { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}}*/)
     .then((response) => {
         var p = response.data
-        // console.log(p)
-        // for (let i = 0; i < p.length; i++) {
-        //     let dateTime = p[i].purchaseDate
-        //     let date = dateTime.slice(0, 10)
-        //     console.log(date)
-        // }
-        // kako da go ubacam date na Product ili da go konvertiram?
             let products = p.map((product) => {       
                 return (<ProductRow      
                       key={product._id} 
@@ -48,7 +41,7 @@ class TableData extends React.Component {
                       productName={product.productName}
                       productType={product.productType}
                       productDescription={product.productDescription}
-                      purchaseDate={product.purchaseDate}
+                      purchaseDate={product.purchaseDate.slice(0, 10)}
                       productPrice={product.productPrice}
                       EdDel={this.props.showEdDel}
                       del={this.delBox} />

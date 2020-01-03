@@ -31,7 +31,7 @@ class ProductRow extends React.Component {
                 {this.props.EdDel ? 
                 <td>
                        {/* <Link to='/editproduct'> */}
-                    <Link to={"/editproduct/" + this.props.productId}>
+                    <Link to={"/editproduct/" + this.props.productId} >
                         <button id='editbtn' className="far fa-edit" />
                     </Link>
                         <button id='delbtn' className="far fa-trash-alt" onClick={this.props.del} />

@@ -107,9 +107,11 @@ class NewProduct extends React.Component {
                                onChange={this.saveInputValue}/>
                          </p>
                          <div id='btnsNp'>
+                         <Link to={'/products'}> {/*Dali e dobro resenievo so nested btn so f-jata???*/}
                          <button type='button' className='cp-button' onClick={this.createProduct} >
-                             CREATE PRODUCT
+                             CREATE PRODUCT 
                          </button>
+                         </Link>
                          <Link to='products'>
                          <button className='cl-button'>
                              CLOSE

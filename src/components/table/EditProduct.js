@@ -26,7 +26,7 @@ class EditProduct extends React.Component {
             var ep = res.data
             console.log(ep)
                     this.setState({ edata: ep })
-                    console.log('Generated _id - ' + this.state.edata[0]._id)
+                    console.log('Existing generated _id - ' + this.state.edata[0]._id)
                })
               .catch((error) => {
                console.log(error + ' Greska')
@@ -38,7 +38,9 @@ class EditProduct extends React.Component {
    }
 
     saveInputValue = (event) => {
-    this.setState({[event.target.id]: event.target.value})
+    this.setState({[event.target.id]: event.target.value 
+    // || {productName: this.state.productName}
+})
     // console.log(event.target.id)
     console.log(event.target.value)
     }
@@ -55,15 +57,16 @@ class EditProduct extends React.Component {
                 event.preventDefault()
         } else {
             axios.put('http://127.0.0.1:8082/api/v1/products/' + this.props.match.params.id, {
-                productName: this.state.productName,
-                productType: this.state.productType,
-                productDescription: this.state.productDescription,
-                purchaseDate: this.state.purchaseDate,
-                productPrice: this.state.productPrice,
+                productName: this.state.productName || this.state.edata[0].productName,
+                productType: this.state.productType || this.state.edata[0].productType,
+                productDescription: this.state.productDescription || this.state.edata[0].productDescription,
+                purchaseDate: this.state.purchaseDate || this.state.edata[0].purchaseDate,
+                productPrice: this.state.productPrice || this.state.edata[0].productPrice,
                 _modified: new Date()
             } /*, { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}}*/)
             .then(res => {
             console.log(res);
+            // this.setState({ edata: ep })
             })
             .catch(err => {
             console.log(err);
@@ -117,9 +120,9 @@ class EditProduct extends React.Component {
                          <label className="nplabel" >
                              Purchase Date
                          </label>
-                         <input type="text" className="nptextfield" id='purchaseDate' 
+                         <input type="date" className="nptextfield" id='purchaseDate' 
                           onChange={this.saveInputValue} 
-                          defaultValue={this.state.edata[0].purchaseDate} />
+                          defaultValue={this.state.edata[0].purchaseDate.slice(0, 10)} />
                     </p>
                     <p className='input-container'>
                          <label className="nplabel" >
@@ -130,9 +133,11 @@ class EditProduct extends React.Component {
                           defaultValue={this.state.edata[0].productPrice} />
                     </p>
                     <div id='btnsNp'>
+                    <Link to={'/products'} >
                     <button type='button' className='cp-button'  onClick={this.editProduct} >
                         SAVE
                     </button>
+                    </Link>
                     <Link to='/products'>
                     <button className='cl-button' >
                         CLOSE
