@@ -55,6 +55,7 @@ class TableData extends React.Component {
                     )
                 })
                 this.setState({ udata: products })
+                // console.log(this.state.udata)
                 // console.log(this.state.udata[0].props.productName)
            })
           .catch((error) => {

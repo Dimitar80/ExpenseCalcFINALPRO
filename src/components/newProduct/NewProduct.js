@@ -29,22 +29,16 @@ class NewProduct extends React.Component {
     }
 
     createProduct = (event) => {
-        console.log('clicked')
+        // console.log('clicked')
         if( this.state.productName === null ||
             this.state.productType === null ||
             this.state.productDescription === null ||
             this.state.purchaseDate === null ||
             this.state.productPrice === null){
                 event.preventDefault()
-                alert('Please fill out all the fields')
-        } else /*if ( 
-            this.state.productName != null &&
-            this.state.productType != null &&
-            this.state.productDescription != null &&
-            this.state.purchaseDate != null &&
-            this.state.productPrice != null)*/ {
-            
-            axios.post('http://127.0.0.1:8082/api/v1/products/', {
+                alert('All fields must be filled out')
+        } else {
+              axios.post('http://127.0.0.1:8082/api/v1/products/', {
                 productName: this.state.productName,
                 productType: this.state.productType,
                 productDescription: this.state.productDescription,
