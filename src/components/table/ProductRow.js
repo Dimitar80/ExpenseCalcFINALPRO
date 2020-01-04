@@ -34,7 +34,7 @@ class ProductRow extends React.Component {
                     <Link to={"/editproduct/" + this.props.productId} >
                         <button id='editbtn' className="far fa-edit" />
                     </Link>
-                        <button id='delbtn' className="far fa-trash-alt" onClick={this.props.del} />
+                        <button id='delbtn' className="far fa-trash-alt" onClick={() => this.props.del(this.props.productId)} />
                 </td> 
               : <td></td>}
             </tr>

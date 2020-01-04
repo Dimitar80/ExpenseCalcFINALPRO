@@ -15,46 +15,65 @@ class TableData extends React.Component {
             // show: false,
             udata: [],
             // showEditDelete: true,
+            rowIdToDelete: null,
+
 
         }
     }
 
-    delBox = () => {
-        this.setState({ show: !this.state.show })
+    delBox = (id) => {
+        this.setState({ show: !this.state.show, rowIdToDelete: id })
+        console.log("ID: ", id)
     }
 
     closeBt = () => {
+        console.log("Function called")
         this.setState({ show: false })
+   }
+
+   deleteRow = (id) => {
+       axios.delete('http://127.0.0.1:8082/api/v1/products/' + id).then((res) => {
+           this.setState({show: false})
+            console.log("Deleted: ", res)
+            this.getProducts()
+           })
+          .catch((error) => {
+           console.log(error + ' Greska')
+    })
+   }
+
+   getProducts = () => {
+    axios.get('http://127.0.0.1:8082/api/v1/products/?sort=purchaseDate:asc' /*, 
+        { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}}*/)
+        .then((response) => {
+            var p = response.data
+                let products = p.map((product) => {       
+                    return (<ProductRow      
+                        key={product._id} 
+                        productId={product._id}
+                        productName={product.productName}
+                        productType={product.productType}
+                        productDescription={product.productDescription}
+                        purchaseDate={product.purchaseDate.slice(0, 10)}
+                        productPrice={product.productPrice}
+                        EdDel={this.props.showEdDel}
+                        del={this.delBox} />
+                        )
+                    })
+                    this.setState({ udata: products })
+                    // console.log(this.state.udata)
+                    // console.log(this.state.udata[0].props.productName)
+            })
+            .catch((error) => {
+            console.log(error + ' Greska')
+            // this.setState({ error: <Error />, loading: false })
+        })
    }
     
    componentDidMount () {
     // this.setState({ loading: true })
     // console.log(loading)
-    axios.get('http://127.0.0.1:8082/api/v1/products/?sort=purchaseDate:desc' /*, 
-    { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}}*/)
-    .then((response) => {
-        var p = response.data
-            let products = p.map((product) => {       
-                return (<ProductRow      
-                      key={product._id} 
-                      productId={product._id}
-                      productName={product.productName}
-                      productType={product.productType}
-                      productDescription={product.productDescription}
-                      purchaseDate={product.purchaseDate.slice(0, 10)}
-                      productPrice={product.productPrice}
-                      EdDel={this.props.showEdDel}
-                      del={this.delBox} />
-                    )
-                })
-                this.setState({ udata: products })
-                // console.log(this.state.udata)
-                // console.log(this.state.udata[0].props.productName)
-           })
-          .catch((error) => {
-           console.log(error + ' Greska')
-         // this.setState({ error: <Error />, loading: false })
-    })
+    this.getProducts()
 }
 
     render () {
@@ -81,7 +100,12 @@ class TableData extends React.Component {
                        {/* {this.state.show && <DeleteBox  clBtn={this.closeBt} />} */}
                        {/* {this.state.show && <EditProduct  data={this.state.udata} />} */}
                 </table>
-                {this.state.show && <DeleteBox  clBtn={this.closeBt} />}
+                {this.state.show && 
+                <DeleteBox 
+                    ajdi={this.state.rowIdToDelete}
+                    clBtn={this.closeBt}
+                    deleteRow={this.deleteRow}
+                />}
             </div>
             </React.Fragment>
         )

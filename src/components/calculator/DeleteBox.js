@@ -4,15 +4,30 @@ import '../../assets/styles/shared.css'
 
 
 class DeleteBox extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-        
-    }
-}
+//   constructor(props) {
+//     super(props)
+//     this.state = {
+//         data: this.props.ajdi
+//     }
+// }
 
+
+
+   //   deleterow = (item) => {
+   //     const newdata = this.state.data.filter(i => i._id !== item.id)
+   //    //  this.setState({newdata})
+   //    this.setState({data: newdata})
+   //    //  console.log(this.state.newdata)
+   // }
+
+
+ 
 
   render(){
+   // console.log(this.newdata)
+   //   console.log(this.props)
+   // console.log(this.state.data)
+   const id = this.props.ajdi
       return (
               <div id='delproducts'>
                  <div id='back-screen'>
@@ -25,7 +40,7 @@ class DeleteBox extends React.Component {
                       </div>
                       <div id='buttons'>
                          <button id='cancel' onClick={this.props.clBtn}>CANCEL</button>
-                         <button id='delete'>DELETE</button>
+                         <button id='delete' onClick={() => this.props.deleteRow(id)} >DELETE</button>
                       </div>
                    </div>
                  </div>
