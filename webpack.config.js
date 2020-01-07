@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-    entry: './src/index.js',
+    entry: ['react-hot-loader/patch','./src/index.js'],  /*entry: ['react-hot-loader/patch', './src']*/
     devtool: 'source-map',
     output: {
       path: path.resolve(__dirname, 'src'),
