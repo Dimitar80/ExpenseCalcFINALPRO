@@ -4,7 +4,6 @@ import "../../assets/styles/ProductsNew.css";
 import "../../assets/styles/shared.css";
 import { Link } from "react-router-dom";
 import TableAll from "../table/TableAll";
-import TableBody from "../table/TableBody";
 
 // document.body.style.backgroundColor = 'blue';
 
@@ -16,7 +15,7 @@ class ProductsNew extends React.Component {
       // showAlert: false,
       // didUpdate: false
       showEditDelete: true,
-      show: true,
+      // show: true,
       data: [],
       sort: null
       // edit: false

@@ -3,7 +3,6 @@ import axios from "axios";
 import "../../assets/styles/Expenses.css";
 import "../../assets/styles/shared.css";
 import TableAll from "../table/TableAll";
-import TableBody from "../table/TableBody";
 
 // const exbody = document.getElementsByTagName('body')
 // document.body.style.backgroundColor = 'red';
@@ -12,9 +11,7 @@ class Expenses extends React.Component {
   constructor() {
     super();
     this.state = {
-      // showProducts: true,
       // showAlert: false,
-      // didUpdate: false
       showMonthly: true,
       showYearly: false,
       toggle: false,
@@ -88,10 +85,11 @@ class Expenses extends React.Component {
       "November",
       "December"
     ];
-    //   let totalSpent = 0
-    //     for (let i = 0; i < this.props.products.length; i++) {
-    //         totalSpent += this.props.products[i].productPrice
-    //     }
+
+    let totalSpent = 0;
+    for (let i = 0; i < this.state.data.length; i++) {
+      totalSpent += this.state.data[i].productPrice;
+    }
 
     return (
       <React.Fragment>
@@ -171,14 +169,12 @@ class Expenses extends React.Component {
               ) : null}
               {/* Sredi M/Y Drop down i so queries*/}
             </div>
-            {/* <TableData /> */}
-            {/* <TableBody data={this.state.data} /> */}
             <TableAll data={this.state.data} />
           </div>
           <div id="saldo">
             {/* <h2><span id='wh'>Total spent:</span> 1205 den.</h2> */}
             <h2>
-              <span id="wh">Total spent:</span> {/*{totalSpent}*/} den.
+              <span id="wh">Total spent:</span> {totalSpent} den.
             </h2>
           </div>
         </div>

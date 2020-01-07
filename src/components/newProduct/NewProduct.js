@@ -56,8 +56,6 @@ class NewProduct extends React.Component {
           this.setState({ redirect: true });
           // this.setState({ upd: this.getProducts})
           // this.props.updProducts()
-          // this.setState({ upd: this.props.updProducts /*, loading: false*/ })
-          // this.setState({ upd: <ProductsNew /> /*, loading: false*/ })
         })
         .catch(err => {
           console.log(err);

@@ -1,11 +1,9 @@
 import React from "react";
-
 import ProductRow from "./ProductRow";
 
 const TableBody = props => {
   //   console.log(props.data);
   console.log(props);
-  // console.log(props.showEdDel, props.del)
   return props.data.map(product => {
     return (
       <ProductRow

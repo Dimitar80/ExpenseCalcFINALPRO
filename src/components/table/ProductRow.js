@@ -8,22 +8,10 @@ class ProductRow extends React.Component {
     super(/*props*/);
     this.state = {
       // show: false
-      prooo: this.props
     };
   }
 
-  // delBox = () => {
-  //     this.setState({ show: !this.state.show })
-  // }
-
   render() {
-    // let totalSpent = 0
-    // for (let i = 0; i < this..length; i++) {
-    //     totalSpent += this.props[i].productPrice
-    //     console.log(this.props[i].productPrice)
-    // }
-    // console.log(totalSpent)
-    // console.log(this.props.productId);
     return (
       <React.Fragment>
         <tr /*{...this.props.key}*/>
