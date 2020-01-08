@@ -4,6 +4,7 @@ import "../../assets/styles/ProductsNew.css";
 import "../../assets/styles/shared.css";
 import { Link } from "react-router-dom";
 import TableAll from "../table/TableAll";
+import DeleteBox from "../calculator/DeleteBox";
 
 // document.body.style.backgroundColor = 'blue';
 
@@ -15,7 +16,6 @@ class ProductsNew extends React.Component {
       // showAlert: false,
       // didUpdate: false
       showEditDelete: true,
-      // show: true,
       data: [],
       sort: null
       // edit: false
@@ -30,7 +30,7 @@ class ProductsNew extends React.Component {
     console.log("Value", event.target.value);
   };
 
-  componentDidMount() {
+  /*componentDidMount()*/ getProducts = () => {
     axios
       .get(
         "http://127.0.0.1:8082/api/v1/products/?sort=purchaseDate:desc" /*,
@@ -40,11 +40,17 @@ class ProductsNew extends React.Component {
         // const pUp = res.data
         // console.log(pUp)
         this.setState({ data: res.data /*, loading: false*/ });
+        // console.log(data);
         console.log(res.data);
       })
       .catch(err => {
         console.log(err);
       });
+  };
+
+  componentDidMount() {
+    console.log("Table data did mount");
+    this.getProducts();
   }
 
   componentDidUpdate() {
@@ -109,11 +115,8 @@ class ProductsNew extends React.Component {
             <TableAll
               data={this.state.data}
               showEdDel={this.state.showEditDelete}
+              fgetProducts={this.getProducts}
             />
-            {/* <TableBody
-              showEdDel={this.state.showEditDelete}
-              data={this.state.data}
-            /> */}
           </div>
           <div id="mainonebtn">
             <Link

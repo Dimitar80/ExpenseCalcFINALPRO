@@ -7,11 +7,19 @@ class ProductRow extends React.Component {
   constructor(/*props*/) {
     super(/*props*/);
     this.state = {
-      // show: false
+      // show: false,
+      // rowIdToDelete: null
     };
   }
 
+  // delBoxOpen = id => {
+  //   this.setState({ show: true /*rowIdToDelete: id*/ });
+  //   console.log("ID: ", id);
+  //   console.log("delBoxOpen: " + this.state.show);
+  // };
+
   render() {
+    // console.log(this.props.del);
     return (
       <React.Fragment>
         <tr /*{...this.props.key}*/>
@@ -31,6 +39,11 @@ class ProductRow extends React.Component {
                 className="far fa-trash-alt"
                 onClick={() => this.props.del(this.props.productId)}
               />
+              {/* <button
+                id="delbtn"
+                className="far fa-trash-alt"
+                onClick={() => this.delBoxOpen(this.props.productId)}
+              /> */}
             </td>
           ) : (
             <td></td>

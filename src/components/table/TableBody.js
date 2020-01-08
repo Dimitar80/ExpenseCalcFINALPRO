@@ -15,7 +15,7 @@ const TableBody = props => {
         purchaseDate={product.purchaseDate.slice(0, 10)}
         productPrice={product.productPrice}
         EdDel={props.showEdDel}
-        del={props.del}
+        del={props.delBtnOpen}
       />
     );
   });
