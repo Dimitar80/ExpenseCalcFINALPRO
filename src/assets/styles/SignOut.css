@@ -1,6 +1,6 @@
-/*DP30-08-2019*/
+/*DP09-01-2020*/
 
-#delproducts {
+#signout {
   width: 100%;
   height: 100%;
   display: flex;
@@ -10,7 +10,7 @@
   /* align-content: center; */
 }
 
-#back-screen {
+#bck-screen {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -25,7 +25,7 @@
   margin: 0px;
 }
 
-#delbox {
+#sobox {
   position: fixed;
   width: 450px;
   height: 225px;
@@ -39,34 +39,35 @@
   margin: 0px;
 }
 
-#boxtext {
+#sotext {
   display: flex;
   flex-direction: column;
   padding-bottom: 20px;
 }
 
-#delbox h2 {
+#sobox h2 {
   font-size: 19px;
   color: #576574;
   font-weight: bold;
+  margin-bottom: 0px;
   /* margin-right: auto; */
 }
-#delbox p {
+#sobox p {
   font-size: 17px;
   color: #576574;
 }
 
-#buttons {
+#btns {
   display: flex;
   align-items: center;
   margin-left: auto;
-  margin-right: 60px;
+  margin-right: 65px;
   box-sizing: border-box;
   padding-bottom: 20px;
 }
 
-#delbox #cancel,
-#delete {
+#sobox #socancel,
+#sodelete {
   font-size: 15px;
   font-weight: 600;
   color: #576574;
@@ -79,7 +80,7 @@
   box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.17);
   cursor: pointer;
 }
-#delbox #delete {
+#sobox #sodelete {
   background-color: #576574;
   color: #fff;
   /* font-weight: 500; */

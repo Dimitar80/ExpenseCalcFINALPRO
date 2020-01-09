@@ -2,18 +2,20 @@ import React from "react";
 import "../../assets/styles/Navbar.css";
 import "../../assets/styles/shared.css";
 import { Link } from "react-router-dom";
+import SignOut from "./SignOut";
 
 // Navbar 'sreden'
 class Navbar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      active: null,
-      //  toggle: true,
-      toggle: this.props.toggle
+      toggle: this.props.toggle,
+      signOut: false
+      // show: false
     };
   }
 
+  // Kako raboti toggle-iranjeto koga ovie dve funkcii ne postojat/se iskomentirani???
   showProducts = () => {
     // alert("Products WORKS!")
     this.setState({
@@ -28,7 +30,21 @@ class Navbar extends React.Component {
     });
   };
 
+  // SIgnOut Metods-START
+  signOut = () => {
+    this.setState({ signOut: true });
+  };
+
+  closeBt = () => {
+    console.log("Function called");
+    this.setState({ signOut: false });
+  };
+  // SignOut Methods-END
+
   render() {
+    console.log(this.state.signOut);
+    console.log(this.state.toggle);
+    // console.log(this.state.show);
     return (
       <React.Fragment>
         {/* <header id='header'> */}
@@ -65,14 +81,21 @@ class Navbar extends React.Component {
               </button>
             </Link>
           </nav>
+          {/* SignOut - Display */}
+          {this.state.signOut && (
+            <SignOut
+              // ajdi={this.state.rowIdToDelete}}
+              clBtn={this.closeBt}
+              // delRow={this.deleteRow}
+            />
+          )}
           <div id="user">
-            {/* <Link to="#" style={{ textDecoration: "none" }}> */}
             <img src="../../assets/img/DPPHOTO.jpg" alt="profileimg" />
             {/* PRAKTICNO DA ISKOCI POP UP KO DELETE SO PRASANJE ZA KONFIRMACIJA A OD YES DA ME VRATI NA
             LINKOT - PATEKATA '/' OD Prologin ! */}
-            <Link to="#" style={{ textDecoration: "none" }}>
-              <h2>User name</h2>
-            </Link>
+            <h2 id="touch" onClick={this.signOut}>
+              User name
+            </h2>
           </div>
         </div>
         {/* </header> */}

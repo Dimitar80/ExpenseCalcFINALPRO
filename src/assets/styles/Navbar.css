@@ -96,7 +96,7 @@
   align-items: center;
   flex-direction: row;
   justify-content: center;
-  background-color: red;
+  /* background-color: red; */
   margin: 0px;
   padding: 0px;
 }
@@ -116,4 +116,8 @@
   margin-top: 0px;
   /* margin-right: 30px; */
   white-space: nowrap;
+}
+
+#touch {
+  cursor: pointer;
 }

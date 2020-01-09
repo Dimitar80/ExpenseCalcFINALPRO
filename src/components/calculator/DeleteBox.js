@@ -11,8 +11,8 @@ class DeleteBox extends React.Component {
       // data: this.props.ajdi
       toggle: true,
       rowIdToDelete: null,
-      redirect: false,
-      show: this.props.show
+      redirect: false
+      // show: this.props.show
     };
   }
 
@@ -41,38 +41,25 @@ class DeleteBox extends React.Component {
       });
   };
 
-  // componentDidMount()
+  // componentDidMount() {   ???
+  //   this.getProducts()
+  // }
 
-  // deleteRow = id => {
-  //   axios
-  //     .delete("http://127.0.0.1:8082/api/v1/products/" + id)
-  //     .then(res => {
-  //       // this.setState({ toggle: false /*redirect: true*/ });
-  //       // this.setState({ redirect: true });
-  //       console.log("Product with id: " + id + " is deleted");
-  //       this.setState({});
-  //       this.getProducts();
-  //       // console.log(this.state.toggle);
-  //       // this.setState({ redirect: true });
-  //       console.log("Deleted: ", res);
-  //     })
-  //     .catch(error => {
-  //       console.log(error + " Greska");
-  //     });
-  // };
+  keyPressed(event) {
+    if (event.key === "Enter") {
+      // this.submitMessage()
+      this.props.delRow(this.props.ajdi);
+      alert("Enter is functioning");
+    }
+  }
 
   render() {
+    console.log(this.keyPressed);
     // console.log(this.props);
     // console.log(this.state.data)
     console.log(this.state.show);
     // console.log(this.state.toggle);
-    const id = this.props.ajdi;
-    console.log(this.state.redirect);
-
-    const { redirect } = this.state;
-    if (redirect) {
-      return <Redirect to="/products" />;
-    }
+    const id = this.props.ajdi; //SAMO TUKA LI MORA???
     return (
       <div id="delproducts">
         <div id="back-screen">
@@ -85,16 +72,14 @@ class DeleteBox extends React.Component {
               </p>
             </div>
             <div id="buttons">
-              {/* <button id="cancel" onClick={this.cancelBtn}>
-                CANCEL
-              </button>
-              <button id="delete" onClick={() => this.deleteRow(id)}>
-                DELETE
-              </button> */}
               <button id="cancel" onClick={this.props.clBtn}>
                 CANCEL
               </button>
-              <button id="delete" onClick={() => this.props.delRow(id)}>
+              <button
+                id="delete"
+                onClick={() => this.props.delRow(id)}
+                onKeyPress={this.keyPressed}
+              >
                 DELETE
               </button>
             </div>

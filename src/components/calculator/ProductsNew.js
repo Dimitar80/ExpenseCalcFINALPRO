@@ -4,7 +4,6 @@ import "../../assets/styles/ProductsNew.css";
 import "../../assets/styles/shared.css";
 import { Link } from "react-router-dom";
 import TableAll from "../table/TableAll";
-import DeleteBox from "../calculator/DeleteBox";
 
 // document.body.style.backgroundColor = 'blue';
 

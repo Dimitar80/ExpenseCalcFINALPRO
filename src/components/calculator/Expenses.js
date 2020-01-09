@@ -15,7 +15,8 @@ class Expenses extends React.Component {
       showMonthly: true,
       showYearly: false,
       toggle: false,
-      data: []
+      data: [],
+      optionValue: null
     };
   }
 
@@ -38,6 +39,12 @@ class Expenses extends React.Component {
     });
   };
 
+  selectValue = e => {
+    this.setState({
+      optionValue: e.target.value
+    });
+  };
+
   componentDidMount() {
     axios
       .get(
@@ -54,17 +61,59 @@ class Expenses extends React.Component {
       });
   }
 
+  componentDidUpdate() {
+    // const { sort } = this.state;
+    let selectedDate = this.state.optionValue;
+    console.log(selectedDate);
+
+    if (selectedDate) {
+      console.log(selectedDate.length);
+    }
+    let dateFrom = new Date(`${selectedDate}-01-01T00:00:00.000Z`).getTime();
+    console.log(dateFrom);
+    // let toTargetDate = `${myDate}-12-31T23:59:59.000Z`
+    let dateTo = new Date(`${selectedDate}-12-31T23:59:59.000Z`).getTime();
+    console.log(dateTo);
+
+    console.log("Component did update", selectedDate);
+    if (selectedDate != null && selectedDate.length === 4) {
+      console.log("Sort in component did mount", selectedDate);
+      axios
+        .get(
+          `http://127.0.0.1:8082/api/v1/products/?purcdate_from=${dateFrom}&purcdate_to=${dateTo}` /*,
+                  { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}}*/
+        )
+        .then(res => {
+          this.setState({ data: res.data /*, loading: false*/ });
+          console.log(res.data);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  }
+
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   const currentSort = selectedDate;
+  //   const nextSort = nextState.selectedDate;
+  //   console.log("Should Component update", currentSort, nextSort);
+  //   if (currentSort === nextSort && currentSort !== null) {
+  //     return false;
+  //   } else {
+  //     return true;
+  //   }
+  // }
+
   render() {
     // Za options na selectbox od Year
     let today = new Date();
     let year = today.getFullYear();
     //   console.log(year)
     let selOptionsYear = [];
-    for (let i = 2000; i <= year; i++) {
+    for (let i = 2001; i <= year; i++) {
       selOptionsYear.push(
         <option key={i} value={i}>
-          {" "}
-          {i}{" "}
+          {i}
         </option>
       );
     }
@@ -90,6 +139,13 @@ class Expenses extends React.Component {
     for (let i = 0; i < this.state.data.length; i++) {
       totalSpent += this.state.data[i].productPrice;
     }
+
+    // let selectedDate = this.state.optionValue;
+    // console.log(selectedDate);
+
+    // if (selectedDate) {
+    //   console.log(selectedDate.length);
+    // }
 
     return (
       <React.Fragment>
@@ -130,7 +186,7 @@ class Expenses extends React.Component {
                   <h2>Choose Month</h2>
                   <select
                     /*name="expenses-filter" className="select-box"*/ id="select"
-                    /*onChange={this.searchFilter}*/
+                    /*onChange={this.selectValue}*/
                   >
                     <option>Months</option>
                     {/* <option value={'total'}>Total</option> */}
@@ -144,7 +200,7 @@ class Expenses extends React.Component {
                   <h2>Choose Year</h2>
                   <select
                     /*name="expenses-filter" className="select-box"*/ id="select"
-                    /*onChange={this.searchFilter}*/
+                    onChange={this.selectValue}
                   >
                     <option>Years</option>
                     {/* <option value={'total'}>Total</option> */}
@@ -159,7 +215,7 @@ class Expenses extends React.Component {
                   <h2>Choose Year</h2>
                   <select
                     /*name="expenses-filter" className="select-box"*/ id="select"
-                    /*onChange={this.searchFilter}*/
+                    onChange={this.selectValue}
                   >
                     <option>Years</option>
                     {/* <option value={'total'}>Total</option> */}
