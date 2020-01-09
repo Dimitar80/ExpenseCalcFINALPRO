@@ -85,3 +85,20 @@
   color: #fff;
   /* font-weight: 500; */
 }
+
+/*#user img*/
+img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+  /* margin-right: 10px; */
+  /* margin-left: auto; */
+}
+#userInfo h2,
+p {
+  margin: 0px;
+}
+#userIfo {
+  display: flex;
+  flex-direction: column;
+}

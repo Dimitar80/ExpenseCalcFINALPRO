@@ -9,6 +9,12 @@ const SignOut = props => {
         <div id="sobox">
           <div id="soxtext">
             <h2>Sign Out</h2>
+            <div id="userInfo">
+              <img src="../../assets/img/DPPHOTO.jpg" alt="profileimg" />
+
+              <h2>User name</h2>
+              <p>User email</p>
+            </div>
             <p>
               You are about to sign out. Are you sure you
               <br />
