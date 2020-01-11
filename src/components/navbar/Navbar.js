@@ -42,8 +42,8 @@ class Navbar extends React.Component {
   // SignOut Methods-END
 
   render() {
-    console.log(this.state.signOut);
-    console.log(this.state.toggle);
+    // console.log(this.state.signOut);
+    // console.log(this.state.toggle);
     // console.log(this.state.show);
     return (
       <React.Fragment>

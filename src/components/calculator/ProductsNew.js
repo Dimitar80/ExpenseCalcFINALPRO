@@ -17,7 +17,6 @@ class ProductsNew extends React.Component {
       showEditDelete: true,
       data: [],
       sort: null
-      // edit: false
     };
   }
 
@@ -25,22 +24,21 @@ class ProductsNew extends React.Component {
     this.setState({
       sort: event.target.value
     });
-    console.log(event);
+    // console.log(event);
     console.log("Value", event.target.value);
   };
 
-  /*componentDidMount()*/ getProducts = () => {
+  getProducts = () => {
+    console.log("Get products", this.state.sort);
     axios
       .get(
-        "http://127.0.0.1:8082/api/v1/products/?sort=purchaseDate:desc" /*,
+        `http://127.0.0.1:8082/api/v1/products/?sort=purchaseDate:desc` /*,
       { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}}*/
       )
       .then(res => {
-        // const pUp = res.data
-        // console.log(pUp)
-        this.setState({ data: res.data /*, loading: false*/ });
         // console.log(data);
-        console.log(res.data);
+        console.log("Data: ", res.data);
+        this.setState({ data: res.data });
       })
       .catch(err => {
         console.log(err);
@@ -49,46 +47,56 @@ class ProductsNew extends React.Component {
 
   componentDidMount() {
     console.log("Table data did mount");
+    console.log(this.state.data);
     this.getProducts();
   }
 
   componentDidUpdate() {
-    const { sort } = this.state;
-    console.log("Component did update", sort);
-    if (this.state.sort != null) {
-      console.log("Sort in component did mount", this.state.sort);
-      axios
-        .get(
-          `http://127.0.0.1:8082/api/v1/products/?sort=${this.state.sort}` /*,
-                  { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}}*/
-          /*+ this.state.sort*/
-        )
-        .then(res => {
-          // const pUpSort = res.data
-          // console.log(pUpSort)
-          this.setState({ data: res.data /*, loading: false*/ });
-          console.log(res.data);
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    }
+    console.log("Component did update, loading: " /*this.state.loading*/);
+    // this.getProducts();
+    console.log("Get products", this.state.sort);
+    axios
+      .get(
+        `http://127.0.0.1:8082/api/v1/products/?sort=${this.state.sort}` /*,
+      { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}}*/
+      )
+      .then(res => {
+        // console.log(data);
+        console.log("Data: ", res.data);
+        this.setState({ data: res.data });
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   shouldComponentUpdate(nextProps, nextState) {
     const currentSort = this.state.sort;
+    console.log(currentSort);
     const nextSort = nextState.sort;
-    console.log("Should Component update", currentSort, nextSort);
-    if (currentSort === nextSort && currentSort !== null) {
-      return false;
-    } else {
+    console.log(nextSort);
+    const dataLength = this.state.data.length;
+    console.log(dataLength);
+    // const loading = this.state.loading;
+    console.log(
+      "Should Component update",
+      "Current sort - ",
+      currentSort,
+      ", ",
+      "NexSort - ",
+      nextSort /*loading*/
+    );
+    if (currentSort !== nextSort || dataLength === 0) {
+      console.log("Update");
       return true;
+    } else {
+      console.log("No Update");
+      return false;
     }
   }
 
   render() {
-    console.log(this.state.sort);
-    console.log(this.state.data);
+    console.log("Component in render");
     return (
       <React.Fragment>
         {/* <Navbar /> */}
@@ -104,10 +112,10 @@ class ProductsNew extends React.Component {
               <div id="filter">
                 <h2>Sort by:</h2>
                 <select onChange={this.SortProduct}>
-                  <option value="purchaseDate:asc">Latest Purchase</option>
-                  <option value="purchaseDate:desc">First Purchase</option>
-                  <option value="productPrice:asc">Highest Price</option>
-                  <option value="productPrice:desc">Lowest Price</option>
+                  <option value="purchaseDate:desc">Latest Purchase</option>
+                  <option value="purchaseDate:asc">First Purchase</option>
+                  <option value="productPrice:desc">Highest Price</option>
+                  <option value="productPrice:asc">Lowest Price</option>
                 </select>
               </div>
             </div>

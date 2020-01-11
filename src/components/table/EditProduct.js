@@ -97,49 +97,49 @@ class EditProduct extends React.Component {
     return this.state.edata.length > 0 ? (
       <React.Fragment>
         <this.props.component toggle={false} />
-        <div id="newproducts">
-          <div id="npmain-container">
-            <div id="npmaintitle">
+        <div id="editproducts">
+          <div id="epmain-container">
+            <div id="epmaintitle">
               <h1>Edit Product</h1>
             </div>
-            <div className="form-container">
-              <div id="fpage">
+            <div className="epform-container">
+              <div id="epfpage">
                 <form>
-                  <p className="input-container">
-                    <label className="nplabel">Product Name</label>
+                  <p className="epinput-container">
+                    <label className="eplabel">Product Name</label>
                     <input
                       type="text"
-                      className="nptextfield"
+                      className="eptextfield"
                       id="productName"
                       onChange={this.saveInputValue}
                       defaultValue={this.state.edata[0].productName}
                     />
                   </p>
                   <p className="input-container">
-                    <label className="nplabel">Product Type</label>
+                    <label className="eplabel">Product Type</label>
                     <input
                       type="text"
-                      className="nptextfield"
+                      className="eptextfield"
                       id="productDescription"
                       onChange={this.saveInputValue}
                       defaultValue={this.state.edata[0].productType}
                     />
                   </p>
                   <p className="input-container">
-                    <label className="nplabel">Product Description</label>
+                    <label className="eplabel">Product Description</label>
                     <input
                       type="text"
-                      className="nptextfield"
+                      className="eptextfield"
                       id="productType"
                       onChange={this.saveInputValue}
                       defaultValue={this.state.edata[0].productDescription}
                     />
                   </p>
                   <p className="input-container">
-                    <label className="nplabel">Purchase Date</label>
+                    <label className="eplabel">Purchase Date</label>
                     <input
                       type="date"
-                      className="nptextfield"
+                      className="eptextfield"
                       id="purchaseDate"
                       onChange={this.saveInputValue}
                       defaultValue={this.state.edata[0].purchaseDate.slice(
@@ -149,35 +149,35 @@ class EditProduct extends React.Component {
                     />
                   </p>
                   <p className="input-container">
-                    <label className="nplabel">Product Price</label>
+                    <label className="eplabel">Product Price</label>
                     <input
                       type="text"
-                      className="nptextfield"
+                      className="eptextfield"
                       id="productPrice"
                       onChange={this.saveInputValue}
                       defaultValue={this.state.edata[0].productPrice}
                     />
                   </p>
-                  <div id="btnsNp">
+                  <div id="btnsEp">
                     <button
                       type="button"
-                      className="cp-button"
+                      className="ep-button"
                       onClick={this.editProduct}
                     >
                       SAVE
                     </button>
 
                     <Link to="/products">
-                      <button className="cl-button">CLOSE</button>
+                      <button className="epcl-button">CLOSE</button>
                     </Link>
                   </div>
                 </form>
               </div>
-              <div id="right-page">
-                <p id="simbol">
+              <div id="ep-right-page">
+                <p id="ep-simbol">
                   <i className="fas fa-plus-circle" />
                 </p>
-                <p id="title">You are editing an existing product</p>
+                <p id="ep-title">You are editing an existing product</p>
               </div>
             </div>
           </div>

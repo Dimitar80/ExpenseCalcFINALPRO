@@ -25,10 +25,11 @@
   margin: 0px;
 }
 
-#sobox {
+#so-box {
   position: fixed;
   width: 450px;
-  height: 225px;
+  /* height: 225px; */
+  height: 250px;
   box-sizing: border-box;
   background-color: #fff;
   display: flex;
@@ -39,20 +40,20 @@
   margin: 0px;
 }
 
-#sotext {
+#so-text {
   display: flex;
   flex-direction: column;
   padding-bottom: 20px;
 }
 
-#sobox h2 {
+#so-box h2 {
   font-size: 19px;
   color: #576574;
   font-weight: bold;
   margin-bottom: 0px;
   /* margin-right: auto; */
 }
-#sobox p {
+#so-box p {
   font-size: 17px;
   color: #576574;
 }
@@ -66,7 +67,7 @@
   padding-bottom: 20px;
 }
 
-#sobox #socancel,
+#so-box #socancel,
 #sodelete {
   font-size: 15px;
   font-weight: 600;
@@ -80,25 +81,34 @@
   box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.17);
   cursor: pointer;
 }
-#sobox #sodelete {
+#so-box #sodelete {
   background-color: #576574;
   color: #fff;
   /* font-weight: 500; */
 }
 
 /*#user img*/
-img {
-  width: 40px;
-  height: 40px;
+#so-userS img {
+  width: 60px;
+  height: 60px;
   border-radius: 50px;
+  margin: 18px auto 0px;
   /* margin-right: 10px; */
   /* margin-left: auto; */
 }
-#userInfo h2,
+#so-userInfo h2,
 p {
   margin: 0px;
 }
-#userIfo {
+#so-userInfo {
+  float: right;
   display: flex;
   flex-direction: column;
+  /* background-color: rgba(255, 0, 0, 0.342); */
+  margin: 30px auto 15px;
 }
+
+/* #so-userS {
+  float: left;
+  flex-direction: column;
+} */

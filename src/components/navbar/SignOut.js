@@ -6,14 +6,15 @@ const SignOut = props => {
   return (
     <div id="signout">
       <div id="bck-screen">
-        <div id="sobox">
-          <div id="soxtext">
+        <div id="so-box">
+          <div id="so-text">
             <h2>Sign Out</h2>
-            <div id="userInfo">
+            <div id="so-userS">
               <img src="../../assets/img/DPPHOTO.jpg" alt="profileimg" />
-
-              <h2>User name</h2>
-              <p>User email</p>
+              <div id="so-userInfo">
+                <p>Dimitar Pavlov</p>
+                <p>designcrafts.mk@gmail.com</p>
+              </div>
             </div>
             <p>
               You are about to sign out. Are you sure you

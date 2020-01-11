@@ -43,15 +43,15 @@ class TableAll extends React.Component {
   };
 
   render() {
-    console.log(this.props);
-    console.log(this.state.show + " - od kade ide ova true?");
+    // console.log(this.props);
+    // console.log(this.state.show + " - od kade ide ova true?");
     // console.log(this.props.data);
     // console.log(this.getProducts);
     return (
       // this.state.udata.length > 0 ?
       <React.Fragment>
         {/* <div className="products-table-container"> */}
-        <table id="pmaintable">
+        <table id="emaintable">
           <thead className="products-table-head">
             <tr>
               <th>Product Name</th>
@@ -80,11 +80,6 @@ class TableAll extends React.Component {
         {/* </div> */}
       </React.Fragment>
       // : <h2>Loading data...</h2>
-      /*: <h2>Loading data...</h2>*/
-      /*: <h2>Loading data...</h2>*/
-      /*: <h2>Loading data...</h2>*/
-      /*: <h2>Loading data...</h2>*/
-      /*: <h2>Loading data...</h2>*/
       /*: <h2>Loading data...</h2>*/
       /*: <h2>Loading data...</h2>*/
      /*: <h2>Loading data...</h2>*/);

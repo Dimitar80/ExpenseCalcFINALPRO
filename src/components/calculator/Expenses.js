@@ -11,12 +11,12 @@ class Expenses extends React.Component {
   constructor() {
     super();
     this.state = {
-      // showAlert: false,
       showMonthly: true,
       showYearly: false,
       toggle: false,
       data: [],
-      optionValue: null
+      optionValue: null,
+      selected: false
     };
   }
 
@@ -29,7 +29,7 @@ class Expenses extends React.Component {
     });
   };
 
-  showYearly = e => {
+  showYearly = (/*e*/) => {
     // console.log(e.target)
     // alert("Yearly WORKS!")
     this.setState({
@@ -41,46 +41,109 @@ class Expenses extends React.Component {
 
   selectValue = e => {
     this.setState({
-      optionValue: e.target.value
+      optionValue: e.target.value,
+      selected: true
     });
+    console.log(e.target.value); //so setState:???
   };
 
-  componentDidMount() {
+  // componentDidMount() {
+  //   axios
+  //     .get(
+  //       "http://127.0.0.1:8082/api/v1/products/?sort=purchaseDate:desc" /*,
+  //       { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}}*/
+  //     )
+  //     .then(res => {
+  //       // const pUp = res.data
+  //       // console.log(pUp)
+  //       this.setState({ data: res.data /*, loading: false*/ });
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  // }
+
+  getProductsInExp = () => {
+    console.log("Get products");
     axios
       .get(
-        "http://127.0.0.1:8082/api/v1/products/?sort=purchaseDate:desc" /*, 
-        { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}}*/
+        `http://127.0.0.1:8082/api/v1/products/?sort=purchaseDate:desc` /*,
+      { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}}*/
       )
       .then(res => {
-        // const pUp = res.data
-        // console.log(pUp)
-        this.setState({ data: res.data /*, loading: false*/ });
+        // console.log(data);
+        console.log("Data: ", res.data);
+        this.setState({ data: res.data });
       })
       .catch(err => {
         console.log(err);
       });
+  };
+
+  componentDidMount() {
+    this.getProductsInExp();
   }
 
+  // componentDidUpdate() {
+  //   let selectedDate = this.state.optionValue;
+  //   console.log(selectedDate);
+
+  //   if (selectedDate != null) {
+  //     console.log(selectedDate.length);
+  //   }
+  //   let dateFrom = new Date(`${selectedDate}-01-01 00:00:00.000`).getTime();
+  //   console.log("dateFrom", dateFrom);
+  //   // let dateTo = `${selectedDate}-12-31T23:59:59.000Z`
+  //   let dateTo = new Date(`${selectedDate}-12-31 23:59:59.000`).getTime();
+  //   console.log("dateToOO", dateTo);
+
+  //   console.log("Component did update", selectedDate);
+  //   if (selectedDate === null /*&& selectedDate.length === 4*/) {
+  //     this.getProductsInExp();
+  //   } else {
+  //     // console.log("else TESTING componentDidUpdate");
+  //     // console.log("Sort in component did mount", selectedDate);
+  //     axios
+  //       .get(
+  //         `http://127.0.0.1:8082/api/v1/products/?purcdate_from=${dateFrom}&purcdate_to=${dateTo}&sort=purchaseDate:desc` /*,
+  //                 { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}}*/
+  //       )
+  //       .then(res => {
+  //         this.setState({ data: res.data /*, loading: false*/ });
+  //         console.log(res.data);
+  //       })
+  //       .catch(err => {
+  //         console.log(err);
+  //       });
+  //   }
+  // }
+
   componentDidUpdate() {
-    // const { sort } = this.state;
     let selectedDate = this.state.optionValue;
     console.log(selectedDate);
 
-    if (selectedDate) {
-      console.log(selectedDate.length);
-    }
-    let dateFrom = new Date(`${selectedDate}-01-01T00:00:00.000Z`).getTime();
-    console.log(dateFrom);
-    // let toTargetDate = `${myDate}-12-31T23:59:59.000Z`
-    let dateTo = new Date(`${selectedDate}-12-31T23:59:59.000Z`).getTime();
-    console.log(dateTo);
+    // if (selectedDate != null) {
+    //   console.log(selectedDate.length);
+    // }
+    let dateFrom = new Date(`${selectedDate}-01-01 00:00:00.000`).getTime();
+    console.log("dateFrom", dateFrom);
+    // let dateTo = `${selectedDate}-12-31T23:59:59.000Z`
+    let dateTo = new Date(`${selectedDate}-12-31 23:59:59.000`).getTime();
+    console.log("dateToOO", dateTo);
 
     console.log("Component did update", selectedDate);
-    if (selectedDate != null && selectedDate.length === 4) {
-      console.log("Sort in component did mount", selectedDate);
+    if (
+      selectedDate != null &&
+      this.state.selected /*&& selectedDate.length === 4*/
+    ) {
+      console.log(
+        "Sort in component did mount",
+        selectedDate,
+        this.state.selected
+      );
       axios
         .get(
-          `http://127.0.0.1:8082/api/v1/products/?purcdate_from=${dateFrom}&purcdate_to=${dateTo}` /*,
+          `http://127.0.0.1:8082/api/v1/products/?purcdate_from=${dateFrom}&purcdate_to=${dateTo}&sort=purchaseDate:desc` /*,
                   { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}}*/
         )
         .then(res => {
@@ -90,6 +153,8 @@ class Expenses extends React.Component {
         .catch(err => {
           console.log(err);
         });
+    } else {
+      console.log("else TESTING componentDidUpdate");
     }
   }
 
@@ -110,7 +175,7 @@ class Expenses extends React.Component {
     let year = today.getFullYear();
     //   console.log(year)
     let selOptionsYear = [];
-    for (let i = 2001; i <= year; i++) {
+    for (let i = 1999; i <= year; i++) {
       selOptionsYear.push(
         <option key={i} value={i}>
           {i}
@@ -202,7 +267,7 @@ class Expenses extends React.Component {
                     /*name="expenses-filter" className="select-box"*/ id="select"
                     onChange={this.selectValue}
                   >
-                    <option>Years</option>
+                    <option value={"Years"}>Years</option>
                     {/* <option value={'total'}>Total</option> */}
                     {selOptionsYear}
                   </select>
