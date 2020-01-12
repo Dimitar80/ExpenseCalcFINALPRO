@@ -15,7 +15,8 @@ class Expenses extends React.Component {
       showYearly: false,
       toggle: false,
       data: [],
-      optionValue: null,
+      yearValue: null,
+      monthValue: null,
       selected: false
     };
   }
@@ -39,29 +40,13 @@ class Expenses extends React.Component {
     });
   };
 
-  selectValue = e => {
+  selectYValue = e => {
     this.setState({
-      optionValue: e.target.value,
+      yearValue: e.target.value,
       selected: true
     });
     console.log(e.target.value); //so setState:???
   };
-
-  // componentDidMount() {
-  //   axios
-  //     .get(
-  //       "http://127.0.0.1:8082/api/v1/products/?sort=purchaseDate:desc" /*,
-  //       { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}}*/
-  //     )
-  //     .then(res => {
-  //       // const pUp = res.data
-  //       // console.log(pUp)
-  //       this.setState({ data: res.data /*, loading: false*/ });
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // }
 
   getProductsInExp = () => {
     console.log("Get products");
@@ -118,8 +103,9 @@ class Expenses extends React.Component {
   //   }
   // }
 
+  // Za Godina //
   componentDidUpdate() {
-    let selectedDate = this.state.optionValue;
+    let selectedDate = this.state.yearValue;
     console.log(selectedDate);
 
     // if (selectedDate != null) {
@@ -133,6 +119,9 @@ class Expenses extends React.Component {
 
     console.log("Component did update", selectedDate);
     if (
+      this.state.showYearly === true &&
+      this.state.showMonthly === false &&
+      this.state.toggle === true &&
       selectedDate != null &&
       this.state.selected /*&& selectedDate.length === 4*/
     ) {
@@ -169,11 +158,85 @@ class Expenses extends React.Component {
   //   }
   // }
 
+  // Za Mesec i godina //
+  selectMValue = e => {
+    this.setState({
+      monthValue: e.target.value,
+      selected: true
+    });
+    console.log(e.target.value); //so setState:???
+  };
+
+  // componentDidUpdate() {
+  //   let selectedMonth = Number(this.state.monthValue);
+  //   console.log(selectedMonth);
+  //   let selectedYear = this.state.yearValue;
+  //   console.log(selectedYear);
+
+  //   // const getDaysInMonth = date =>
+  //   //   new Date(date.getFullYear(), date.getMonth(), 0).getDate();
+  //   // console.log(getDaysInMonth(new Date(selectedDate, selectedMonth))); // 28 days in February 2019
+  //   // console.log(getDaysInMonth);
+
+  //   // if (selectedDate != null) {
+  //   //   console.log(selectedDate.length);
+  //   // }
+  //   let dateFromYM = new Date(
+  //     `${selectedYear}-${selectedMonth} 00:00:00.000`
+  //   ); /*.getTime()*/
+  //   console.log("dateFromYM", dateFromYM);
+  //   let dateToYM = new Date(
+  //     `${selectedYear}-${selectedMonth + 1} 00:00:00.000`
+  //   ); /*.getTime()*/
+  //   console.log("dateToYM", dateToYM);
+
+  //   console.log("Component did update", selectedMonth);
+  //   if (
+  //     selectedMonth != null &&
+  //     selectedYear != null &&
+  //     this.state.selected == true /*&& selectedDate.length === 4*/
+  //   ) {
+  //     console.log(
+  //       "Sort in component did mount",
+  //       selectedMonth,
+  //       this.state.selected
+  //     );
+  //     // axios
+  //     //   .get(
+  //     //     `http://127.0.0.1:8082/api/v1/products/?purcdate_from=${dateFromYM}&purcdate_to=${dateToYM}&sort=purchaseDate:desc` /*,
+  //     //             { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}}*/
+  //     //   )
+  //     //   .then(res => {
+  //     //     this.setState({ data: res.data /*, loading: false*/ });
+  //     //     console.log(res.data);
+  //     //   })
+  //     //   .catch(err => {
+  //     //     console.log(err);
+  //     //   });
+  //   } else {
+  //     console.log("else TESTING componentDidUpdate");
+  //   }
+  // }
+
   render() {
     // Za options na selectbox od Year
     let today = new Date();
+    console.log(today);
     let year = today.getFullYear();
-    //   console.log(year)
+    console.log(year);
+
+    // var getDaysInMonth = function(month, year) {
+    //   // Here January is 1 based
+    //   //Day 0 is the last day in the previous month
+    //   return new Date(year, month, 0).getDate();
+    //   // Here January is 0 based
+    //   // return new Date(year, month+1, 0).getDate();
+    // };
+    // console.log(getDaysInMonth(2, 2020));
+
+    // let month = today.getMonth();
+    // console.log(month);
+
     let selOptionsYear = [];
     for (let i = 1999; i <= year; i++) {
       selOptionsYear.push(
@@ -184,8 +247,16 @@ class Expenses extends React.Component {
     }
     selOptionsYear.reverse();
 
+    // const currentYear = new Date().getFullYear();
+    // console.log(currentYear);
+    // const fromMonth = new Date(currentYear, 0);
+    // console.log(fromMonth);
+    // const toMonth = new Date(currentYear /*+ 10*/, 4);
+    // console.log(toMonth);
+
     // Za options na selectbox od Month
     let monthsList = [
+      "...",
       "January",
       "February",
       "March",
@@ -251,7 +322,7 @@ class Expenses extends React.Component {
                   <h2>Choose Month</h2>
                   <select
                     /*name="expenses-filter" className="select-box"*/ id="select"
-                    /*onChange={this.selectValue}*/
+                    onChange={this.selectMValue}
                   >
                     <option>Months</option>
                     {/* <option value={'total'}>Total</option> */}
@@ -265,7 +336,7 @@ class Expenses extends React.Component {
                   <h2>Choose Year</h2>
                   <select
                     /*name="expenses-filter" className="select-box"*/ id="select"
-                    onChange={this.selectValue}
+                    onChange={this.selectYValue}
                   >
                     <option value={"Years"}>Years</option>
                     {/* <option value={'total'}>Total</option> */}
@@ -280,7 +351,7 @@ class Expenses extends React.Component {
                   <h2>Choose Year</h2>
                   <select
                     /*name="expenses-filter" className="select-box"*/ id="select"
-                    onChange={this.selectValue}
+                    onChange={this.selectYValue}
                   >
                     <option>Years</option>
                     {/* <option value={'total'}>Total</option> */}
