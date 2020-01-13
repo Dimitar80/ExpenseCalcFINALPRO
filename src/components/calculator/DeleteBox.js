@@ -10,56 +10,62 @@ class DeleteBox extends React.Component {
     this.state = {
       // data: this.props.ajdi
       toggle: true,
-      rowIdToDelete: null,
-      redirect: false
+      rowIdToDelete: null
+      // redirect: false
       // show: this.props.show
     };
   }
 
-  // cancelBtn = () => {
-  //   console.log("Function called");
-  //   this.setState({ show: !this.state.show });
-  //   console.log(this.state.show);
-  //   // this.setState({ redirect: true });
-  //   // this.setState({ toggle: false });
-  //   // console.log(this.state.toggle);
+  // getProducts = () => {
+  //   axios
+  //     .get(
+  //       "http://127.0.0.1:8082/api/v1/products/?sort=purchaseDate:desc" /*,
+  //     { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}}*/
+  //     )
+  //     .then(res => {
+  //       this.setState({ data: res.data /*, loading: false*/ });
+  //       // console.log(data);
+  //       console.log(res.data);
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
   // };
-
-  getProducts = () => {
-    axios
-      .get(
-        "http://127.0.0.1:8082/api/v1/products/?sort=purchaseDate:desc" /*,
-      { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}}*/
-      )
-      .then(res => {
-        this.setState({ data: res.data /*, loading: false*/ });
-        // console.log(data);
-        console.log(res.data);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
 
   // componentDidMount() {   ???
   //   this.getProducts()
   // }
 
-  keyPressed(event) {
-    if (event.key === "Enter") {
-      // this.submitMessage()
-      this.props.delRow(this.props.ajdi);
-      alert("Enter is functioning");
-    }
-  }
+  // keyPressed(event) {
+  //   if (event.key === "Enter") {
+  //     // this.submitMessage()
+  //     this.props.delRow(this.props.ajdi);
+  //     alert("Enter is functioning");
+  //   }
+  // }
 
   render() {
-    console.log(this.keyPressed);
+    // console.log(this.keyPressed);
     // console.log(this.props);
     // console.log(this.state.data)
     console.log(this.state.show);
     // console.log(this.state.toggle);
-    const id = this.props.ajdi; //SAMO TUKA LI MORA???
+    const id = this.props.ajdi;
+    // console.log(this.props.proba[0].productName, "TESTIS");
+    console.log(this.props.proba, "TESTIS");
+    const names = this.props.proba;
+    console.log(names);
+    // console.log(this.props.proba[0].productName);
+
+    let pN = null;
+    for (let i = 0; i < names.length; i++) {
+      if (names[i]._id == id) {
+        // console.log(names[i].productName);
+        pN = names[i].productName;
+        console.log(pN);
+      }
+    }
+
     return (
       <div id="delproducts">
         <div id="back-screen">
@@ -67,8 +73,12 @@ class DeleteBox extends React.Component {
             <div id="boxtext">
               <h2>Delete Product</h2>
               <p>
-                You are about to delete this product. Are you <br />
-                sure you wish to continue?
+                You are about to delete this product -{" "}
+                <span style={{ fontWeight: "900", fontSize: "18px" }}>
+                  {pN}
+                </span>
+                <br />
+                Are you sure you wish to continue?
               </p>
             </div>
             <div id="buttons">
@@ -78,7 +88,7 @@ class DeleteBox extends React.Component {
               <button
                 id="delete"
                 onClick={() => this.props.delRow(id)}
-                onKeyPress={this.keyPressed}
+                /*onKeyPress={this.keyPressed}*/
               >
                 DELETE
               </button>

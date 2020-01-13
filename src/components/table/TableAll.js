@@ -15,14 +15,18 @@ class TableAll extends React.Component {
       // showEditDelete: true,
       // loading: false,
       rowIdToDelete: null
-      // redirect: false
+      // show: true
     };
   }
 
   delBoxOpen = id => {
-    this.setState({ show: !this.state.show, rowIdToDelete: id });
+    this.setState({
+      show: !this.state.show,
+      rowIdToDelete: id
+    });
     console.log("ID: ", id);
-    console.log(this.state.show);
+    // console.log(this.state.show);
+    // console.log(this.props.productName);
   };
   closeBt = () => {
     console.log("Function called");
@@ -35,7 +39,8 @@ class TableAll extends React.Component {
       .then(res => {
         this.setState({ show: false });
         console.log("Deleted: ", res);
-        this.props.fgetProducts();
+        this.props.fgetProducts(); // Povik do baza-nov call!!!???
+        console.log(this.props.fgetProducts);
       })
       .catch(error => {
         console.log(error + " Greska");
@@ -47,6 +52,7 @@ class TableAll extends React.Component {
     // console.log(this.state.show + " - od kade ide ova true?");
     // console.log(this.props.data);
     // console.log(this.getProducts);
+
     return (
       // this.state.udata.length > 0 ?
       <React.Fragment>
@@ -72,14 +78,18 @@ class TableAll extends React.Component {
             // show={this.state.show}
             clBtn={this.closeBt}
             delRow={this.deleteRow}
-            // clBtn={this.closeBt}
-            // delRow={this.deleteRow}
+            proba={this.props.data}
+            /*datite={...this.props}*/
           />
         )}
 
         {/* </div> */}
       </React.Fragment>
       // : <h2>Loading data...</h2>
+      /*: <h2>Loading data...</h2>*/
+      /*: <h2>Loading data...</h2>*/
+      /*: <h2>Loading data...</h2>*/
+      /*: <h2>Loading data...</h2>*/
       /*: <h2>Loading data...</h2>*/
       /*: <h2>Loading data...</h2>*/
      /*: <h2>Loading data...</h2>*/);
