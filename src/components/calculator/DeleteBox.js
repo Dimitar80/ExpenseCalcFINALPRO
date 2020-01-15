@@ -81,7 +81,7 @@ class DeleteBox extends React.Component {
                 Are you sure you wish to continue?
               </p>
             </div>
-            <div id="buttons">
+            <div id="delBox-buttons">
               <button id="cancel" onClick={this.props.clBtn}>
                 CANCEL
               </button>

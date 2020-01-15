@@ -12,24 +12,23 @@ class ProductsNew extends React.Component {
     super();
     this.state = {
       // showProducts: true,
-      // showAlert: false,
-      // didUpdate: false
-      showEditDelete: true,
+      showEditDeleteBtns: true,
       data: [],
-      sort: null
+      sort: null,
+      didUpd: false
     };
   }
 
   SortProduct = event => {
     this.setState({
-      sort: event.target.value
+      sort: event.target.value,
+      didUpd: true
     });
     // console.log(event);
     console.log("Value", event.target.value);
   };
 
   getProducts = () => {
-    console.log("Get products", this.state.sort);
     axios
       .get(
         `http://127.0.0.1:8082/api/v1/products/?sort=purchaseDate:desc` /*,
@@ -49,52 +48,32 @@ class ProductsNew extends React.Component {
     console.log("Table data did mount");
     console.log(this.state.data);
     this.getProducts();
+    console.log(this.state.sort);
   }
 
   componentDidUpdate() {
-    console.log("Component did update, loading: " /*this.state.loading*/);
     // this.getProducts();
     console.log("Get products", this.state.sort);
-    axios
-      .get(
-        `http://127.0.0.1:8082/api/v1/products/?sort=${this.state.sort}` /*,
-      { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}}*/
-      )
-      .then(res => {
-        // console.log(data);
-        console.log("Data: ", res.data);
-        this.setState({ data: res.data });
-      })
-      .catch(err => {
-        console.log(err);
+    if (this.state.didUpd === true && this.state.sort != null) {
+      axios
+        .get(
+          `http://127.0.0.1:8082/api/v1/products/?sort=${this.state.sort}` /*,
+    { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}}*/
+        )
+        .then(res => {
+          // console.log(data);
+          console.log("Data: ", res.data);
+          this.setState({ data: res.data });
+        })
+        .catch(err => {
+          console.log(err);
+        });
+      this.setState({
+        didUpd: false,
+        sort: null
       });
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    const currentSort = this.state.sort;
-    console.log(currentSort);
-    const nextSort = nextState.sort;
-    console.log(nextSort);
-    const dataLength = this.state.data.length;
-    console.log(dataLength);
-    // const loading = this.state.loading;
-    console.log(
-      "Should Component update",
-      "Current sort - ",
-      currentSort,
-      ", ",
-      "NexSort - ",
-      nextSort /*loading*/
-    );
-    if (currentSort !== nextSort || dataLength === 0) {
-      console.log("Update");
-      return true;
-    } else {
-      console.log("No Update");
-      return false;
     }
   }
-
   render() {
     console.log("Component in render");
     return (
@@ -121,7 +100,7 @@ class ProductsNew extends React.Component {
             </div>
             <TableAll
               data={this.state.data}
-              showEdDel={this.state.showEditDelete}
+              showEdDel={this.state.showEditDeleteBtns}
               fgetProducts={this.getProducts}
             />
           </div>

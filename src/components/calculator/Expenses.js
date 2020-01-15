@@ -40,6 +40,7 @@ class Expenses extends React.Component {
     });
   };
 
+  // ZA FILTER PO GODINA I MESEC //
   selectYValue = e => {
     this.setState({
       yearValue: e.target.value,
@@ -66,7 +67,7 @@ class Expenses extends React.Component {
       )
       .then(res => {
         // console.log(data);
-        console.log("Data: ", res.data);
+        console.log("getProductsInExp-Data: ", res.data);
         this.setState({ data: res.data });
       })
       .catch(err => {
@@ -77,6 +78,12 @@ class Expenses extends React.Component {
   componentDidMount() {
     this.getProductsInExp();
   }
+
+  onYears = () => {
+    console.log("Function called");
+    // this.setState({ show: false });
+    this.getProductsInExp();
+  };
 
   // componentDidUpdate() {
   //   let selectedDate = this.state.optionValue;
@@ -112,45 +119,38 @@ class Expenses extends React.Component {
   //   }
   // }
 
-  // Za Godina //
+  // Za Godina i Mesec//
   componentDidUpdate() {
-    let selectedDate = this.state.yearValue;
-    console.log(selectedDate);
-
-    let dateFrom = new Date(`${selectedDate}-01-01 00:00:00.000`).getTime();
-    console.log("dateFrom", dateFrom);
-    // let dateTo = `${selectedDate}-12-31T23:59:59.000Z`
-    let dateTo = new Date(`${selectedDate}-12-31 23:59:59.000`).getTime();
-    console.log("dateToOO", dateTo);
+    // Za Godina //
+    let onlyYear = this.state.yearValue;
+    console.log(onlyYear);
 
     // Za Mesec //
     let selectedMonth = Number(this.state.monthValue);
     console.log(selectedMonth);
     let selectedYear = this.state.yearValue;
     console.log(selectedYear);
-    // if (selectedDate != null) {
-    //   console.log(selectedDate.length);
-    // }
-    let dateFromYM = new Date(
-      `${selectedYear}-${selectedMonth} 00:00:00.000`
-    ).getTime();
-    console.log("dateFromYM", dateFromYM);
-    let dateToYM = new Date(
-      `${selectedYear}-${selectedMonth + 1} 00:00:00.000`
-    ).getTime();
-    console.log("dateToYM", dateToYM);
 
-    console.log("Component did update", selectedDate);
-    if (
-      this.state.showYearly === true &&
-      this.state.showMonthly === false &&
-      this.state.toggle === true &&
-      selectedDate != null &&
-      this.state.selected
+    console.log("Component did update", onlyYear);
+    if (onlyYear === "Years" && this.state.selected === true) {
+      this.getProductsInExp();
+      this.setState({
+        selected: false,
+        onlyYear: null
+      });
+    } else if (
+      this.showYearly &&
+      onlyYear != null &&
+      this.state.selected === true
     ) {
+      let dateFrom = new Date(`${onlyYear}-01-01 00:00:00.000`).getTime(); //2001 default//
+      console.log("dateFrom", dateFrom);
+      // let dateTo = `${selectedDate}-12-31T23:59:59.000Z`
+      let dateTo = new Date(`${onlyYear}-12-31 23:59:59.000`).getTime(); //2001 default//
+      console.log("dateToOO", dateTo);
       console.log(
-        "Sort in component did mount",
-        selectedDate,
+        "Filter in component did mount",
+        "Selected Year at Yearly" + onlyYear,
         this.state.selected
       );
       axios
@@ -160,106 +160,76 @@ class Expenses extends React.Component {
         )
         .then(res => {
           this.setState({ data: res.data /*, loading: false*/ });
-          console.log(res.data);
+          console.log(this.state.data);
+
+          // if (this.state.data) {
+          //   alert("There is no data for this Year");
+          // }
         })
         .catch(err => {
           console.log(err);
         });
+      this.setState({
+        selected: false,
+        onlyYear: null
+      });
     } else if (
-      this.state.showYearly === false &&
-      this.state.showMonthly === true &&
-      this.state.toggle === false &&
+      this.showMonthly &&
       selectedMonth != null &&
-      selectedYear != null
-      /*this.state.selected*/
+      selectedYear != null &&
+      this.state.selected === true
     ) {
-      console.log("else TESTING componentDidUpdate");
-      {
-        console.log(
-          "Sort in component did mount",
-          selectedMonth,
-          this.state.selected
-        );
-        axios
-          .get(
-            `http://127.0.0.1:8082/api/v1/products/?purcdate_from=${dateFromYM}&purcdate_to=${dateToYM}&sort=purchaseDate:desc` /*,
+      let dateFromYM = new Date(
+        `${selectedYear}-${selectedMonth} 00:00:00.000`
+        // `2019-${selectedMonth} 00:00:00.000`
+      ); /*.getTime();*/
+      console.log("dateFromYM", dateFromYM); //2001 default//
+      let dateToYM = new Date(
+        `${selectedYear}-${selectedMonth + 1} 00:00:00.000`
+        // `2019-${selectedMonth + 1} 00:00:00.000`
+      ); /*.getTime()*/
+      console.log("dateToYM", dateToYM); //2001 default//
+      console.log(
+        "Filter in component did mount",
+        "Selected Month" + selectedMonth,
+        "Selected Year at Monthly" + selectedYear,
+        this.state.selected
+      );
+      axios
+        .get(
+          `http://127.0.0.1:8082/api/v1/products/?purcdate_from=${dateFromYM}&purcdate_to=${dateToYM}&sort=purchaseDate:desc` /*,
                     { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}}*/
-          )
-          .then(res => {
-            this.setState({ data: res.data /*, loading: false*/ });
-            console.log(res.data);
-          })
-          .catch(err => {
-            console.log(err);
-          });
-      }
+        )
+        .then(res => {
+          this.setState({ data: res.data /*, loading: false*/ });
+          console.log(this.state.data);
+          // if (res.data === null) {
+          //   alert("There is no data for this Year, please select another one");
+          // } else if (res.data != null) {
+          //   this.setState({ data: res.data /*, loading: false*/ });
+          // }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+      // this.setState({
+      //   selected: false,
+      //   selectedMonth: null,
+      //   selectedYear: null
+      // });
     } else {
       ("Probaj NOVO RESENIE!!!");
     }
   }
-
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   const currentSort = selectedDate;
-  //   const nextSort = nextState.selectedDate;
-  //   console.log("Should Component update", currentSort, nextSort);
-  //   if (currentSort === nextSort && currentSort !== null) {
-  //     return false;
-  //   } else {
-  //     return true;
-  //   }
-  // }
-
-  // componentDidUpdate() {
-  //   let selectedMonth = Number(this.state.monthValue);
-  //   console.log(selectedMonth);
-  //   let selectedYear = this.state.yearValue;
-  //   console.log(selectedYear);
-  //   // if (selectedDate != null) {
-  //   //   console.log(selectedDate.length);
-  //   // }
-  //   let dateFromYM = new Date(
-  //     `${selectedYear}-${selectedMonth} 00:00:00.000`
-  //   ).getTime();
-  //   console.log("dateFromYM", dateFromYM);
-  //   let dateToYM = new Date(
-  //     `${selectedYear}-${selectedMonth + 1} 00:00:00.000`
-  //   ).getTime();
-  //   console.log("dateToYM", dateToYM);
-
-  //   console.log("Component did update", selectedMonth);
-  //   if (
-  //     selectedMonth != null &&
-  //     selectedYear != null &&
-  //     this.state.selected == true /*&& selectedDate.length === 4*/
-  //   ) {
-  //     console.log(
-  //       "Sort in component did mount",
-  //       selectedMonth,
-  //       this.state.selected
-  //     );
-  //     axios
-  //       .get(
-  //         `http://127.0.0.1:8082/api/v1/products/?purcdate_from=${dateFromYM}&purcdate_to=${dateToYM}&sort=purchaseDate:desc` /*,
-  //                 { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}}*/
-  //       )
-  //       .then(res => {
-  //         this.setState({ data: res.data /*, loading: false*/ });
-  //         console.log(res.data);
-  //       })
-  //       .catch(err => {
-  //         console.log(err);
-  //       });
-  //   } else {
-  //     console.log("else TESTING componentDidUpdate");
-  //   }
-  // }
 
   render() {
     // Za options na selectbox od Year
     let today = new Date();
     console.log(today);
     let year = today.getFullYear();
-    console.log(year);
+    // console.log(year);
+    // let month = today.getMonth();
+    // console.log(month);
 
     let selOptionsYear = [];
     for (let i = 1999; i <= year; i++) {
@@ -300,12 +270,13 @@ class Expenses extends React.Component {
       totalSpent += this.state.data[i].productPrice;
     }
 
-    // let selectedDate = this.state.optionValue;
-    // console.log(selectedDate);
-
-    // if (selectedDate) {
-    //   console.log(selectedDate.length);
-    // }
+    console.log(this.state.data);
+    ////////////////////////////////////////////
+    if (this.state.data === null) {
+      alert("There is no data for this Year");
+      console.log(this.state.data);
+    }
+    ////////////////////////////////////////////
 
     return (
       <React.Fragment>
@@ -319,6 +290,8 @@ class Expenses extends React.Component {
             <div id="experiod">
               {/* in curly braces - dynamic data/content */}
               {/* <p>{Math.random() * 10}</p> */}
+
+              {/* BUTTONS - MONTHLY/YEARLY START*/}
               <div className="periodbtns">
                 <button
                   type="button" /*id='btnmonth'*/
@@ -339,17 +312,16 @@ class Expenses extends React.Component {
                   YEARLY
                 </button>
               </div>
-              {/* <div id='months'> */}
+              {/* BUTTONS - MONTHLY/YEARLY END*/}
+
               {this.state.showMonthly ? (
                 <p /*id="select-box-container"*/ id="years">
-                  {/* <label htmlFor="expenses-filter">Choose Year </label>  */}
                   <h2>Choose Month</h2>
                   <select
                     /*name="expenses-filter" className="select-box"*/ id="select"
                     onChange={this.selectMValue}
                   >
                     <option>Months</option>
-                    {/* <option value={'total'}>Total</option> */}
                     {monthsList.map((month, i) => (
                       //   console.log(i, month),
                       <option key={month} value={i}>
@@ -362,8 +334,9 @@ class Expenses extends React.Component {
                     /*name="expenses-filter" className="select-box"*/ id="select"
                     onChange={this.selectYValue}
                   >
-                    <option value={"Years"}>Years</option>
-                    {/* <option value={'total'}>Total</option> */}
+                    <option value={"Years"} /*onClick={this.onYears}*/>
+                      Years
+                    </option>
                     {selOptionsYear}
                   </select>
                 </p>
@@ -371,24 +344,20 @@ class Expenses extends React.Component {
 
               {this.state.showYearly ? (
                 <p /*id="select-box-container"*/ id="years">
-                  {/* <label htmlFor="expenses-filter">Choose Year </label> */}
                   <h2>Choose Year</h2>
                   <select
                     /*name="expenses-filter" className="select-box"*/ id="select"
                     onChange={this.selectYValue}
                   >
                     <option>Years</option>
-                    {/* <option value={'total'}>Total</option> */}
                     {selOptionsYear}
                   </select>
                 </p>
               ) : null}
-              {/* Sredi M/Y Drop down i so queries*/}
             </div>
             <TableAll data={this.state.data} />
           </div>
           <div id="saldo">
-            {/* <h2><span id='wh'>Total spent:</span> 1205 den.</h2> */}
             <h2>
               <span id="wh">Total spent:</span> {totalSpent} den.
             </h2>

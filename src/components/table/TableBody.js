@@ -3,7 +3,7 @@ import ProductRow from "./ProductRow";
 
 const TableBody = props => {
   //   console.log(props.data);
-  console.log(props);
+  // console.log(props);
   return props.data.map(product => {
     return (
       <ProductRow

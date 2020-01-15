@@ -41,11 +41,6 @@ class ProductRow extends React.Component {
                 className="far fa-trash-alt"
                 onClick={() => this.props.del(this.props.productId)}
               />
-              {/* <button
-                id="delbtn"
-                className="far fa-trash-alt"
-                onClick={() => this.delBoxOpen(this.props.productId)}
-              /> */}
             </td>
           ) : (
             <td></td>
