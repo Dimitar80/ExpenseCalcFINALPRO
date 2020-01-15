@@ -42,12 +42,14 @@
   margin: 0 auto 20px 5%;
   box-sizing: border-box;
   overflow-x: hidden;
+  /* max-width: 600px; */
   /* height: 450px; */
   /* padding: 40px 120px 40px 40px; */
 }
-
+/*LEFT PAGE*/
 #fpage {
   display: flex;
+  /* float: left; */
   align-items: center;
   justify-content: flex-start; /*flex-start*/
   width: 53%;
@@ -133,6 +135,7 @@
   padding: 0px;
 }
 
+/*RIGHT PAGE*/
 #right-page {
   width: 47%;
   height: 100%;

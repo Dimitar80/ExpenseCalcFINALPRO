@@ -10,7 +10,8 @@ class Navbar extends React.Component {
     super(props);
     this.state = {
       toggle: this.props.toggle,
-      signOut: false
+      signOut: false,
+      uff: this.props.tes
       // show: false
     };
   }
@@ -23,11 +24,20 @@ class Navbar extends React.Component {
     });
   };
 
-  showExpenses = () => {
-    // alert("Expenses WORKS!")
-    this.setState({
-      toggle: true
-    });
+  // showExpenses = () => {
+  //   // alert("Expenses WORKS!")
+  //   this.props.povik;
+  //   this.setState({
+  //     toggle: true
+  //   });
+  // };
+
+  refExp = () => {
+    // this.props.povik();
+    console.log("Povik: ", this.props.povik);
+    // this.props.funOpt()
+    // this.setState({ uff: "Years" });
+    console.log("obnoven povik za expensess");
   };
 
   // SIgnOut Metods-START
@@ -45,6 +55,11 @@ class Navbar extends React.Component {
     // console.log(this.state.signOut);
     // console.log(this.state.toggle);
     // console.log(this.state.show);
+
+    // console.log(this.props.val);
+    // console.log(this.props.tes);
+    // console.log(this.state.uff);
+
     return (
       <React.Fragment>
         {/* <header id='header'> */}
@@ -70,8 +85,10 @@ class Navbar extends React.Component {
             <Link
               to="/expenses" /*exact activeClassName="navbar-button active"*/
             >
-              <button
-                /*id='btexpenses'*/ onClick={this.showExpenses}
+              <button /*onClick={this.showExpenses}*/
+                // /*id='btexpenses'*/ /*onClick={this.props.povik}*/ onClick={() =>
+                //   this.refExp()
+                // }
                 className={
                   this.state.toggle ? "navbar-button active" : "navbar-button"
                 }

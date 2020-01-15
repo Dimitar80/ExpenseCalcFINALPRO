@@ -22,7 +22,9 @@
   justify-content: space-between;
   align-items: center;
   margin: 20px auto -10px auto;
+  box-sizing: border-box;
 }
+
 /*Vidi kaj marginot*/
 
 #editbtn {
@@ -49,11 +51,16 @@
 .tit {
   display: flex;
   align-items: center;
+  padding-right: 200px;
 }
 
 #filter {
   display: flex;
   align-items: center;
+  justify-content: center;
+  margin: 0px;
+  padding: 0px;
+  flex-direction: row;
 }
 
 #pmaintitle h1 {
@@ -78,6 +85,7 @@
   outline: none;
   border-radius: 5px;
   margin-left: 10px;
+  white-space: nowrap;
 }
 
 #pmaintable {

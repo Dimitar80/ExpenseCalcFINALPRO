@@ -17,7 +17,8 @@ class Expenses extends React.Component {
       data: [],
       yearValue: null,
       monthValue: null,
-      selected: false
+      selected: false,
+      loading: false
     };
   }
 
@@ -49,6 +50,10 @@ class Expenses extends React.Component {
     console.log(e.target.value); //so setState:???
   };
 
+  handleChange = (/*e*/) => {
+    this.setState({ yearValue: "Years" });
+  };
+
   // Za Mesec //
   selectMValue = e => {
     this.setState({
@@ -60,6 +65,8 @@ class Expenses extends React.Component {
 
   getProductsInExp = () => {
     console.log("Get products");
+    this.setState({ loading: true });
+    // const url = this.formatUrl();
     axios
       .get(
         `http://127.0.0.1:8082/api/v1/products/?sort=purchaseDate:desc` /*,
@@ -68,22 +75,35 @@ class Expenses extends React.Component {
       .then(res => {
         // console.log(data);
         console.log("getProductsInExp-Data: ", res.data);
-        this.setState({ data: res.data });
+        this.setState({ data: res.data, loading: false });
       })
       .catch(err => {
+        this.setState({ loading: false });
         console.log(err);
       });
   };
 
+  formatUrl = () => {
+    const base =
+      "http://127.0.0.1:8082/api/v1/products/?sort=purchaseDate:desc";
+    // Formatiraj gi vo timestamp
+    if (this.state.yearValue && this.state.monthValue) {
+      url = base + `&purcdate_from=${dateFrom}&purcdate_to=${dateTo}`;
+      return url;
+    }
+    return base;
+  };
+
   componentDidMount() {
+    console.log("Expenses did mount");
     this.getProductsInExp();
   }
 
-  onYears = () => {
-    console.log("Function called");
-    // this.setState({ show: false });
-    this.getProductsInExp();
-  };
+  // onYears = () => {
+  //   console.log("Function called");
+  //   // this.setState({ show: false });
+  //   this.getProductsInExp();
+  // };
 
   // componentDidUpdate() {
   //   let selectedDate = this.state.optionValue;
@@ -124,10 +144,9 @@ class Expenses extends React.Component {
     // Za Godina //
     let onlyYear = this.state.yearValue;
     console.log(onlyYear);
-
     // Za Mesec //
     let selectedMonth = Number(this.state.monthValue);
-    console.log(selectedMonth);
+    console.log("Selected month", selectedMonth);
     let selectedYear = this.state.yearValue;
     console.log(selectedYear);
 
@@ -153,16 +172,21 @@ class Expenses extends React.Component {
         "Selected Year at Yearly" + onlyYear,
         this.state.selected
       );
+      this.setState({ loading: true });
       axios
         .get(
           `http://127.0.0.1:8082/api/v1/products/?purcdate_from=${dateFrom}&purcdate_to=${dateTo}&sort=purchaseDate:desc` /*,
                   { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}}*/
         )
         .then(res => {
-          this.setState({ data: res.data /*, loading: false*/ });
-          console.log(this.state.data);
+          console.log("In TIMEOUT");
+          setTimeout(
+            () => this.setState({ data: res.data, loading: false }),
+            1000
+          );
 
-          // if (this.state.data) {
+          console.log(this.state.data);
+          // if (this.state.data.length === 0) {
           //   alert("There is no data for this Year");
           // }
         })
@@ -224,6 +248,7 @@ class Expenses extends React.Component {
 
   render() {
     // Za options na selectbox od Year
+    console.log("Loading: ", this.state.loading);
     let today = new Date();
     console.log(today);
     let year = today.getFullYear();
@@ -238,6 +263,7 @@ class Expenses extends React.Component {
           {i}
         </option>
       );
+      // console.log(i);
     }
     selOptionsYear.reverse();
 
@@ -270,18 +296,17 @@ class Expenses extends React.Component {
       totalSpent += this.state.data[i].productPrice;
     }
 
-    console.log(this.state.data);
-    ////////////////////////////////////////////
-    if (this.state.data === null) {
-      alert("There is no data for this Year");
-      console.log(this.state.data);
-    }
-    ////////////////////////////////////////////
-
+    const Navbar = this.props.component;
     return (
       <React.Fragment>
         {/* <Navbar /> */}
-        <this.props.component toggle={true} />
+        <Navbar
+          toggle={true}
+          povik={this.getProductsInExp}
+          tes={this.state.yearValue}
+          // funOpt={this.handleChange}
+          // val={this.onlyYear}
+        />
         <div id="expenses">
           <div className="exmain-container">
             <div id="emaintitle">
@@ -292,7 +317,7 @@ class Expenses extends React.Component {
               {/* <p>{Math.random() * 10}</p> */}
 
               {/* BUTTONS - MONTHLY/YEARLY START*/}
-              <div className="periodbtns">
+              <div className="ex-period-btns">
                 <button
                   type="button" /*id='btnmonth'*/
                   className={
@@ -355,7 +380,7 @@ class Expenses extends React.Component {
                 </p>
               ) : null}
             </div>
-            <TableAll data={this.state.data} />
+            <TableAll dataLoading={this.state.loading} data={this.state.data} />
           </div>
           <div id="saldo">
             <h2>

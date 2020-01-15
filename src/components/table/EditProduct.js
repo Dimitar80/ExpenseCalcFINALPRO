@@ -77,6 +77,7 @@ class EditProduct extends React.Component {
         .then(res => {
           console.log(res);
           this.setState({ redirect: true });
+          alert("All filds are filled out successfully");
           // this.props.updProducts()
         })
         .catch(err => {

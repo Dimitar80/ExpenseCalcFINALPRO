@@ -54,6 +54,7 @@ class NewProduct extends React.Component {
           console.log(res);
           console.log("NEW PRODUCT IS CREATED");
           this.setState({ redirect: true });
+          alert("All filds are filled out successfully");
           // this.setState({ upd: this.getProducts})
           // this.props.updProducts()
         })

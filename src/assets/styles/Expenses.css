@@ -40,6 +40,10 @@
     padding: 20px auto 20px ; */
 }
 
+.ex-period-btns {
+  /* display: flex; */
+}
+
 #experiod h2 {
   font-size: 16px;
   color: #575757;
