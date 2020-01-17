@@ -24,9 +24,7 @@ class TableAll extends React.Component {
       show: !this.state.show,
       rowIdToDelete: id
     });
-    console.log("ID: ", id);
-    // console.log(this.state.show);
-    // console.log(this.props.productName);
+    // console.log("ID: ", id);
   };
   closeBt = () => {
     console.log("Function called");
@@ -51,7 +49,6 @@ class TableAll extends React.Component {
     // console.log(this.props);
     // console.log(this.state.show + " - od kade ide ova true?");
     // console.log(this.props.data);
-    // console.log(this.getProducts);
 
     return (
       // this.state.udata.length > 0 ?
@@ -75,21 +72,14 @@ class TableAll extends React.Component {
         {this.state.show && (
           <DeleteBox
             ajdi={this.state.rowIdToDelete}
-            // show={this.state.show}
             clBtn={this.closeBt}
             delRow={this.deleteRow}
             proba={this.props.data}
-            /*datite={...this.props}*/
           />
         )}
-
         {/* </div> */}
       </React.Fragment>
       // : <h2>Loading data...</h2>
-      /*: <h2>Loading data...</h2>*/
-      /*: <h2>Loading data...</h2>*/
-      /*: <h2>Loading data...</h2>*/
-      /*: <h2>Loading data...</h2>*/
       /*: <h2>Loading data...</h2>*/
       /*: <h2>Loading data...</h2>*/
      /*: <h2>Loading data...</h2>*/);

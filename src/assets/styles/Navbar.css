@@ -9,6 +9,8 @@
   top: 0;
   background: #fff;
   box-sizing: border-box;
+  border-top: solid 1px grey;
+  border-bottom: solid 1px grey;
 }
 
 /* #mainnav  {

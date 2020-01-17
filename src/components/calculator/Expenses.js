@@ -22,8 +22,10 @@ class Expenses extends React.Component {
     };
   }
 
-  showMonthly = (/*e*/) => {
+  showMonthlyBtn = (/*e*/) => {
     // alert("Monthly WORKS!")
+    ///// Kako resenie e OK No da ne e suvisen povikov ???/////
+    this.getProductsInExp();
     this.setState({
       showYearly: false,
       showMonthly: true,
@@ -31,9 +33,12 @@ class Expenses extends React.Component {
     });
   };
 
-  showYearly = (/*e*/) => {
+  showYearlyBtn = (/*e*/) => {
     // console.log(e.target)
     // alert("Yearly WORKS!")
+    ///// Kako resenie e OK No da ne e suvisen povikov ???/////
+    this.getProductsInExp();
+    ///// I da go vrati option- value={"Years"}
     this.setState({
       showYearly: true,
       showMonthly: false,
@@ -48,10 +53,6 @@ class Expenses extends React.Component {
       selected: true
     });
     console.log(e.target.value); //so setState:???
-  };
-
-  handleChange = (/*e*/) => {
-    this.setState({ yearValue: "Years" });
   };
 
   // Za Mesec //
@@ -73,9 +74,11 @@ class Expenses extends React.Component {
       { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}}*/
       )
       .then(res => {
-        // console.log(data);
-        console.log("getProductsInExp-Data: ", res.data);
-        this.setState({ data: res.data, loading: false });
+        // console.log("getProductsInExp-Data: ", res.data);
+        this.setState({
+          data: res.data,
+          loading: false /*yearValue: "Years"*/
+        });
       })
       .catch(err => {
         this.setState({ loading: false });
@@ -83,6 +86,7 @@ class Expenses extends React.Component {
       });
   };
 
+  //Boko//
   formatUrl = () => {
     const base =
       "http://127.0.0.1:8082/api/v1/products/?sort=purchaseDate:desc";
@@ -93,80 +97,47 @@ class Expenses extends React.Component {
     }
     return base;
   };
+  //Boko//
 
   componentDidMount() {
     console.log("Expenses did mount");
     this.getProductsInExp();
   }
 
-  // onYears = () => {
-  //   console.log("Function called");
-  //   // this.setState({ show: false });
-  //   this.getProductsInExp();
-  // };
-
-  // componentDidUpdate() {
-  //   let selectedDate = this.state.optionValue;
-  //   console.log(selectedDate);
-
-  //   if (selectedDate != null) {
-  //     console.log(selectedDate.length);
-  //   }
-  //   let dateFrom = new Date(`${selectedDate}-01-01 00:00:00.000`).getTime();
-  //   console.log("dateFrom", dateFrom);
-  //   // let dateTo = `${selectedDate}-12-31T23:59:59.000Z`
-  //   let dateTo = new Date(`${selectedDate}-12-31 23:59:59.000`).getTime();
-  //   console.log("dateToOO", dateTo);
-
-  //   console.log("Component did update", selectedDate);
-  //   if (selectedDate === null /*&& selectedDate.length === 4*/) {
-  //     this.getProductsInExp();
-  //   } else {
-  //     // console.log("else TESTING componentDidUpdate");
-  //     // console.log("Sort in component did mount", selectedDate);
-  //     axios
-  //       .get(
-  //         `http://127.0.0.1:8082/api/v1/products/?purcdate_from=${dateFrom}&purcdate_to=${dateTo}&sort=purchaseDate:desc` /*,
-  //                 { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}}*/
-  //       )
-  //       .then(res => {
-  //         this.setState({ data: res.data /*, loading: false*/ });
-  //         console.log(res.data);
-  //       })
-  //       .catch(err => {
-  //         console.log(err);
-  //       });
-  //   }
-  // }
-
-  // Za Godina i Mesec//
+  // Za Godina i Godina so Mesec//
   componentDidUpdate() {
     // Za Godina //
     let onlyYear = this.state.yearValue;
     console.log(onlyYear);
     // Za Mesec //
     let selectedMonth = Number(this.state.monthValue);
-    console.log("Selected month", selectedMonth);
+    console.log("SelectedMonth ", selectedMonth);
+    console.log("SelectedMonth + 1 ", selectedMonth + 1);
+
     let selectedYear = this.state.yearValue;
-    console.log(selectedYear);
+    console.log("SelectedYear", selectedYear);
 
     console.log("Component did update", onlyYear);
-    if (onlyYear === "Years" && this.state.selected === true) {
+    if (this.state.selected === true && onlyYear === "Years") {
       this.getProductsInExp();
       this.setState({
-        selected: false,
-        onlyYear: null
+        selected: false
+        // onlyYear: null
       });
+      // Za Godina START//
     } else if (
-      this.showYearly &&
+      this.showYearly === true &&
+      this.showMonthly === false &&
+      this.toggle === true &&
+      this.state.selected === true &&
       onlyYear != null &&
-      this.state.selected === true
+      onlyYear != "Years"
     ) {
       let dateFrom = new Date(`${onlyYear}-01-01 00:00:00.000`).getTime(); //2001 default//
-      console.log("dateFrom", dateFrom);
-      // let dateTo = `${selectedDate}-12-31T23:59:59.000Z`
+      console.log("Choose Year - dateFrom", dateFrom);
+      // let dateTo = `${onlyYear}-12-31T23:59:59.000Z`
       let dateTo = new Date(`${onlyYear}-12-31 23:59:59.000`).getTime(); //2001 default//
-      console.log("dateToOO", dateTo);
+      console.log("Choose Year - dateToOO", dateTo);
       console.log(
         "Filter in component did mount",
         "Selected Year at Yearly" + onlyYear,
@@ -180,67 +151,64 @@ class Expenses extends React.Component {
         )
         .then(res => {
           console.log("In TIMEOUT");
+          // this.setState({ data: res.data, loading: false });
           setTimeout(
             () => this.setState({ data: res.data, loading: false }),
-            1000
+            500
           );
-
-          console.log(this.state.data);
-          // if (this.state.data.length === 0) {
-          //   alert("There is no data for this Year");
-          // }
+          // console.log(this.state.data);
         })
         .catch(err => {
-          console.log(err);
+          this.setState({ loading: false });
+          console.log(err, "ERROR at Expenses component");
         });
       this.setState({
-        selected: false,
-        onlyYear: null
+        selected: false
+        // onlyYear: null
       });
+      // Za Godina END//
     } else if (
-      this.showMonthly &&
+      this.state.showYearly === false &&
+      this.state.showMonthly === true &&
+      this.state.toggle === false &&
       selectedMonth != null &&
       selectedYear != null &&
       this.state.selected === true
     ) {
       let dateFromYM = new Date(
-        `${selectedYear}-${selectedMonth} 00:00:00.000`
-        // `2019-${selectedMonth} 00:00:00.000`
-      ); /*.getTime();*/
+        `${selectedYear}-${selectedMonth}-01 00:00:00.000`
+      ).getTime();
       console.log("dateFromYM", dateFromYM); //2001 default//
       let dateToYM = new Date(
-        `${selectedYear}-${selectedMonth + 1} 00:00:00.000`
-        // `2019-${selectedMonth + 1} 00:00:00.000`
-      ); /*.getTime()*/
+        `${selectedYear}-${selectedMonth + 1}-01 00:00:00.000`
+      ).getTime();
       console.log("dateToYM", dateToYM); //2001 default//
-      console.log(
-        "Filter in component did mount",
-        "Selected Month" + selectedMonth,
-        "Selected Year at Monthly" + selectedYear,
-        this.state.selected
-      );
+
+      // console.log(
+      //   "Filter in component did mount",
+      //   "Selected Month" + selectedMonth,
+      //   "Selected Year at Monthly" + selectedYear,
+      //   this.state.selected
+      // );
+      this.setState({ loading: true });
       axios
         .get(
           `http://127.0.0.1:8082/api/v1/products/?purcdate_from=${dateFromYM}&purcdate_to=${dateToYM}&sort=purchaseDate:desc` /*,
                     { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}}*/
         )
         .then(res => {
-          this.setState({ data: res.data /*, loading: false*/ });
+          this.setState({ data: res.data, loading: false });
           console.log(this.state.data);
-          // if (res.data === null) {
-          //   alert("There is no data for this Year, please select another one");
-          // } else if (res.data != null) {
-          //   this.setState({ data: res.data /*, loading: false*/ });
-          // }
         })
         .catch(err => {
-          console.log(err);
+          this.setState({ loading: false });
+          console.log(err, "ERROR at Expenses component");
         });
-      // this.setState({
-      //   selected: false,
-      //   selectedMonth: null,
-      //   selectedYear: null
-      // });
+      this.setState({
+        selected: false
+        // selectedMonth: null,
+        // selectedYear: null
+      });
     } else {
       ("Probaj NOVO RESENIE!!!");
     }
@@ -296,16 +264,14 @@ class Expenses extends React.Component {
       totalSpent += this.state.data[i].productPrice;
     }
 
-    const Navbar = this.props.component;
+    const NavbarSur = this.props.component;
     return (
       <React.Fragment>
         {/* <Navbar /> */}
-        <Navbar
+        <NavbarSur
           toggle={true}
-          povik={this.getProductsInExp}
-          tes={this.state.yearValue}
-          // funOpt={this.handleChange}
-          // val={this.onlyYear}
+          // povik={this.getProductsInExp}
+          // tes={this.state.yearValue}
         />
         <div id="expenses">
           <div className="exmain-container">
@@ -313,9 +279,6 @@ class Expenses extends React.Component {
               <h1>Expenses</h1>
             </div>
             <div id="experiod">
-              {/* in curly braces - dynamic data/content */}
-              {/* <p>{Math.random() * 10}</p> */}
-
               {/* BUTTONS - MONTHLY/YEARLY START*/}
               <div className="ex-period-btns">
                 <button
@@ -323,7 +286,7 @@ class Expenses extends React.Component {
                   className={
                     !this.state.toggle ? "mY-btn active-mY-btn" : "mY-btn"
                   }
-                  onClick={this.showMonthly}
+                  onClick={this.showMonthlyBtn}
                 >
                   MONTHLY
                 </button>
@@ -332,7 +295,7 @@ class Expenses extends React.Component {
                   className={
                     this.state.toggle ? "mY-btn active-mY-btn" : "mY-btn"
                   }
-                  onClick={this.showYearly}
+                  onClick={this.showYearlyBtn}
                 >
                   YEARLY
                 </button>
@@ -346,7 +309,7 @@ class Expenses extends React.Component {
                     /*name="expenses-filter" className="select-box"*/ id="select"
                     onChange={this.selectMValue}
                   >
-                    <option>Months</option>
+                    <option value={"Months"}>Months</option>
                     {monthsList.map((month, i) => (
                       //   console.log(i, month),
                       <option key={month} value={i}>
@@ -374,7 +337,7 @@ class Expenses extends React.Component {
                     /*name="expenses-filter" className="select-box"*/ id="select"
                     onChange={this.selectYValue}
                   >
-                    <option>Years</option>
+                    <option /*value={"Years"}*/>Years</option>
                     {selOptionsYear}
                   </select>
                 </p>

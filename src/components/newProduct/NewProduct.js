@@ -36,7 +36,9 @@ class NewProduct extends React.Component {
       this.state.productPrice === null
     ) {
       event.preventDefault();
-      alert("All fields must be filled out");
+      alert(
+        "All fields must be filled out for New Product to be created successfully!"
+      );
     } else {
       axios
         .post(
@@ -71,10 +73,12 @@ class NewProduct extends React.Component {
     if (redirect) {
       return <Redirect to="/products" />;
     }
+
+    const NavbarSur = this.props.component;
     return (
       <React.Fragment>
         {/* <Navbar /> */}
-        <this.props.component toggle={false} />
+        <NavbarSur toggle={false} />
         <div id="newproducts">
           {/* Portal */}
           <div id="npmain-container">

@@ -53,7 +53,7 @@ class EditProduct extends React.Component {
       this.state.purchaseDate === "" ||
       this.state.productPrice === 0
     ) {
-      alert("All fields must be filled out");
+      alert("All fields must be filled out for successfully Edit-ed Product!");
       event.preventDefault();
     } else {
       axios
@@ -83,7 +83,7 @@ class EditProduct extends React.Component {
         .catch(err => {
           console.log(err);
           alert(
-            "All the fields must be filled out in order to edit your product succesfuly!"
+            "All fields must be filled out to edit your product succesfuly!"
           );
         });
     }
@@ -95,9 +95,11 @@ class EditProduct extends React.Component {
     if (redirect) {
       return <Redirect to="/products" />;
     }
+
+    const NavbarSur = this.props.component;
     return this.state.edata.length > 0 ? (
       <React.Fragment>
-        <this.props.component toggle={false} />
+        <NavbarSur toggle={false} />
         <div id="editproducts">
           <div id="epmain-container">
             <div id="epmaintitle">

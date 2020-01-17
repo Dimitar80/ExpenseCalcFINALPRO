@@ -15,11 +15,12 @@ class ProductsNew extends React.Component {
       showEditDeleteBtns: true,
       data: [],
       sort: null,
-      didUpd: false
+      didUpd: false,
+      loading: false
     };
   }
 
-  SortProduct = event => {
+  SortProductsBy = event => {
     this.setState({
       sort: event.target.value,
       didUpd: true
@@ -29,6 +30,7 @@ class ProductsNew extends React.Component {
   };
 
   getProducts = () => {
+    this.setState({ loading: true });
     axios
       .get(
         `http://127.0.0.1:8082/api/v1/products/?sort=purchaseDate:desc` /*,
@@ -37,22 +39,26 @@ class ProductsNew extends React.Component {
       .then(res => {
         // console.log(data);
         console.log("Data: ", res.data);
-        this.setState({ data: res.data });
+        // setTimeout(
+        //   () => this.setState({ data: res.data, loading: false }),
+        //   500
+        // );
+        this.setState({ data: res.data, loading: false });
       })
       .catch(err => {
+        this.setState({ loading: false });
         console.log(err);
       });
   };
 
   componentDidMount() {
     console.log("Table data did mount");
-    console.log(this.state.data);
     this.getProducts();
+    console.log(this.state.data);
     console.log(this.state.sort);
   }
 
   componentDidUpdate() {
-    // this.getProducts();
     console.log("Get products", this.state.sort);
     if (this.state.didUpd === true && this.state.sort != null) {
       axios
@@ -66,7 +72,7 @@ class ProductsNew extends React.Component {
           this.setState({ data: res.data });
         })
         .catch(err => {
-          console.log(err);
+          console.log(err, "ERROR at Products component");
         });
       this.setState({
         didUpd: false,
@@ -74,12 +80,14 @@ class ProductsNew extends React.Component {
       });
     }
   }
+
   render() {
     console.log("Component in render");
+    const NavbarSur = this.props.component;
     return (
       <React.Fragment>
         {/* <Navbar /> */}
-        <this.props.component toggle={false} />
+        <NavbarSur toggle={true} />
         <div id="products">
           {/* PORTAL */}
           {/* HEADER */}
@@ -90,7 +98,7 @@ class ProductsNew extends React.Component {
               </div>
               <div id="filter">
                 <h2>Sort by:</h2>
-                <select onChange={this.SortProduct}>
+                <select onChange={this.SortProductsBy}>
                   <option value="purchaseDate:desc">Latest Purchase</option>
                   <option value="purchaseDate:asc">First Purchase</option>
                   <option value="productPrice:desc">Highest Price</option>

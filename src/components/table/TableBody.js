@@ -25,7 +25,13 @@ const TableBody = props => {
       );
     });
   } else {
-    return <NoDataFound message={"No data found for this year/month"} />;
+    return (
+      <NoDataFound
+        message={
+          "No data was found for this request - Year/Month, Please choose another one!"
+        }
+      />
+    );
   }
 };
 
