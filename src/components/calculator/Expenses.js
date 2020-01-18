@@ -48,6 +48,7 @@ class Expenses extends React.Component {
 
   // ZA FILTER PO GODINA I MESEC //
   selectYValue = e => {
+    console.log("YEAR VALUE IS SELECTED");
     this.setState({
       yearValue: e.target.value,
       selected: true
@@ -57,6 +58,7 @@ class Expenses extends React.Component {
 
   // Za Mesec //
   selectMValue = e => {
+    console.log("MONTH VALUE IS SELECTED");
     this.setState({
       monthValue: e.target.value,
       selected: true
@@ -65,7 +67,7 @@ class Expenses extends React.Component {
   };
 
   getProductsInExp = () => {
-    console.log("Get products");
+    // console.log("getPoductsInExp");
     this.setState({ loading: true });
     // const url = this.formatUrl();
     axios
@@ -108,14 +110,31 @@ class Expenses extends React.Component {
   componentDidUpdate() {
     // Za Godina //
     let onlyYear = this.state.yearValue;
-    console.log(onlyYear);
+    console.log("onlyYear at Years is SELECTED -", onlyYear);
+    let dateFrom = new Date(`${onlyYear}-01-01 00:00:00.000`).getTime();
+    console.log("Choose Year - dateFrom", dateFrom); //Mon Jan 01 2001 00:00:00 default//
+    // let dateTo = `${onlyYear}-12-31T23:59:59.000Z`
+    let dateTo = new Date(`${onlyYear}-12-31 23:59:59.000`).getTime();
+    console.log("Choose Year - dateToOO", dateTo); //Mon Dec 31 2001 23:59:59 default//
+
     // Za Mesec //
     let selectedMonth = Number(this.state.monthValue);
-    console.log("SelectedMonth ", selectedMonth);
-    console.log("SelectedMonth + 1 ", selectedMonth + 1);
+    console.log("SelectedMonth at Months is SELECTED -", selectedMonth);
+    console.log("SelectedMonth + 1 at Months-", selectedMonth + 1);
 
     let selectedYear = this.state.yearValue;
-    console.log("SelectedYear", selectedYear);
+    console.log("SelectedYear at Months", selectedYear);
+
+    let dateFromYM = new Date(
+      `${selectedYear}-${selectedMonth} 00:00:00.000`
+      // `${selectedYear}-${selectedMonth}-01 00:00:00.000`
+    ).getTime();
+    console.log("dateFromYM", dateFromYM); // Sat Jan 01 2000 00:00:00?//
+    let dateToYM = new Date(
+      `${selectedYear}-${selectedMonth + 1} 00:00:00.000`
+      // `${selectedYear}-${selectedMonth + 1}-01 00:00:00.000`
+    ).getTime();
+    console.log("dateToYM", dateToYM); //Mon Jan 01 2001 00:00:00//
 
     console.log("Component did update", onlyYear);
     if (this.state.selected === true && onlyYear === "Years") {
@@ -126,18 +145,18 @@ class Expenses extends React.Component {
       });
       // Za Godina START//
     } else if (
-      this.showYearly === true &&
-      this.showMonthly === false &&
-      this.toggle === true &&
+      this.state.showYearly === true &&
+      this.state.showMonthly === false &&
+      this.state.toggle === true &&
       this.state.selected === true &&
       onlyYear != null &&
       onlyYear != "Years"
     ) {
-      let dateFrom = new Date(`${onlyYear}-01-01 00:00:00.000`).getTime(); //2001 default//
-      console.log("Choose Year - dateFrom", dateFrom);
-      // let dateTo = `${onlyYear}-12-31T23:59:59.000Z`
-      let dateTo = new Date(`${onlyYear}-12-31 23:59:59.000`).getTime(); //2001 default//
-      console.log("Choose Year - dateToOO", dateTo);
+      // let dateFrom = new Date(`${onlyYear}-01-01 00:00:00.000`).getTime(); //2001 default//
+      // console.log("Choose Year - dateFrom", dateFrom);
+      // // let dateTo = `${onlyYear}-12-31T23:59:59.000Z`
+      // let dateTo = new Date(`${onlyYear}-12-31 23:59:59.000`).getTime(); //2001 default//
+      // console.log("Choose Year - dateToOO", dateTo);
       console.log(
         "Filter in component did mount",
         "Selected Year at Yearly" + onlyYear,
@@ -151,16 +170,16 @@ class Expenses extends React.Component {
         )
         .then(res => {
           console.log("In TIMEOUT");
-          // this.setState({ data: res.data, loading: false });
-          setTimeout(
-            () => this.setState({ data: res.data, loading: false }),
-            500
-          );
-          // console.log(this.state.data);
+          this.setState({ data: res.data, loading: false });
+          // setTimeout(
+          //   () => this.setState({ data: res.data, loading: false }),
+          //   500
+          // );
+          console.log(this.res.data);
         })
         .catch(err => {
           this.setState({ loading: false });
-          console.log(err, "ERROR at Expenses component");
+          console.log(err, "ERROR on Yarly at Expenses component");
         });
       this.setState({
         selected: false
@@ -171,18 +190,20 @@ class Expenses extends React.Component {
       this.state.showYearly === false &&
       this.state.showMonthly === true &&
       this.state.toggle === false &&
+      this.state.selected === true &&
       selectedMonth != null &&
-      selectedYear != null &&
-      this.state.selected === true
+      selectedYear != null
     ) {
-      let dateFromYM = new Date(
-        `${selectedYear}-${selectedMonth}-01 00:00:00.000`
-      ).getTime();
-      console.log("dateFromYM", dateFromYM); //2001 default//
-      let dateToYM = new Date(
-        `${selectedYear}-${selectedMonth + 1}-01 00:00:00.000`
-      ).getTime();
-      console.log("dateToYM", dateToYM); //2001 default//
+      // let dateFromYM = new Date(
+      //   `${selectedYear}-${selectedMonth} 00:00:00.000`
+      //   // `${selectedYear}-${selectedMonth}-01 00:00:00.000`
+      // ).getTime();
+      // console.log("dateFromYM", dateFromYM); //2001 default//
+      // let dateToYM = new Date(
+      //   `${selectedYear}-${selectedMonth + 1} 00:00:00.000`
+      //   // `${selectedYear}-${selectedMonth + 1}-01 00:00:00.000`
+      // ).getTime();
+      // console.log("dateToYM", dateToYM); //2001 default//
 
       // console.log(
       //   "Filter in component did mount",
@@ -216,16 +237,16 @@ class Expenses extends React.Component {
 
   render() {
     // Za options na selectbox od Year
-    console.log("Loading: ", this.state.loading);
+    // console.log("Loading: ", this.state.loading);
     let today = new Date();
-    console.log(today);
+    // console.log(today);
     let year = today.getFullYear();
     // console.log(year);
     // let month = today.getMonth();
     // console.log(month);
 
     let selOptionsYear = [];
-    for (let i = 1999; i <= year; i++) {
+    for (let i = 1998; i <= year; i++) {
       selOptionsYear.push(
         <option key={i} value={i}>
           {i}
@@ -337,7 +358,7 @@ class Expenses extends React.Component {
                     /*name="expenses-filter" className="select-box"*/ id="select"
                     onChange={this.selectYValue}
                   >
-                    <option /*value={"Years"}*/>Years</option>
+                    <option value={"Years"}>Years</option>
                     {selOptionsYear}
                   </select>
                 </p>
