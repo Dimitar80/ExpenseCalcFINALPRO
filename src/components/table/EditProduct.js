@@ -123,7 +123,7 @@ class EditProduct extends React.Component {
                     <input
                       type="text"
                       className="eptextfield"
-                      id="productDescription"
+                      id="productType"
                       onChange={this.saveInputValue}
                       defaultValue={this.state.edata[0].productType}
                     />
@@ -133,7 +133,7 @@ class EditProduct extends React.Component {
                     <input
                       type="text"
                       className="eptextfield"
-                      id="productType"
+                      id="productDescription"
                       onChange={this.saveInputValue}
                       defaultValue={this.state.edata[0].productDescription}
                     />

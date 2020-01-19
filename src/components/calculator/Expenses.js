@@ -29,7 +29,8 @@ class Expenses extends React.Component {
     this.setState({
       showYearly: false,
       showMonthly: true,
-      toggle: false
+      toggle: false,
+      yearValue: null
     });
   };
 
@@ -117,7 +118,7 @@ class Expenses extends React.Component {
     let dateTo = new Date(`${onlyYear}-12-31 23:59:59.000`).getTime();
     console.log("Choose Year - dateToOO", dateTo); //Mon Dec 31 2001 23:59:59 default//
 
-    // Za Mesec //
+    // Za Mesec so Godina//
     let selectedMonth = Number(this.state.monthValue);
     console.log("SelectedMonth at Months is SELECTED -", selectedMonth);
     console.log("SelectedMonth + 1 at Months-", selectedMonth + 1);
@@ -136,7 +137,43 @@ class Expenses extends React.Component {
     ).getTime();
     console.log("dateToYM", dateToYM); //Mon Jan 01 2001 00:00:00//
 
-    console.log("Component did update", onlyYear);
+    // console.log("Component did update", onlyYear);
+
+    // Za Mesec vo SITE Godini//
+    // let selectedMonth = Number(this.state.monthValue);
+    // console.log("SelectedMonth at Months is SELECTED -", selectedMonth);
+    // console.log("SelectedMonth + 1 at Months-", selectedMonth + 1);
+
+    // const dbData = this.state.data;
+    // // console.log(dbData);
+    // let dbYears = [];
+    // // let dbYears = null;
+    // for (let p = 0; p < dbData.length; p++) {
+    //   dbYears.push(Number(dbData[p].purchaseDate.slice(0, 4)));
+    //   // dbYears = dbData[p].purchaseDate.slice(0, 10);
+    //   // dbYears = dbData[p].purchaseDate.slice(0, 4);
+    //   // dbYears = dbData[p].purchaseDate;
+    //   // console.log(dbYears);
+    // }
+    // console.log(dbYears);
+
+    // // let allYears = this.state.yearValue;
+    // let allYears = dbYears;
+    // console.log("allYears at Months", allYears);
+
+    // let monthFromInAllY = new Date(
+    //   `1998-${selectedMonth} 00:00:00.000`
+    //   // `${allYears}-${selectedMonth} 00:00:00.000`
+    //   // `${allYears}-${selectedMonth}-01 00:00:00.000`
+    // ).getTime();
+    // console.log("monthFromInAllY", monthFromInAllY); // Sat Jan 01 2000 00:00:00?//
+    // let monthToInAllY = new Date(
+    //   `2020-${selectedMonth + 1} 00:00:00.000`
+    //   // `${allYears}-${selectedMonth + 1} 00:00:00.000`
+    //   // `${allYears}-${selectedMonth + 1}-01 00:00:00.000`
+    // ).getTime();
+    // console.log("monthToInAllY", monthToInAllY); //Mon Jan 01 2001 00:00:00//
+
     if (this.state.selected === true && onlyYear === "Years") {
       this.getProductsInExp();
       this.setState({
@@ -152,11 +189,6 @@ class Expenses extends React.Component {
       onlyYear != null &&
       onlyYear != "Years"
     ) {
-      // let dateFrom = new Date(`${onlyYear}-01-01 00:00:00.000`).getTime(); //2001 default//
-      // console.log("Choose Year - dateFrom", dateFrom);
-      // // let dateTo = `${onlyYear}-12-31T23:59:59.000Z`
-      // let dateTo = new Date(`${onlyYear}-12-31 23:59:59.000`).getTime(); //2001 default//
-      // console.log("Choose Year - dateToOO", dateTo);
       console.log(
         "Filter in component did mount",
         "Selected Year at Yearly" + onlyYear,
@@ -171,10 +203,6 @@ class Expenses extends React.Component {
         .then(res => {
           console.log("In TIMEOUT");
           this.setState({ data: res.data, loading: false });
-          // setTimeout(
-          //   () => this.setState({ data: res.data, loading: false }),
-          //   500
-          // );
           console.log(this.res.data);
         })
         .catch(err => {
@@ -182,8 +210,8 @@ class Expenses extends React.Component {
           console.log(err, "ERROR on Yarly at Expenses component");
         });
       this.setState({
-        selected: false
-        // onlyYear: null
+        selected: false,
+        onlyYear: null
       });
       // Za Godina END//
     } else if (
@@ -192,19 +220,11 @@ class Expenses extends React.Component {
       this.state.toggle === false &&
       this.state.selected === true &&
       selectedMonth != null &&
-      selectedYear != null
+      selectedMonth != "..." &&
+      selectedMonth != "Months" &&
+      selectedYear != null &&
+      selectedYear != "Years"
     ) {
-      // let dateFromYM = new Date(
-      //   `${selectedYear}-${selectedMonth} 00:00:00.000`
-      //   // `${selectedYear}-${selectedMonth}-01 00:00:00.000`
-      // ).getTime();
-      // console.log("dateFromYM", dateFromYM); //2001 default//
-      // let dateToYM = new Date(
-      //   `${selectedYear}-${selectedMonth + 1} 00:00:00.000`
-      //   // `${selectedYear}-${selectedMonth + 1}-01 00:00:00.000`
-      // ).getTime();
-      // console.log("dateToYM", dateToYM); //2001 default//
-
       // console.log(
       //   "Filter in component did mount",
       //   "Selected Month" + selectedMonth,
@@ -230,7 +250,40 @@ class Expenses extends React.Component {
         // selectedMonth: null,
         // selectedYear: null
       });
-    } else {
+    }
+    // else if (
+    //   this.state.showYearly === false &&
+    //   this.state.showMonthly === true &&
+    //   this.state.toggle === false &&
+    //   this.state.selected === true &&
+    //   selectedMonth != null &&
+    //   selectedMonth != "..." &&
+    //   selectedMonth != "Month" &&
+    //   selectedYear === null
+    //   /*selectedYear != null &&*/
+    //   // selectedYear === "Years"
+    // ) {
+    //   this.setState({ loading: true });
+    //   axios
+    //     .get(
+    //       `http://127.0.0.1:8082/api/v1/products/?purcdate_from=${monthFromInAllY}&purcdate_to=${monthToInAllY}&sort=purchaseDate:desc` /*,
+    //                 { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}}*/
+    //     )
+    //     .then(res => {
+    //       this.setState({ data: res.data, loading: false });
+    //       console.log(this.state.data);
+    //     })
+    //     .catch(err => {
+    //       this.setState({ loading: false });
+    //       console.log(err, "ERROR at Expenses component");
+    //     });
+    //   this.setState({
+    //     selected: false
+    //     // selectedMonth: null,
+    //     // selectedYear: null
+    //   });
+    // }
+    else {
       ("Probaj NOVO RESENIE!!!");
     }
   }
@@ -255,6 +308,37 @@ class Expenses extends React.Component {
       // console.log(i);
     }
     selOptionsYear.reverse();
+
+    // MESEC VO GODINI //
+    // const dbData = this.state.data;
+    // // console.log(dbData);
+    // // let dbYears = [];
+    // let dbYears = null;
+    // let dbMonth = null;
+    // for (let p = 0; p < dbData.length; p++) {
+    //   // dbYears.push(dbData[p].purchaseDate);
+    //   // dbYears = dbData[p].purchaseDate.slice(0, 10);
+    //   // dbYears = dbData[p].purchaseDate.slice(0, 4);
+    //   dbYears = dbData[p].purchaseDate;
+    //   // console.log(dbYears.length);
+    //   // console.log(dbYears);
+    //   if (dbYears.slice(0, 4).length === 4) {
+    //     console.log(dbYears.slice(0, 4));
+    //   }
+
+    //   // // dbMonth = dbYears.slice(5, 7);
+    //   // dbMonth = Number(dbYears.slice(5, 7));
+    //   // // console.log(dbMonth);
+    //   // if (/*dbMonth === "01"*/ dbMonth === 1) {
+    //   //   // Gore so this.setState({})
+    //   //   console.log(dbYears);
+    //   //   // console.log(dbData[p].purchaseDate.slice(0, 10));
+    //   // }
+    //   if(selectedMonth === dbMonth){
+    //     axios.get.length...
+    //   }
+    // }
+    // console.log(dbYears);
 
     // const currentYear = new Date().getFullYear();
     // console.log(currentYear);
@@ -289,11 +373,7 @@ class Expenses extends React.Component {
     return (
       <React.Fragment>
         {/* <Navbar /> */}
-        <NavbarSur
-          toggle={true}
-          // povik={this.getProductsInExp}
-          // tes={this.state.yearValue}
-        />
+        <NavbarSur toggle={true} />
         <div id="expenses">
           <div className="exmain-container">
             <div id="emaintitle">
