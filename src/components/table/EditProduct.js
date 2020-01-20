@@ -97,6 +97,7 @@ class EditProduct extends React.Component {
     }
 
     const NavbarSur = this.props.component;
+
     return this.state.edata.length > 0 ? (
       <React.Fragment>
         <NavbarSur toggle={false} />

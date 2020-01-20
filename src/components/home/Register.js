@@ -2,44 +2,165 @@ import React from "react";
 import "../../assets/styles/Register.css";
 import "../../assets/styles/shared.css";
 // import { BrowserRouter as Link } from 'react-router-dom'
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 class Register extends React.Component {
+  constructor(/*props*/) {
+    super(/*props*/);
+    this.state = {
+      first_name: null,
+      last_name: null,
+      email: null,
+      password: null,
+      date_of_birth: null,
+      telephone: null,
+      country: null,
+      redirect: false
+    };
+  }
+
+  saveUserData = event => {
+    this.setState({ [event.target.id]: event.target.value });
+    console.log(event.target.id);
+    console.log(event.target.value);
+  };
+
+  createUser = event => {
+    if (
+      this.state.first_name === null ||
+      this.state.last_name === null ||
+      this.state.email === null ||
+      this.state.password === null ||
+      this.state.birthday === null ||
+      this.state.telephone === null ||
+      this.state.country === null
+    ) {
+      event.preventDefault();
+      alert("Please fill out all the fields");
+    } else if (
+      this.state.first_name != null &&
+      this.state.last_name != null &&
+      this.state.email != null &&
+      this.state.password != null &&
+      this.state.birthday != null &&
+      this.state.telephone != null &&
+      this.state.country != null
+    ) {
+      event.preventDefault();
+      axios
+        .post("http://127.0.0.1:8081/api/v1/auth/register", {
+          first_name: this.state.first_name,
+          last_name: this.state.last_name,
+          email: this.state.email,
+          password: this.state.password,
+          birthday: this.state.birthday,
+          telephone: this.state.telephone,
+          country: this.state.country,
+          _created: new Date()
+        })
+        .then(res => {
+          console.log(res);
+          axios
+            .post("http://127.0.0.1:8081/api/v1/auth/login", {
+              email: this.state.email,
+              password: this.state.password
+            })
+            .then(res => {
+              localStorage.setItem("jwt", res.data.jwt);
+              localStorage.setItem("firstName", this.state.first_name);
+              localStorage.setItem("lastName", this.state.last_name);
+              this.setState({ redirect: true });
+              // this.props.history.push('/products')
+            })
+            .catch(err => {
+              console.log(err);
+            });
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  };
+
   render() {
+    const { redirect } = this.state;
+    if (redirect) {
+      return <Redirect to="/products" />;
+    }
+
     return (
       <React.Fragment>
         <div id="register">
           <div className="box-container" id="regbox">
             <form>
               <p className="input-container">
-                <label className="text-field-input">First Name</label>
-                <input className="text-field" type="text" />
+                <label className="text-label">First Name</label>
+                <input
+                  className="text-input"
+                  type="text"
+                  id="first_name"
+                  onChange={this.saveUserData}
+                />
               </p>
               <p className="input-container">
-                <label className="text-field-input">Last Name</label>
-                <input className="text-field" type="text" />
+                <label className="text-label">Last Name</label>
+                <input
+                  className="text-input"
+                  type="text"
+                  id="last_name"
+                  onChange={this.saveUserData}
+                />
               </p>
               <p className="input-container">
-                <label className="text-field-input">E-mail</label>
-                <input className="text-field" type="email" />
+                <label className="text-label">E-mail</label>
+                <input
+                  className="text-input"
+                  type="email"
+                  id="email"
+                  onChange={this.saveUserData}
+                />
               </p>
               <p className="input-container">
-                <label className="text-field-input">Date of Birth</label>
-                <input className="text-field" type="text" />
+                <label className="text-label">Password</label>
+                <input
+                  className="text-input"
+                  type="password"
+                  id="password"
+                  onChange={this.saveUserData}
+                />
               </p>
               <p className="input-container">
-                <label className="text-field-input">Telephone</label>
-                <input className="text-field" type="text" />
+                <label className="text-label">Date of Birth</label>
+                <input
+                  className="text-input"
+                  type="date"
+                  id="date_of_birth"
+                  onChange={this.saveUserData}
+                />
               </p>
               <p className="input-container">
-                <label className="text-field-input">Country</label>
-                <input className="text-field" type="text" />
+                <label className="text-label">Telephone</label>
+                <input
+                  className="text-input"
+                  type="text"
+                  id="telephone"
+                  onChange={this.saveUserData}
+                />
               </p>
               <p className="input-container">
-                <label className="text-field-input">Password</label>
-                <input className="text-field" type="password" />
+                <label className="text-label">Country</label>
+                <input
+                  className="text-input"
+                  type="text"
+                  id="country"
+                  onChange={this.saveUserData}
+                />
               </p>
-              <button className="primary-button" type="submit">
+              <button
+                className="primary-button"
+                type="submit"
+                onClick={this.createUser}
+              >
                 REGISTER
               </button>
             </form>
@@ -49,7 +170,7 @@ class Register extends React.Component {
               Or if you already have an account,
               <Link
                 to="/"
-                activestyle={{ color: "red" }}
+                // activestyle={{ color: "red" }}
                 style={{
                   textDecoration: "none",
                   color: "#8d8d8d",
