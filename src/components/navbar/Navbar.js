@@ -11,8 +11,9 @@ class Navbar extends React.Component {
     this.state = {
       toggle: this.props.toggle,
       signOut: false,
-      uff: this.props.tes
+      uff: this.props.tes,
       // show: false
+      redirect: false
     };
   }
 
@@ -28,7 +29,8 @@ class Navbar extends React.Component {
     // alert("Expenses WORKS!")
     this.props.povik;
     this.setState({
-      toggle: true
+      toggle: true,
+      redirect: true
     });
   };
 
@@ -59,6 +61,10 @@ class Navbar extends React.Component {
     // console.log(this.props.val);
     // console.log(this.props.tes);
     // console.log(this.state.uff);
+    const { redirect } = this.state;
+    if (redirect) {
+      return <Redirect to="/expenses" />;
+    }
 
     return (
       <React.Fragment>
@@ -83,21 +89,18 @@ class Navbar extends React.Component {
               </button>
             </Link>
 
-            <Link
-              to="/expenses" /*exact activeClassName="navbar-button active"*/
+            <button
+              onClick={this.showExpenses}
+              // /*id='btexpenses'*/ /*onClick={this.props.povik}*/ onClick={() =>
+              //   this.refExp()
+              // }
+              className={
+                this.state.toggle ? "navbar-button active" : "navbar-button"
+              }
+              /*activeClassName="navbar-button active"*/
             >
-              <button /*onClick={this.showExpenses}*/
-                // /*id='btexpenses'*/ /*onClick={this.props.povik}*/ onClick={() =>
-                //   this.refExp()
-                // }
-                className={
-                  this.state.toggle ? "navbar-button active" : "navbar-button"
-                }
-                /*activeClassName="navbar-button active"*/
-              >
-                EXPENSES
-              </button>
-            </Link>
+              EXPENSES
+            </button>
           </nav>
           {/* SignOut - Display */}
           {this.state.signOut ? (
@@ -110,11 +113,11 @@ class Navbar extends React.Component {
           <div id="user">
             <img src="../../assets/img/DPPHOTO.jpg" alt="profileimg" />
 
-            <h2 id="touch" onClick={this.signOut}>
+            <h3 id="touch" onClick={this.signOut}>
               {localStorage.getItem("firstName") +
                 " " +
                 localStorage.getItem("lastName")}
-            </h2>
+            </h3>
           </div>
         </div>
         {/* </header> */}

@@ -9,7 +9,9 @@ class ProLogin extends React.Component {
     super(/*props*/);
     this.state = {
       email: null,
-      password: null,
+      //   password: null,
+      password: "",
+      hidden: true,
       redirect: false
     };
   }
@@ -24,8 +26,8 @@ class ProLogin extends React.Component {
     event.preventDefault();
     if (
       this.state.email === null ||
-      this.state.password ===
-        null /*&& ako ne se pravilno napisani 
+      this.state.password === null
+      /*&& ako ne se pravilno napisani 
         da dade alert-your e-mail address or password is incorrect
         i ako nema takov user so tie podatoci vo baza da alert-theres no such user with this data*/
     ) {
@@ -49,6 +51,22 @@ class ProLogin extends React.Component {
         });
     }
   };
+  // Za PASSWORD - HIDDEN/VISIBLE //
+  handlePasswordChange = e => {
+    this.setState({ password: e.target.value });
+    console.log(this.state.password);
+  };
+
+  toggleShow = e => {
+    e.preventDefault();
+    this.setState({ hidden: !this.state.hidden });
+  };
+
+  //   componentDidMount() {
+  //     if (this.state.password) {
+  //       this.setState({ password: this.state.password });
+  //     }
+  //   }
 
   render() {
     const { redirect } = this.state;
@@ -73,20 +91,29 @@ class ProLogin extends React.Component {
               <p className="input-container">
                 <label className="text-label">Password</label>
                 <input
-                  type="password"
+                  //   type="password"
+                  type={this.state.hidden ? "password" : "text"}
                   className="text-input"
-                  id="password"
-                  onChange={this.saveInputValue}
+                  //   id="password"
+                  //   onChange={this.saveInputValue}
+                  value={this.state.password}
+                  onChange={this.handlePasswordChange}
+                  placeholder=""
                 />
+                <i
+                  className="fa fa-eye password-icon"
+                  onClick={this.toggleShow}
+                />
+                {/* <button onClick={this.toggleShow}>Show/Hide</button> */}
               </p>
-              <Link
+              {/* <Link
                 to="/products"
                 style={{ textDecoration: "none", color: "#fff" }}
-              >
-                <button className="primary-button" onClick={this.logIn}>
-                  SIGN IN
-                </button>
-              </Link>
+              > */}
+              <button className="primary-button" onClick={this.logIn}>
+                SIGN IN
+              </button>
+              {/* </Link> */}
             </form>
           </div>
           <div className="additional-info">

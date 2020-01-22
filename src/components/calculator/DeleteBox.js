@@ -74,7 +74,7 @@ class DeleteBox extends React.Component {
                   {pN}
                 </span>
                 <br />
-                Are you sure you wish to continue?
+                Are you sure you want to continue?
               </p>
             </div>
             <div id="delBox-buttons">
