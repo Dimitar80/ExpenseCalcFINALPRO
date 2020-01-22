@@ -1,17 +1,60 @@
 import React from "react";
 import "../../assets/styles/ProLogin.css";
 import "../../assets/styles/shared.css";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import axios from "axios";
 
 class ProLogin extends React.Component {
   constructor(/*props*/) {
     super(/*props*/);
     this.state = {
-      orange: true
+      email: null,
+      password: null,
+      redirect: false
     };
   }
 
+  saveInputValue = event => {
+    this.setState({ [event.target.id]: event.target.value });
+    console.log(event.target.id);
+    console.log(event.target.value);
+  };
+
+  logIn = event => {
+    event.preventDefault();
+    if (
+      this.state.email === null ||
+      this.state.password ===
+        null /*&& ako ne se pravilno napisani 
+        da dade alert-your e-mail address or password is incorrect
+        i ako nema takov user so tie podatoci vo baza da alert-theres no such user with this data*/
+    ) {
+      event.preventDefault();
+      alert("All fields must be filled out to SignIn!");
+    } else {
+      axios
+        .post("http://127.0.0.1:8081/api/v1/auth/login", {
+          email: this.state.email,
+          password: this.state.password
+        })
+        .then(res => {
+          localStorage.setItem("jwt", res.data.jwt);
+          localStorage.setItem("email", res.data.email);
+          localStorage.setItem("firstName", res.data.first_name);
+          localStorage.setItem("lastName", res.data.last_name);
+          this.setState({ redirect: true });
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  };
+
   render() {
+    const { redirect } = this.state;
+    if (redirect) {
+      return <Redirect to="/products" />;
+    }
     return (
       <React.Fragment>
         <div id="prologin">
@@ -22,18 +65,27 @@ class ProLogin extends React.Component {
                 <input
                   type="text"
                   className="text-input"
-                  placeholder="Korekcii - Finishing"
+                  //   placeholder="Korekcii - Finishing"
+                  id="email"
+                  onChange={this.saveInputValue}
                 />
               </p>
               <p className="input-container">
                 <label className="text-label">Password</label>
-                <input type="text" className="text-input" />
+                <input
+                  type="password"
+                  className="text-input"
+                  id="password"
+                  onChange={this.saveInputValue}
+                />
               </p>
               <Link
                 to="/products"
                 style={{ textDecoration: "none", color: "#fff" }}
               >
-                <button className="primary-button">SIGN IN</button>
+                <button className="primary-button" onClick={this.logIn}>
+                  SIGN IN
+                </button>
               </Link>
             </form>
           </div>

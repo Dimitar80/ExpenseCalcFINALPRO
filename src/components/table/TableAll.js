@@ -33,7 +33,9 @@ class TableAll extends React.Component {
 
   deleteRow = id => {
     axios
-      .delete("http://127.0.0.1:8082/api/v1/products/" + id)
+      .delete("http://127.0.0.1:8082/api/v1/products/" + id, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` }
+      })
       .then(res => {
         this.setState({ show: false });
         console.log("Deleted: ", res);
@@ -80,6 +82,8 @@ class TableAll extends React.Component {
         {/* </div> */}
       </React.Fragment>
       // : <h2>Loading data...</h2>
+      /*: <h2>Loading data...</h2>*/
+      /*: <h2>Loading data...</h2>*/
       /*: <h2>Loading data...</h2>*/
       /*: <h2>Loading data...</h2>*/
       /*: <h2>Loading data...</h2>*/

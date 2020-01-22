@@ -1,7 +1,7 @@
 import React from "react";
 import "../../assets/styles/Navbar.css";
 import "../../assets/styles/shared.css";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import SignOut from "./SignOut";
 
 // Navbar 'sreden'
@@ -24,13 +24,13 @@ class Navbar extends React.Component {
     });
   };
 
-  // showExpenses = () => {
-  //   // alert("Expenses WORKS!")
-  //   this.props.povik;
-  //   this.setState({
-  //     toggle: true
-  //   });
-  // };
+  showExpenses = () => {
+    // alert("Expenses WORKS!")
+    this.props.povik;
+    this.setState({
+      toggle: true
+    });
+  };
 
   refExp = () => {
     // this.props.povik();
@@ -42,7 +42,7 @@ class Navbar extends React.Component {
 
   // SIgnOut Metods-START
   signOut = () => {
-    this.setState({ signOut: true });
+    this.setState({ signOut: !this.state.signOut });
   };
 
   closeBt = () => {
@@ -62,12 +62,13 @@ class Navbar extends React.Component {
 
     return (
       <React.Fragment>
+        {!localStorage.getItem("jwt") ? <Redirect to="/" /> : null}
         {/* <header id='header'> */}
         <div id="header">
           <nav id="mainnav">
-            <Link to="/">
+            {/* <Link to="/">
               <button id="bthome">HOME</button>
-            </Link>
+            </Link> */}
 
             <Link
               to="/products" /*exact activeClassName="navbar-button active"*/
@@ -99,19 +100,20 @@ class Navbar extends React.Component {
             </Link>
           </nav>
           {/* SignOut - Display */}
-          {this.state.signOut && (
+          {this.state.signOut ? (
             <SignOut
               // ajdi={this.state.rowIdToDelete}}
               clBtn={this.closeBt}
-              // delRow={this.deleteRow}
+              sO={this.signOut}
             />
-          )}
+          ) : null}
           <div id="user">
             <img src="../../assets/img/DPPHOTO.jpg" alt="profileimg" />
-            {/* PRAKTICNO DA ISKOCI POP UP KO DELETE SO PRASANJE ZA KONFIRMACIJA A OD YES DA ME VRATI NA
-            LINKOT - PATEKATA '/' OD Prologin ! */}
+
             <h2 id="touch" onClick={this.signOut}>
-              User name
+              {localStorage.getItem("firstName") +
+                " " +
+                localStorage.getItem("lastName")}
             </h2>
           </div>
         </div>

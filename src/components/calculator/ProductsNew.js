@@ -32,10 +32,9 @@ class ProductsNew extends React.Component {
   getProducts = () => {
     this.setState({ loading: true });
     axios
-      .get(
-        `http://127.0.0.1:8082/api/v1/products/?sort=purchaseDate:desc` /*,
-      { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}}*/
-      )
+      .get(`http://127.0.0.1:8082/api/v1/products/?sort=purchaseDate:desc`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` }
+      })
       .then(res => {
         // console.log(data);
         console.log("Data: ", res.data);
@@ -62,10 +61,9 @@ class ProductsNew extends React.Component {
     console.log("Get products", this.state.sort);
     if (this.state.didUpd === true && this.state.sort != null) {
       axios
-        .get(
-          `http://127.0.0.1:8082/api/v1/products/?sort=${this.state.sort}` /*,
-    { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}}*/
-        )
+        .get(`http://127.0.0.1:8082/api/v1/products/?sort=${this.state.sort}`, {
+          headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` }
+        })
         .then(res => {
           // console.log(data);
           console.log("Data: ", res.data);

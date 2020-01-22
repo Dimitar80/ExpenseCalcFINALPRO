@@ -21,7 +21,10 @@ class EditProduct extends React.Component {
   GetProductById = () => {
     axios
       .get(
-        "http://127.0.0.1:8082/api/v1/products/" + this.props.match.params.id
+        "http://127.0.0.1:8082/api/v1/products/" + this.props.match.params.id,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` }
+        }
       )
       .then(res => {
         var ep = res.data;
@@ -72,13 +75,15 @@ class EditProduct extends React.Component {
             productPrice:
               this.state.productPrice || this.state.edata[0].productPrice,
             _modified: new Date()
-          } /*, { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}}*/
+          },
+          {
+            headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` }
+          }
         )
         .then(res => {
           console.log(res);
           this.setState({ redirect: true });
           alert("All filds are filled out successfully");
-          // this.props.updProducts()
         })
         .catch(err => {
           console.log(err);

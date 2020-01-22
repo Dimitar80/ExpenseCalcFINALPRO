@@ -80,6 +80,7 @@
   font-weight: bold;
   background: transparent;
   border: 2px solid;
+  color: #576574;
   border-color: #576574;
   border-radius: 5px;
   padding-top: 10px;
@@ -112,7 +113,7 @@
 
 #user h2 {
   font-size: 18px;
-  color: #4d4d4d;
+  color: #576574;
   margin-left: 15px;
   margin-bottom: 0px;
   margin-top: 0px;

@@ -3,6 +3,7 @@ import "../../assets/styles/Register.css";
 import "../../assets/styles/shared.css";
 // import { BrowserRouter as Link } from 'react-router-dom'
 import { Link, Redirect } from "react-router-dom";
+import axios from "axios";
 
 class Register extends React.Component {
   constructor(/*props*/) {
@@ -31,18 +32,20 @@ class Register extends React.Component {
       this.state.last_name === null ||
       this.state.email === null ||
       this.state.password === null ||
-      this.state.birthday === null ||
+      this.state.date_of_birth === null ||
       this.state.telephone === null ||
       this.state.country === null
     ) {
       event.preventDefault();
-      alert("Please fill out all the fields");
+      alert(
+        "All fields must be filled out for Registration form to be created successfully!"
+      );
     } else if (
       this.state.first_name != null &&
       this.state.last_name != null &&
       this.state.email != null &&
       this.state.password != null &&
-      this.state.birthday != null &&
+      this.state.date_of_birth != null &&
       this.state.telephone != null &&
       this.state.country != null
     ) {
@@ -53,13 +56,13 @@ class Register extends React.Component {
           last_name: this.state.last_name,
           email: this.state.email,
           password: this.state.password,
-          birthday: this.state.birthday,
+          date_of_birth: this.state.date_of_birth,
           telephone: this.state.telephone,
           country: this.state.country,
           _created: new Date()
         })
         .then(res => {
-          console.log(res);
+          console.log(res.data);
           axios
             .post("http://127.0.0.1:8081/api/v1/auth/login", {
               email: this.state.email,
@@ -67,8 +70,11 @@ class Register extends React.Component {
             })
             .then(res => {
               localStorage.setItem("jwt", res.data.jwt);
-              localStorage.setItem("firstName", this.state.first_name);
-              localStorage.setItem("lastName", this.state.last_name);
+              localStorage.setItem("email", res.data.email);
+              localStorage.setItem("firstName", res.data.first_name);
+              localStorage.setItem("lastName", res.data.last_name);
+              // localStorage.setItem("firstName", this.state.first_name);
+              // localStorage.setItem("lastName", this.state.last_name);
               this.setState({ redirect: true });
               // this.props.history.push('/products')
             })
@@ -87,7 +93,7 @@ class Register extends React.Component {
     if (redirect) {
       return <Redirect to="/products" />;
     }
-
+    // console.log(Number(this.state.date_of_birth));
     return (
       <React.Fragment>
         <div id="register">

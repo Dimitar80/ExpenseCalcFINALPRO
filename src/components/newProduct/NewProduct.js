@@ -50,7 +50,10 @@ class NewProduct extends React.Component {
             purchaseDate: this.state.purchaseDate,
             productPrice: this.state.productPrice,
             _created: new Date()
-          } /*, { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}}*/
+          },
+          {
+            headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` }
+          }
         )
         .then(res => {
           console.log(res);

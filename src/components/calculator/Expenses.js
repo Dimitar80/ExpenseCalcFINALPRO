@@ -72,10 +72,9 @@ class Expenses extends React.Component {
     this.setState({ loading: true });
     // const url = this.formatUrl();
     axios
-      .get(
-        `http://127.0.0.1:8082/api/v1/products/?sort=purchaseDate:desc` /*,
-      { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}}*/
-      )
+      .get(`http://127.0.0.1:8082/api/v1/products/?sort=purchaseDate:desc`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` }
+      })
       .then(res => {
         // console.log("getProductsInExp-Data: ", res.data);
         this.setState({
@@ -90,16 +89,16 @@ class Expenses extends React.Component {
   };
 
   //Boko//
-  formatUrl = () => {
-    const base =
-      "http://127.0.0.1:8082/api/v1/products/?sort=purchaseDate:desc";
-    // Formatiraj gi vo timestamp
-    if (this.state.yearValue && this.state.monthValue) {
-      url = base + `&purcdate_from=${dateFrom}&purcdate_to=${dateTo}`;
-      return url;
-    }
-    return base;
-  };
+  // formatUrl = () => {
+  //   const base =
+  //     "http://127.0.0.1:8082/api/v1/products/?sort=purchaseDate:desc";
+  //   // Formatiraj gi vo timestamp
+  //   if (this.state.yearValue && this.state.monthValue) {
+  //     url = base + `&purcdate_from=${dateFrom}&purcdate_to=${dateTo}`;
+  //     return url;
+  //   }
+  //   return base;
+  // };
   //Boko//
 
   componentDidMount() {
@@ -197,8 +196,10 @@ class Expenses extends React.Component {
       this.setState({ loading: true });
       axios
         .get(
-          `http://127.0.0.1:8082/api/v1/products/?purcdate_from=${dateFrom}&purcdate_to=${dateTo}&sort=purchaseDate:desc` /*,
-                  { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}}*/
+          `http://127.0.0.1:8082/api/v1/products/?purcdate_from=${dateFrom}&purcdate_to=${dateTo}&sort=purchaseDate:desc`,
+          {
+            headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` }
+          }
         )
         .then(res => {
           console.log("In TIMEOUT");
@@ -234,8 +235,10 @@ class Expenses extends React.Component {
       this.setState({ loading: true });
       axios
         .get(
-          `http://127.0.0.1:8082/api/v1/products/?purcdate_from=${dateFromYM}&purcdate_to=${dateToYM}&sort=purchaseDate:desc` /*,
-                    { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}}*/
+          `http://127.0.0.1:8082/api/v1/products/?purcdate_from=${dateFromYM}&purcdate_to=${dateToYM}&sort=purchaseDate:desc`,
+          {
+            headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` }
+          }
         )
         .then(res => {
           this.setState({ data: res.data, loading: false });

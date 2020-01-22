@@ -3,6 +3,10 @@ import "../../assets/styles/SignOut.css";
 import "../../assets/styles/shared.css";
 
 const SignOut = props => {
+  function logOut() {
+    localStorage.clear();
+    props.sO();
+  }
   return (
     <div id="signout">
       <div id="bck-screen">
@@ -12,8 +16,14 @@ const SignOut = props => {
             <div id="so-userS">
               <img src="../../assets/img/DPPHOTO.jpg" alt="profileimg" />
               <div id="so-userInfo">
-                <p>Dimitar Pavlov</p>
-                <p>designcrafts.mk@gmail.com</p>
+                <p>
+                  <span style={{ fontWeight: "900", fontSize: "18px" }}>
+                    {localStorage.getItem("firstName") +
+                      " " +
+                      localStorage.getItem("lastName")}
+                  </span>
+                </p>
+                <p>{localStorage.getItem("email")}</p>
               </div>
             </div>
             <p>
@@ -26,7 +36,7 @@ const SignOut = props => {
             <button id="socancel" onClick={props.clBtn}>
               CANCEL
             </button>
-            <button id="sodelete" /*onClick={() => this.props.delRow(id)}*/>
+            <button id="sodelete" onClick={logOut}>
               SIGN OUT
             </button>
           </div>
