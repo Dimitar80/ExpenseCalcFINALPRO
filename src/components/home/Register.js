@@ -12,7 +12,9 @@ class Register extends React.Component {
       first_name: null,
       last_name: null,
       email: null,
-      password: null,
+      password: "",
+      // password: null,
+      hidden: true,
       date_of_birth: null,
       telephone: null,
       country: null,
@@ -88,6 +90,11 @@ class Register extends React.Component {
     }
   };
 
+  toggleShow = e => {
+    e.preventDefault();
+    this.setState({ hidden: !this.state.hidden });
+  };
+
   render() {
     const { redirect } = this.state;
     if (redirect) {
@@ -99,69 +106,78 @@ class Register extends React.Component {
         <div id="register">
           <div className="box-container" id="regbox">
             <form>
-              <p className="input-container">
-                <label className="text-label">First Name</label>
-                <input
-                  className="text-input"
-                  type="text"
-                  id="first_name"
-                  onChange={this.saveUserData}
-                />
-              </p>
-              <p className="input-container">
-                <label className="text-label">Last Name</label>
-                <input
-                  className="text-input"
-                  type="text"
-                  id="last_name"
-                  onChange={this.saveUserData}
-                />
-              </p>
-              <p className="input-container">
-                <label className="text-label">E-mail</label>
-                <input
-                  className="text-input"
-                  type="email"
-                  id="email"
-                  onChange={this.saveUserData}
-                />
-              </p>
-              <p className="input-container">
-                <label className="text-label">Password</label>
-                <input
-                  className="text-input"
-                  type="password"
-                  id="password"
-                  onChange={this.saveUserData}
-                />
-              </p>
-              <p className="input-container">
-                <label className="text-label">Date of Birth</label>
-                <input
-                  className="text-input"
-                  type="date"
-                  id="date_of_birth"
-                  onChange={this.saveUserData}
-                />
-              </p>
-              <p className="input-container">
-                <label className="text-label">Telephone</label>
-                <input
-                  className="text-input"
-                  type="text"
-                  id="telephone"
-                  onChange={this.saveUserData}
-                />
-              </p>
-              <p className="input-container">
-                <label className="text-label">Country</label>
-                <input
-                  className="text-input"
-                  type="text"
-                  id="country"
-                  onChange={this.saveUserData}
-                />
-              </p>
+              <div className="reg-input-icons">
+                <p className="input-container">
+                  <label className="text-label">First Name</label>
+                  <input
+                    className="text-input"
+                    type="text"
+                    id="first_name"
+                    onChange={this.saveUserData}
+                  />
+                </p>
+                <p className="input-container">
+                  <label className="text-label">Last Name</label>
+                  <input
+                    className="text-input"
+                    type="text"
+                    id="last_name"
+                    onChange={this.saveUserData}
+                  />
+                </p>
+                <p className="input-container">
+                  <label className="text-label">E-mail</label>
+                  <input
+                    className="text-input"
+                    type="email"
+                    id="email"
+                    onChange={this.saveUserData}
+                  />
+                </p>
+                <p className="input-container">
+                  <label className="text-label">Password</label>
+                  <input
+                    className="text-input"
+                    // type="password"
+                    type={this.state.hidden ? "password" : "text"}
+                    id="password"
+                    onChange={this.saveUserData}
+                  />
+                  <i
+                    id="reg"
+                    className="fa fa-eye password-icon reg-icon"
+                    style={{ color: "#c6c6c6" }}
+                    onClick={this.toggleShow}
+                  ></i>
+                </p>
+                <p className="input-container">
+                  <label className="text-label">Date of Birth</label>
+                  <input
+                    className="text-input"
+                    type="date"
+                    id="date_of_birth"
+                    onChange={this.saveUserData}
+                  />
+                </p>
+                <p className="input-container">
+                  <label className="text-label">Telephone</label>
+                  <input
+                    className="text-input"
+                    type="text"
+                    id="telephone"
+                    onChange={this.saveUserData}
+                  />
+                </p>
+                <p className="input-container">
+                  <label className="text-label">Country</label>
+                  <input
+                    className="text-input"
+                    type="text"
+                    id="country"
+                    onChange={this.saveUserData}
+                  />
+                </p>
+              </div>
               <button
                 className="primary-button"
                 type="submit"
