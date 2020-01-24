@@ -24,7 +24,7 @@ const SignOut = props => {
                   </span>
                 </p>
                 <p>
-                  <span style={{ fontWeight: "0", fontSize: "16px" }}>
+                  <span style={{ fontWeight: "0", fontSize: "15px" }}>
                     {localStorage.getItem("email")}
                   </span>
                 </p>

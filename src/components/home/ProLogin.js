@@ -8,7 +8,8 @@ class ProLogin extends React.Component {
   constructor(/*props*/) {
     super(/*props*/);
     this.state = {
-      email: null,
+      // email: null,
+      email: "",
       //   password: null,
       password: "",
       hidden: true,
@@ -25,42 +26,28 @@ class ProLogin extends React.Component {
     console.log(event.target.value);
   };
 
-  // v = () => {
-  //   if (
-  //     this.state.email === null ||
-  //     this.state.password === "" ||
-  //     this.state.password === null
-  //   ) {
-  //     this.setState({
-  //       exsUserData: "All fields must be filled out to Sign In!"
-  //     });
-  //   }
-  //   if (this.state.datite === null) {
-  //     this.state.error;
-  //   }
-  // };
-
   logIn = event => {
     event.preventDefault();
     // let e =
     if (
-      this.state.email === null ||
+      this.state.email === "" ||
       this.state.password === "" ||
+      this.state.email === null ||
       this.state.password === null
     ) {
-      event.preventDefault();
       // this.setState({ email: null, password: "" });//
       this.setState({
         exsUserData: "Both fields must be filled out to Sign In!",
         error: null
       });
+      event.preventDefault();
       console.log(this.state.exsUserData);
       // alert("All fields must be filled out to SignIn!");
     }
     if (
-      this.state.email != null &&
-      this.state.password != "" &&
-      this.state.password != null
+      this.state.email != "" &&
+      this.state.password != ""
+      // this.state.password != null
     ) {
       axios
         .post("http://127.0.0.1:8081/api/v1/auth/login", {
@@ -81,12 +68,21 @@ class ProLogin extends React.Component {
             // alert("Your e-mail or password is incorrect. Try again")
           );
           this.setState({
-            exsUserData: null,
-            error: "Your e-mail/password is incorrect. Try again !"
+            error:
+              // <i className="fa fa-exclamation-circle" aria-hidden="true">
+              "Your e-mail/password is incorrect. Try again !",
+            //  </i>
+            exsUserData: null
           });
           console.log(this.state.error);
         });
     }
+    // if (this.state.email === "" && this.state.password === "") {
+    //   this.setState({
+    //     exsUserData: null,
+    //     error: null
+    //   });
+    // }
   };
   // Za PASSWORD - HIDDEN/VISIBLE //
   handlePasswordChange = e => {
@@ -152,22 +148,9 @@ class ProLogin extends React.Component {
                   ></i>
                   {/* <button onClick={this.toggleShow}>Show/Hide</button> */}
                 </p>
-                <p className="input-msg">
-                  <span
-                    style={{
-                      margin: "0px",
-                      padding: "0px",
-                      color: "red"
-                      // alignSelf: "center",
-                      // justifyContent: "center",
-                      // alignmentBaseline: "central"
-                    }}
-                  >
-                    {/* {!this.state.exsUserData ? "" : this.state.exsUserData}
-                  {this.state.datite ? null : this.state.error} */}
-                    {this.state.exsUserData}
-                    {this.state.error}
-                  </span>
+                <p className="input-msg" id="alert-msg">
+                  {this.state.exsUserData}
+                  {this.state.error}
                 </p>
               </div>
               {/* </div> */}
