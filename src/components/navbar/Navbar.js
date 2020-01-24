@@ -29,18 +29,18 @@ class Navbar extends React.Component {
     // alert("Expenses WORKS!")
     this.props.povik;
     this.setState({
-      toggle: true,
-      redirect: true
+      toggle: true
+      // redirect: true
     });
   };
 
-  refExp = () => {
-    // this.props.povik();
-    console.log("Povik: ", this.props.povik);
-    // this.props.funOpt()
-    // this.setState({ uff: "Years" });
-    console.log("obnoven povik za expensess");
-  };
+  // refExp = () => {
+  //   // this.props.povik();
+  //   console.log("Povik: ", this.props.povik);
+  //   // this.props.funOpt()
+  //   // this.setState({ uff: "Years" });
+  //   console.log("obnoven povik za expensess");
+  // };
 
   // SIgnOut Metods-START
   signOut = () => {
@@ -61,10 +61,11 @@ class Navbar extends React.Component {
     // console.log(this.props.val);
     // console.log(this.props.tes);
     // console.log(this.state.uff);
-    const { redirect } = this.state;
-    if (redirect) {
-      return <Redirect to="/expenses" />;
-    }
+
+    // const { redirect } = this.state;
+    // if (redirect) {
+    //   return <Redirect to="/expenses" />;
+    // }
 
     return (
       <React.Fragment>
@@ -88,19 +89,20 @@ class Navbar extends React.Component {
                 PRODUCTS
               </button>
             </Link>
-
-            <button
-              onClick={this.showExpenses}
-              // /*id='btexpenses'*/ /*onClick={this.props.povik}*/ onClick={() =>
-              //   this.refExp()
-              // }
-              className={
-                this.state.toggle ? "navbar-button active" : "navbar-button"
-              }
-              /*activeClassName="navbar-button active"*/
-            >
-              EXPENSES
-            </button>
+            <Link to="/expenses">
+              <button
+                onClick={this.showExpenses}
+                // /*id='btexpenses'*/ /*onClick={this.props.povik}*/ onClick={() =>
+                //   this.refExp()
+                // }
+                className={
+                  this.state.toggle ? "navbar-button active" : "navbar-button"
+                }
+                /*activeClassName="navbar-button active"*/
+              >
+                EXPENSES
+              </button>
+            </Link>
           </nav>
           {/* SignOut - Display */}
           {this.state.signOut ? (

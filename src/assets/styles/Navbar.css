@@ -77,9 +77,9 @@
   width: 120px;
   height: 40px;
   font-size: 15px;
-  font-weight: bold;
+  /* font-weight: bold; */
   background: transparent;
-  border: 2px solid;
+  border: 1.6px solid;
   color: #576574;
   border-color: #576574;
   border-radius: 5px;
@@ -123,4 +123,5 @@
 
 #touch {
   cursor: pointer;
+  font-weight: 600;
 }

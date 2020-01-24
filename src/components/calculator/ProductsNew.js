@@ -85,7 +85,7 @@ class ProductsNew extends React.Component {
     return (
       <React.Fragment>
         {/* <Navbar /> */}
-        <NavbarSur toggle={true} />
+        <NavbarSur toggle={false} />
         <div id="products">
           {/* PORTAL */}
           {/* HEADER */}

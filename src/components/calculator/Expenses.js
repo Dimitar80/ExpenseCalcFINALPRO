@@ -13,7 +13,7 @@ class Expenses extends React.Component {
     this.state = {
       showMonthly: true,
       showYearly: false,
-      toggle: false,
+      // toggle: false,
       data: [],
       yearValue: null,
       monthValue: null,

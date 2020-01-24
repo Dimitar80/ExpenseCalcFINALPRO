@@ -145,7 +145,11 @@ class Register extends React.Component {
                   />
                   <i
                     id="reg"
-                    className="fa fa-eye password-icon reg-icon"
+                    className={
+                      this.state.hidden
+                        ? "fas fa-eye-slash reg-icon"
+                        : "fas fa-eye reg-icon"
+                    }
                     style={{ color: "#c6c6c6" }}
                     onClick={this.toggleShow}
                   ></i>

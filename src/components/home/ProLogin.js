@@ -47,6 +47,7 @@ class ProLogin extends React.Component {
     if (
       this.state.email != "" &&
       this.state.password != ""
+      // this.state.email != null
       // this.state.password != null
     ) {
       axios
@@ -85,10 +86,10 @@ class ProLogin extends React.Component {
     // }
   };
   // Za PASSWORD - HIDDEN/VISIBLE //
-  handlePasswordChange = e => {
-    this.setState({ password: e.target.value });
-    console.log(this.state.password);
-  };
+  // handlePasswordChange = e => {
+  //   this.setState({ password: e.target.value });
+  //   console.log(this.state.password);
+  // };
 
   toggleShow = e => {
     e.preventDefault();
@@ -142,7 +143,11 @@ class ProLogin extends React.Component {
                     // placeholder=""
                   />
                   <i
-                    className="fa fa-eye password-icon icon"
+                    className={
+                      this.state.hidden
+                        ? "fas fa-eye-slash icon"
+                        : "fas fa-eye icon"
+                    }
                     style={{ color: "#c6c6c6" }}
                     onClick={this.toggleShow}
                   ></i>
