@@ -350,6 +350,7 @@ class Expenses extends React.Component {
     // const toMonth = new Date(currentYear /*+ 10*/, 4);
     // console.log(toMonth);
 
+    // December + 1 = 13?! //
     // Za options na selectbox od Month
     let monthsList = [
       "...",
