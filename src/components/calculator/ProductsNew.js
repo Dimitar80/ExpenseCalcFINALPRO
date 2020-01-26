@@ -82,6 +82,7 @@ class ProductsNew extends React.Component {
   render() {
     console.log("Component in render");
     const NavbarSur = this.props.component;
+    console.log(this.state.data);
     return (
       <React.Fragment>
         {/* <Navbar /> */}

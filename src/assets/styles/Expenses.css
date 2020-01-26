@@ -59,7 +59,7 @@
     background-color: red; */
 }
 
-#experiod #select {
+#experiod .ex-select {
   display: flex;
   align-items: center;
   height: 35px;

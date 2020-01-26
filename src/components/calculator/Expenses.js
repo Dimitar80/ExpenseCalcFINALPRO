@@ -24,14 +24,16 @@ class Expenses extends React.Component {
 
   showMonthlyBtn = (/*e*/) => {
     // alert("Monthly WORKS!")
-    ///// Kako resenie e OK No da ne e suvisen povikov ???/////
-    this.getProductsInExp();
     this.setState({
       showYearly: false,
       showMonthly: true,
       toggle: false,
-      yearValue: null
+      yearValue: null //???//
     });
+    ///// Kako resenie e OK No da ne e suvisen povikov ???/////
+    this.getProductsInExp();
+    document.getElementById("mySelectYears").selectedIndex = "0";
+    // document.getElementById("mySelectMonths").selectedIndex = "0"; //invoke.guardedCallBack ???///
   };
 
   showYearlyBtn = (/*e*/) => {
@@ -39,6 +41,7 @@ class Expenses extends React.Component {
     // alert("Yearly WORKS!")
     ///// Kako resenie e OK No da ne e suvisen povikov ???/////
     this.getProductsInExp();
+    document.getElementById("mySelectYears").selectedIndex = "0";
     ///// I da go vrati option- value={"Years"}
     this.setState({
       showYearly: true,
@@ -54,7 +57,7 @@ class Expenses extends React.Component {
       yearValue: e.target.value,
       selected: true
     });
-    console.log(e.target.value); //so setState:???
+    console.log(e.target.value);
   };
 
   // Za Mesec //
@@ -111,11 +114,11 @@ class Expenses extends React.Component {
     // Za Godina //
     let onlyYear = this.state.yearValue;
     console.log("onlyYear at Years is SELECTED -", onlyYear);
-    let dateFrom = new Date(`${onlyYear}-01-01 00:00:00.000`).getTime();
-    console.log("Choose Year - dateFrom", dateFrom); //Mon Jan 01 2001 00:00:00 default//
+    let fromYear = new Date(`${onlyYear}-01-01 00:00:00.000`).getTime();
+    console.log("Choose Year - dateFrom", fromYear); //Mon Jan 01 2001 00:00:00 default//
     // let dateTo = `${onlyYear}-12-31T23:59:59.000Z`
-    let dateTo = new Date(`${onlyYear}-12-31 23:59:59.000`).getTime();
-    console.log("Choose Year - dateToOO", dateTo); //Mon Dec 31 2001 23:59:59 default//
+    let toYear = new Date(`${onlyYear}-12-31 23:59:59.000`).getTime();
+    console.log("Choose Year - dateToOO", toYear); //Mon Dec 31 2001 23:59:59 default//
 
     // Za Mesec so Godina//
     let selectedMonth = Number(this.state.monthValue);
@@ -135,6 +138,13 @@ class Expenses extends React.Component {
       // `${selectedYear}-${selectedMonth + 1}-01 00:00:00.000`
     ).getTime();
     console.log("dateToYM", dateToYM); //Mon Jan 01 2001 00:00:00//
+
+    // let dateToYM = new Date(
+    //   `${selectedYear+1}-${selectedMonth + 1} 00:00:00.000`
+    //   // `${selectedYear}-${selectedMonth + 1}-01 00:00:00.000`
+    // ).getTime();
+
+    // Let dateFromYMdec = new Date(``)
 
     // console.log("Component did update", onlyYear);
 
@@ -196,7 +206,8 @@ class Expenses extends React.Component {
       this.setState({ loading: true });
       axios
         .get(
-          `http://127.0.0.1:8082/api/v1/products/?purcdate_from=${dateFrom}&purcdate_to=${dateTo}&sort=purchaseDate:desc`,
+          `http://127.0.0.1:8082/api/v1/products/?purcdate_from=
+          ${fromYear}&purcdate_to=${toYear}&sort=purchaseDate:desc`,
           {
             headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` }
           }
@@ -215,7 +226,8 @@ class Expenses extends React.Component {
         onlyYear: null
       });
       // Za Godina END//
-    } else if (
+    }
+    if (
       this.state.showYearly === false &&
       this.state.showMonthly === true &&
       this.state.toggle === false &&
@@ -235,7 +247,8 @@ class Expenses extends React.Component {
       this.setState({ loading: true });
       axios
         .get(
-          `http://127.0.0.1:8082/api/v1/products/?purcdate_from=${dateFromYM}&purcdate_to=${dateToYM}&sort=purchaseDate:desc`,
+          `http://127.0.0.1:8082/api/v1/products/?purcdate_from=
+          ${dateFromYM}&purcdate_to=${dateToYM}&sort=purchaseDate:desc`,
           {
             headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` }
           }
@@ -353,7 +366,7 @@ class Expenses extends React.Component {
     // December + 1 = 13?! //
     // Za options na selectbox od Month
     let monthsList = [
-      "...",
+      "Months",
       "January",
       "February",
       "March",
@@ -411,23 +424,34 @@ class Expenses extends React.Component {
                 <p /*id="select-box-container"*/ id="years">
                   <h2>Choose Month</h2>
                   <select
-                    /*name="expenses-filter" className="select-box"*/ id="select"
+                    /*name="expenses-filter" className="select-box"*/
+                    id="mySelectMonths"
+                    className="ex-select"
                     onChange={this.selectMValue}
                   >
-                    <option value={"Months"}>Months</option>
-                    {monthsList.map((month, i) => (
-                      //   console.log(i, month),
-                      <option key={month} value={i}>
-                        {month}
-                      </option>
-                    ))}
+                    {/* <option value={"Months"}>Months</option> */}
+                    {monthsList.map(
+                      (month, i) => (
+                        console.log(i, month),
+                        (
+                          <option key={month} value={i}>
+                            {month}
+                          </option>
+                        )
+                      )
+                    )}
                   </select>
                   <h2>Choose Year</h2>
                   <select
-                    /*name="expenses-filter" className="select-box"*/ id="select"
+                    /*name="expenses-filter" className="select-box"*/
+                    id="mySelectYears"
+                    className="ex-select"
                     onChange={this.selectYValue}
                   >
-                    <option value={"Years"} /*onClick={this.onYears}*/>
+                    <option
+                      // id="yStart"
+                      value={"Years"} /*onClick={this.onYears}*/
+                    >
                       Years
                     </option>
                     {selOptionsYear}
@@ -439,10 +463,12 @@ class Expenses extends React.Component {
                 <p /*id="select-box-container"*/ id="years">
                   <h2>Choose Year</h2>
                   <select
-                    /*name="expenses-filter" className="select-box"*/ id="select"
+                    /*name="expenses-filter" className="select-box"*/
+                    id="mySelectYears"
+                    className="ex-select"
                     onChange={this.selectYValue}
                   >
-                    <option value={"Years"}>Years</option>
+                    <option /*id="yStart"*/ value={"Years"}>Years</option>
                     {selOptionsYear}
                   </select>
                 </p>

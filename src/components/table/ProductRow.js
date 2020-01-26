@@ -25,7 +25,7 @@ class ProductRow extends React.Component {
     return (
       <React.Fragment>
         <tr /*{...this.props.key}*/>
-          {/* <td>{this.props.id}</td> */}
+          {/* <td>{this.props.productId}</td> */}
           <td>{this.props.productName}</td>
           <td>{this.props.productType}</td>
           <td>{this.props.productDescription}</td>

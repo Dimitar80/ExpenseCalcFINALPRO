@@ -78,7 +78,8 @@ class Register extends React.Component {
               // localStorage.setItem("firstName", this.state.first_name);
               // localStorage.setItem("lastName", this.state.last_name);
               this.setState({ redirect: true });
-              // this.props.history.push('/products')
+              alert("Registration form is successfully created");
+              // this.props.history.push('/products') ???//
             })
             .catch(err => {
               console.log(err);
@@ -98,7 +99,7 @@ class Register extends React.Component {
   render() {
     const { redirect } = this.state;
     if (redirect) {
-      return <Redirect to="/products" />;
+      return <Redirect to="/" />;
     }
     // console.log(Number(this.state.date_of_birth));
     return (
