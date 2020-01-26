@@ -22,8 +22,8 @@ class ProLogin extends React.Component {
 
   saveInputValue = event => {
     this.setState({ [event.target.id]: event.target.value });
-    console.log(event.target.id);
-    console.log(event.target.value);
+    // console.log(event.target.id);
+    // console.log(event.target.value);
   };
 
   logIn = event => {
@@ -78,29 +78,12 @@ class ProLogin extends React.Component {
           console.log(this.state.error);
         });
     }
-    // if (this.state.email === "" && this.state.password === "") {
-    //   this.setState({
-    //     exsUserData: null,
-    //     error: null
-    //   });
-    // }
   };
-  // Za PASSWORD - HIDDEN/VISIBLE //
-  // handlePasswordChange = e => {
-  //   this.setState({ password: e.target.value });
-  //   console.log(this.state.password);
-  // };
 
   toggleShow = e => {
     e.preventDefault();
     this.setState({ hidden: !this.state.hidden });
   };
-
-  //   componentDidMount() {
-  //     if (this.state.password) {
-  //       this.setState({ password: this.state.password });
-  //     }
-  //   }
 
   render() {
     const { redirect } = this.state;
@@ -159,19 +142,9 @@ class ProLogin extends React.Component {
                 </p>
               </div>
               {/* </div> */}
-              {/* <Link
-                to="/products"
-                style={{ textDecoration: "none", color: "#fff" }}
-              > */}
-              {/* <button className="primary-button" onClick={this.logIn}>
-                <span style={{ margin: "0px", padding: "0px", color: "red" }}>
-                  {!this.state.exsUserData ? "SIGN IN" : this.state.exsUserData}
-                </span>
-              </button> */}
               <button className="signin-button" onClick={this.logIn}>
                 SIGN IN
               </button>
-              {/* </Link> */}
             </form>
           </div>
           <div className="additional-info">

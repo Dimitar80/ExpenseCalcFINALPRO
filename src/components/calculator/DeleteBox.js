@@ -16,26 +16,6 @@ class DeleteBox extends React.Component {
     };
   }
 
-  // getProducts = () => {
-  //   axios
-  //     .get(
-  //       "http://127.0.0.1:8082/api/v1/products/?sort=purchaseDate:desc" /*,
-  //     { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}}*/
-  //     )
-  //     .then(res => {
-  //       this.setState({ data: res.data /*, loading: false*/ });
-  //       // console.log(data);
-  //       console.log(res.data);
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // };
-
-  // componentDidMount() {   ???
-  //   this.getProducts()
-  // }
-
   // keyPressed(event) {
   //   if (event.key === "Enter") {
   //     // this.submitMessage()

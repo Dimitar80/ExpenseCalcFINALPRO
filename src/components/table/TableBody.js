@@ -21,6 +21,7 @@ const TableBody = props => {
           productPrice={product.productPrice}
           EdDel={props.showEdDel}
           del={props.delBtnOpen}
+          // sorti={props.sortS}
         />
       );
     });

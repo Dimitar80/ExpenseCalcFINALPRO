@@ -15,6 +15,7 @@ class TableAll extends React.Component {
       // showEditDelete: true,
       // loading: false,
       rowIdToDelete: null
+      // xmm: this.props.sortS
       // show: true
     };
   }
@@ -47,10 +48,33 @@ class TableAll extends React.Component {
       });
   };
 
+  purcDates = () => {
+    if (
+      this.props.sortS == "purchaseDate:desc" ||
+      this.props.sortS == "purchaseDate:asc"
+    ) {
+      console.log("Pashe");
+    }
+  };
+
   render() {
     // console.log(this.props);
     // console.log(this.state.show + " - od kade ide ova true?");
     // console.log(this.props.data);
+
+    console.log(this.props.sortS);
+    if (this.props.sortS == "productPrice:asc") {
+      console.log("seleceted pP:asc");
+    }
+    if (this.props.sortS == "productPrice:desc") {
+      console.log("seleceted pP:desc");
+    }
+    if (this.props.sortS == "pupchaseDate:asc") {
+      console.log("seleceted pD:asc");
+    }
+    if (this.props.sortS == "pupchaseDate:desc") {
+      console.log("seleceted pD:desc");
+    }
 
     return (
       // this.state.udata.length > 0 ?
@@ -62,7 +86,14 @@ class TableAll extends React.Component {
               <th>Product Name</th>
               <th>Product Type</th>
               <th>Product Description</th>
-              <th>Purchase Date</th>
+
+              {this.props.sortS == "purchaseDate:desc" ||
+              this.props.sortS == "purchaseDate:asc" ? (
+                <th style={{ backgroundColor: "green" }}>Purchase Date</th>
+              ) : (
+                <th style={{ backgroundColor: "orange" }}>Purchase Date</th>
+              )}
+
               <th>Product Price</th>
               {this.props.showEdDel ? <th>Edit / Delete</th> : <th></th>}
             </tr>
@@ -82,7 +113,6 @@ class TableAll extends React.Component {
         {/* </div> */}
       </React.Fragment>
       // : <h2>Loading data...</h2>
-      /*: <h2>Loading data...</h2>*/
       /*: <h2>Loading data...</h2>*/
       /*: <h2>Loading data...</h2>*/
       /*: <h2>Loading data...</h2>*/

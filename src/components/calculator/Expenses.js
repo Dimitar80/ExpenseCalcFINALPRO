@@ -33,7 +33,7 @@ class Expenses extends React.Component {
     ///// Kako resenie e OK No da ne e suvisen povikov ???/////
     this.getProductsInExp();
     document.getElementById("mySelectYears").selectedIndex = "0";
-    // document.getElementById("mySelectMonths").selectedIndex = "0"; //invoke.guardedCallBack ???///
+    document.getElementById("mySelectMonths").selectedIndex = "0"; //invoke.guardedCallBack ???///
   };
 
   showYearlyBtn = (/*e*/) => {
