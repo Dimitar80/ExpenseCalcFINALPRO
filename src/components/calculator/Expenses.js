@@ -33,7 +33,7 @@ class Expenses extends React.Component {
     ///// Kako resenie e OK No da ne e suvisen povikov ???/////
     this.getProductsInExp();
     document.getElementById("mySelectYears").selectedIndex = "0";
-    document.getElementById("mySelectMonths").selectedIndex = "0"; //invoke.guardedCallBack ???///
+    // document.getElementById("mySelectMonths").selectedIndex = "0";s //invoke.guardedCallBack ???///
   };
 
   showYearlyBtn = (/*e*/) => {
@@ -190,7 +190,8 @@ class Expenses extends React.Component {
         // onlyYear: null
       });
       // Za Godina START//
-    } else if (
+    }
+    if (
       this.state.showYearly === true &&
       this.state.showMonthly === false &&
       this.state.toggle === true &&
@@ -233,7 +234,6 @@ class Expenses extends React.Component {
       this.state.toggle === false &&
       this.state.selected === true &&
       selectedMonth != null &&
-      selectedMonth != "..." &&
       selectedMonth != "Months" &&
       selectedYear != null &&
       selectedYear != "Years"
@@ -266,6 +266,41 @@ class Expenses extends React.Component {
         // selectedMonth: null,
         // selectedYear: null
       });
+    } else if (
+      this.state.showYearly === false &&
+      this.state.showMonthly === true &&
+      this.state.toggle === false &&
+      this.state.selected === true &&
+      selectedMonth == null &&
+      selectedMonth == "Months" &&
+      onlyYear != null &&
+      onlyYear != "Years"
+      // selectedYear != null &&
+      // selectedYear != "Years"
+    ) {
+      this.setState({ loading: true });
+      axios
+        .get(
+          `http://127.0.0.1:8082/api/v1/products/?purcdate_from=
+          ${fromYear}&purcdate_to=${toYear}&sort=purchaseDate:desc`,
+          {
+            headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` }
+          }
+        )
+        .then(res => {
+          console.log("In TIMEOUT");
+          this.setState({ data: res.data, loading: false });
+          console.log(this.res.data);
+        })
+        .catch(err => {
+          this.setState({ loading: false });
+          console.log(err, "ERROR on Yarly at Expenses component");
+        });
+      this.setState({
+        selected: false,
+        onlyYear: null
+      });
+      // Za Godina END//
     }
     // else if (
     //   this.state.showYearly === false &&

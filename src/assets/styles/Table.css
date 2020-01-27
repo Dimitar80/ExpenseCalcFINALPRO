@@ -18,6 +18,13 @@
   text-align: start;
 }
 
+.desc {
+  background-color: chartreuse;
+}
+.asc {
+  background-color: crimson;
+}
+
 tbody:before {
   /* ZA DA IMA MALCE PROSTOR MEGJU THEAD I TBODY DODAVA EDEN PRAZEN CELL*/
   content: "@";

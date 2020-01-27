@@ -17,7 +17,9 @@ class ProductsNew extends React.Component {
       sort: "",
       didUpd: false,
       loading: false,
-      povik: null
+      povik: null,
+      id: false
+      // id: ""
     };
   }
 
@@ -37,8 +39,9 @@ class ProductsNew extends React.Component {
   SortProductsBy = event => {
     this.setState({
       sort: event.target.value,
-      didUpd: true
-      // povik: this.getSortedProducts()
+      didUpd: true,
+      // id: event.target.id
+      id: true
     });
     // this.getSortedProducts();
     // console.log(event);
@@ -134,14 +137,9 @@ class ProductsNew extends React.Component {
     const NavbarSur = this.props.component;
     console.log(this.state.data);
 
-    // const sorts = this.state.sort;
-    // console.log(sorts);
-    // if (
-    //   this.state.sort == "purchaseDate:desc" ||
-    //   this.state.sort == "purchaseDate:asc"
-    // ) {
-    //   console.log("Rabote na Purchase Date");
-    // }
+    const sorts = this.state.sort;
+    console.log(sorts);
+
     return (
       <React.Fragment>
         {/* <Navbar /> */}
@@ -157,10 +155,18 @@ class ProductsNew extends React.Component {
               <div id="filter">
                 <h2>Sort by:</h2>
                 <select onChange={this.SortProductsBy}>
-                  <option value="purchaseDate:desc">Latest Purchase</option>
-                  <option value="purchaseDate:asc">First Purchase</option>
-                  <option value="productPrice:desc">Highest Price</option>
-                  <option value="productPrice:asc">Lowest Price</option>
+                  <option id="Lp" value="purchaseDate:desc">
+                    Latest Purchase
+                  </option>
+                  <option id="Fp" value="purchaseDate:asc">
+                    First Purchase
+                  </option>
+                  <option id="Hp" value="productPrice:desc">
+                    Highest Price
+                  </option>
+                  <option id="Lp" value="productPrice:asc">
+                    Lowest Price
+                  </option>
                 </select>
               </div>
             </div>
@@ -169,6 +175,7 @@ class ProductsNew extends React.Component {
               showEdDel={this.state.showEditDeleteBtns}
               fgetProducts={this.getProducts}
               sortS={this.state.sort}
+              _id={this.state.id}
             />
           </div>
           <div id="mainonebtn">
