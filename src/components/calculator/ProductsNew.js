@@ -23,30 +23,30 @@ class ProductsNew extends React.Component {
     };
   }
 
+  SortProductsBy = event => {
+    let that = this;
+    this.setState(
+      {
+        sort: event.target.value
+      },
+      () => {
+        console.log("SortProductsBy CB");
+        that.getSortedProducts();
+      }
+    );
+  };
+
   // SortProductsBy = event => {
   //   this.setState({
-  //     sort: event.target.value
-  //     // didUpd: true
-  //   }),
-  //     () => {
-  //       if (this.state.sort !== null) {
-  //         this.getSortedProducts();
-  //       }
-  //     }; // console.log(event);
+  //     sort: event.target.value,
+  //     didUpd: true,
+  //     // id: event.target.id
+  //     id: true
+  //   });
+  //   // this.getSortedProducts();
+  //   // console.log(event);
   //   console.log("event target Value", event.target.value);
   // };
-
-  SortProductsBy = event => {
-    this.setState({
-      sort: event.target.value,
-      didUpd: true,
-      // id: event.target.id
-      id: true
-    });
-    // this.getSortedProducts();
-    // console.log(event);
-    console.log("event target Value", event.target.value);
-  };
 
   getProducts = () => {
     this.setState({ loading: true });
@@ -72,40 +72,39 @@ class ProductsNew extends React.Component {
   componentDidMount() {
     console.log("Table data did mount");
     this.getProducts();
-    // this.getSortedProducts();
     console.log(this.state.data);
     console.log(this.state.sort);
   }
 
   getSortedProducts = () => {
-    if (this.state.didUpd === true && this.state.sort !== "") {
-      axios
-        .get(`http://127.0.0.1:8082/api/v1/products/?sort=${this.state.sort}`, {
-          headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` }
-        })
-        .then(res => {
-          // console.log(data);
-          console.log("Data: ", res.data);
-          this.setState({ data: res.data /*loading: false*/ });
-        })
-        .catch(err => {
-          // this.setState({ loading: false });
-          console.log(err, "ERROR at Products component");
-        });
-      this.setState({
-        didUpd: false,
-        // sort: null
-        sort: ""
+    // if (this.state.didUpd === true && this.state.sort !== "") {
+    axios
+      .get(`http://127.0.0.1:8082/api/v1/products/?sort=${this.state.sort}`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` }
+      })
+      .then(res => {
+        // console.log(data);
+        console.log("Data: ", res.data);
+        this.setState({ data: res.data /*loading: false*/ });
+      })
+      .catch(err => {
+        // this.setState({ loading: false });
+        console.log(err, "ERROR at Products component");
       });
-    }
+    //   this.setState({
+    //     didUpd: false,
+    //     // sort: null
+    //     sort: ""
+    //   });
+    // }
   };
 
-  componentDidUpdate() {
-    console.log("Table data did mount");
-    this.getSortedProducts();
-    // console.log(this.state.data);
-    // console.log(this.state.sort);
-  }
+  // componentDidUpdate() {
+  //   console.log("Table data did mount");
+  //   this.getSortedProducts();
+  //   // console.log(this.state.data);
+  //   // console.log(this.state.sort);
+  // }
 
   // componentDidUpdate() {
   //   console.log("Get products", this.state.sort);

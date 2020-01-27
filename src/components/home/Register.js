@@ -27,7 +27,7 @@ class Register extends React.Component {
     console.log(event.target.id);
     console.log(event.target.value);
   };
-
+  // Proverka za Register za Mailot(@...) i za passwordot... i davanje poraka za ako nesto missing!!!?)
   createUser = event => {
     if (
       this.state.first_name === null ||
