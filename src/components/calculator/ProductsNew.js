@@ -38,12 +38,12 @@ class ProductsNew extends React.Component {
 
   // SortProductsBy = event => {
   //   this.setState({
-  //     sort: event.target.value,
-  //     didUpd: true,
+  //     sort: event.target.value
+  //     // didUpd: true,
   //     // id: event.target.id
-  //     id: true
+  //     // id: true
   //   });
-  //   // this.getSortedProducts();
+  //   this.getSortedProducts();
   //   // console.log(event);
   //   console.log("event target Value", event.target.value);
   // };
@@ -72,12 +72,12 @@ class ProductsNew extends React.Component {
   componentDidMount() {
     console.log("Table data did mount");
     this.getProducts();
-    console.log(this.state.data);
-    console.log(this.state.sort);
+    // console.log(this.state.data);
+    // console.log(this.state.sort);
   }
 
   getSortedProducts = () => {
-    // if (this.state.didUpd === true && this.state.sort !== "") {
+    this.setState({ loading: true });
     axios
       .get(`http://127.0.0.1:8082/api/v1/products/?sort=${this.state.sort}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` }
@@ -85,51 +85,13 @@ class ProductsNew extends React.Component {
       .then(res => {
         // console.log(data);
         console.log("Data: ", res.data);
-        this.setState({ data: res.data /*loading: false*/ });
+        this.setState({ data: res.data, loading: false });
       })
       .catch(err => {
-        // this.setState({ loading: false });
+        this.setState({ loading: false });
         console.log(err, "ERROR at Products component");
       });
-    //   this.setState({
-    //     didUpd: false,
-    //     // sort: null
-    //     sort: ""
-    //   });
-    // }
   };
-
-  // componentDidUpdate() {
-  //   console.log("Table data did mount");
-  //   this.getSortedProducts();
-  //   // console.log(this.state.data);
-  //   // console.log(this.state.sort);
-  // }
-
-  // componentDidUpdate() {
-  //   console.log("Get products", this.state.sort);
-  //   // this.setState({ loading: true });
-  //   // if (this.state.didUpd === true && this.state.sort != null) {
-  //   //   axios
-  //   //     .get(`http://127.0.0.1:8082/api/v1/products/?sort=${this.state.sort}`, {
-  //   //       headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` }
-  //   //     })
-  //   //     .then(res => {
-  //   //       // console.log(data);
-  //   //       console.log("Data: ", res.data);
-  //   //       this.setState({ data: res.data /*loading: false*/ });
-  //   //     })
-  //   //     .catch(err => {
-  //   //       // this.setState({ loading: false });
-  //   //       console.log(err, "ERROR at Products component");
-  //   //     });
-  //   //   this.setState({
-  //   //     didUpd: false,
-  //   //     sort: null
-  //   //   });
-  //   // }
-  //   this.getSortedProducts();
-  // }
 
   render() {
     console.log("Component in render");
@@ -141,11 +103,9 @@ class ProductsNew extends React.Component {
 
     return (
       <React.Fragment>
-        {/* <Navbar /> */}
         <NavbarSur toggle={false} />
         <div id="products">
           {/* PORTAL */}
-          {/* HEADER */}
           <div className="prmain-container">
             <div id="pmaintitle">
               <div className="tit">
@@ -170,6 +130,7 @@ class ProductsNew extends React.Component {
               </div>
             </div>
             <TableAll
+              dataLoading={this.state.loading}
               data={this.state.data}
               showEdDel={this.state.showEditDeleteBtns}
               fgetProducts={this.getProducts}

@@ -4,74 +4,24 @@ import "../../assets/styles/Expenses.css";
 import "../../assets/styles/shared.css";
 import TableAll from "../table/TableAll";
 
-// const exbody = document.getElementsByTagName('body')
-// document.body.style.backgroundColor = 'red';
-
 class Expenses extends React.Component {
   constructor() {
     super();
     this.state = {
-      showMonthly: true,
-      showYearly: false,
-      // toggle: false,
+      toggle: false,
       data: [],
-      yearValue: null,
-      monthValue: null,
+      yearValue: "Years",
+      monthValue: "Months",
+      // yearValueM: null,
       selected: false,
-      loading: false
+      loading: false,
+      value: "",
+      m: "",
+      y: ""
     };
   }
 
-  showMonthlyBtn = (/*e*/) => {
-    // alert("Monthly WORKS!")
-    this.setState({
-      showYearly: false,
-      showMonthly: true,
-      toggle: false,
-      yearValue: null //???//
-    });
-    ///// Kako resenie e OK No da ne e suvisen povikov ???/////
-    this.getProductsInExp();
-    document.getElementById("mySelectYears").selectedIndex = "0";
-    // document.getElementById("mySelectMonths").selectedIndex = "0";s //invoke.guardedCallBack ???///
-  };
-
-  showYearlyBtn = (/*e*/) => {
-    // console.log(e.target)
-    // alert("Yearly WORKS!")
-    ///// Kako resenie e OK No da ne e suvisen povikov ???/////
-    this.getProductsInExp();
-    document.getElementById("mySelectYears").selectedIndex = "0";
-    ///// I da go vrati option- value={"Years"}
-    this.setState({
-      showYearly: true,
-      showMonthly: false,
-      toggle: true
-    });
-  };
-
-  // ZA FILTER PO GODINA I MESEC //
-  selectYValue = e => {
-    console.log("YEAR VALUE IS SELECTED");
-    this.setState({
-      yearValue: e.target.value,
-      selected: true
-    });
-    console.log(e.target.value);
-  };
-
-  // Za Mesec //
-  selectMValue = e => {
-    console.log("MONTH VALUE IS SELECTED");
-    this.setState({
-      monthValue: e.target.value,
-      selected: true
-    });
-    console.log(e.target.value);
-  };
-
-  getProductsInExp = () => {
-    // console.log("getPoductsInExp");
+  getAllProductsInExp = () => {
     this.setState({ loading: true });
     // const url = this.formatUrl();
     axios
@@ -79,7 +29,6 @@ class Expenses extends React.Component {
         headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` }
       })
       .then(res => {
-        // console.log("getProductsInExp-Data: ", res.data);
         this.setState({
           data: res.data,
           loading: false /*yearValue: "Years"*/
@@ -91,119 +40,59 @@ class Expenses extends React.Component {
       });
   };
 
-  //Boko//
-  // formatUrl = () => {
-  //   const base =
-  //     "http://127.0.0.1:8082/api/v1/products/?sort=purchaseDate:desc";
-  //   // Formatiraj gi vo timestamp
-  //   if (this.state.yearValue && this.state.monthValue) {
-  //     url = base + `&purcdate_from=${dateFrom}&purcdate_to=${dateTo}`;
-  //     return url;
-  //   }
-  //   return base;
-  // };
-  //Boko//
-
   componentDidMount() {
     console.log("Expenses did mount");
-    this.getProductsInExp();
+    this.getAllProductsInExp();
   }
 
-  // Za Godina i Godina so Mesec//
-  componentDidUpdate() {
-    // Za Godina //
+  showYearlyBtn = e => {
+    ///// Kako resenie e OK No da ne e suvisen povikov ???/////
+    // const index = selYears.findIndex(o => o.value === this.state.yearValue);
+    // console.log(index);
+    this.getAllProductsInExp();
+    // document.getElementById("mySelectYears").selectedIndex = "0"; /// NAJDI ZA VO REACT ??? ///
+    ///// I da go vrati option- value={"Years"}
+    this.setState({
+      toggle: true,
+      // value:
+      yearValue: "Years"
+    });
+  };
+
+  // ZA FILTER PO GODINA VO GODINI //
+  // onChange //
+  selectYValue = e => {
+    console.log("YEAR VALUE IS SELECTED");
+    let that = this;
+    this.setState(
+      {
+        yearValue: e.target.value
+      },
+      () => {
+        console.log("SortProductsBy CB");
+        that.filterByYear();
+      }
+    );
+    console.log(e.target.value);
+  };
+
+  filterByYear = () => {
     let onlyYear = this.state.yearValue;
     console.log("onlyYear at Years is SELECTED -", onlyYear);
     let fromYear = new Date(`${onlyYear}-01-01 00:00:00.000`).getTime();
     console.log("Choose Year - dateFrom", fromYear); //Mon Jan 01 2001 00:00:00 default//
-    // let dateTo = `${onlyYear}-12-31T23:59:59.000Z`
     let toYear = new Date(`${onlyYear}-12-31 23:59:59.000`).getTime();
     console.log("Choose Year - dateToOO", toYear); //Mon Dec 31 2001 23:59:59 default//
-
-    // Za Mesec so Godina//
-    let selectedMonth = Number(this.state.monthValue);
-    console.log("SelectedMonth at Months is SELECTED -", selectedMonth);
-    console.log("SelectedMonth + 1 at Months-", selectedMonth + 1);
-
-    let selectedYear = this.state.yearValue;
-    console.log("SelectedYear at Months", selectedYear);
-
-    let dateFromYM = new Date(
-      `${selectedYear}-${selectedMonth} 00:00:00.000`
-      // `${selectedYear}-${selectedMonth}-01 00:00:00.000`
-    ).getTime();
-    console.log("dateFromYM", dateFromYM); // Sat Jan 01 2000 00:00:00?//
-    let dateToYM = new Date(
-      `${selectedYear}-${selectedMonth + 1} 00:00:00.000`
-      // `${selectedYear}-${selectedMonth + 1}-01 00:00:00.000`
-    ).getTime();
-    console.log("dateToYM", dateToYM); //Mon Jan 01 2001 00:00:00//
-
-    // let dateToYM = new Date(
-    //   `${selectedYear+1}-${selectedMonth + 1} 00:00:00.000`
-    //   // `${selectedYear}-${selectedMonth + 1}-01 00:00:00.000`
-    // ).getTime();
-
-    // Let dateFromYMdec = new Date(``)
-
-    // console.log("Component did update", onlyYear);
-
-    // Za Mesec vo SITE Godini//
-    // let selectedMonth = Number(this.state.monthValue);
-    // console.log("SelectedMonth at Months is SELECTED -", selectedMonth);
-    // console.log("SelectedMonth + 1 at Months-", selectedMonth + 1);
-
-    // const dbData = this.state.data;
-    // // console.log(dbData);
-    // let dbYears = [];
-    // // let dbYears = null;
-    // for (let p = 0; p < dbData.length; p++) {
-    //   dbYears.push(Number(dbData[p].purchaseDate.slice(0, 4)));
-    //   // dbYears = dbData[p].purchaseDate.slice(0, 10);
-    //   // dbYears = dbData[p].purchaseDate.slice(0, 4);
-    //   // dbYears = dbData[p].purchaseDate;
-    //   // console.log(dbYears);
-    // }
-    // console.log(dbYears);
-
-    // // let allYears = this.state.yearValue;
-    // let allYears = dbYears;
-    // console.log("allYears at Months", allYears);
-
-    // let monthFromInAllY = new Date(
-    //   `1998-${selectedMonth} 00:00:00.000`
-    //   // `${allYears}-${selectedMonth} 00:00:00.000`
-    //   // `${allYears}-${selectedMonth}-01 00:00:00.000`
-    // ).getTime();
-    // console.log("monthFromInAllY", monthFromInAllY); // Sat Jan 01 2000 00:00:00?//
-    // let monthToInAllY = new Date(
-    //   `2020-${selectedMonth + 1} 00:00:00.000`
-    //   // `${allYears}-${selectedMonth + 1} 00:00:00.000`
-    //   // `${allYears}-${selectedMonth + 1}-01 00:00:00.000`
-    // ).getTime();
-    // console.log("monthToInAllY", monthToInAllY); //Mon Jan 01 2001 00:00:00//
-
-    if (this.state.selected === true && onlyYear === "Years") {
-      this.getProductsInExp();
-      this.setState({
-        selected: false
-        // onlyYear: null
-      });
-      // Za Godina START//
-    }
-    if (
-      this.state.showYearly === true &&
-      this.state.showMonthly === false &&
+    if (onlyYear === "Years") {
+      this.getAllProductsInExp();
+      // this.setState({
+      //   onlyYear: null
+      // });
+    } else if (
       this.state.toggle === true &&
-      this.state.selected === true &&
       onlyYear != null &&
       onlyYear != "Years"
     ) {
-      console.log(
-        "Filter in component did mount",
-        "Selected Year at Yearly" + onlyYear,
-        this.state.selected
-      );
       this.setState({ loading: true });
       axios
         .get(
@@ -222,29 +111,99 @@ class Expenses extends React.Component {
           this.setState({ loading: false });
           console.log(err, "ERROR on Yarly at Expenses component");
         });
-      this.setState({
-        selected: false,
-        onlyYear: null
-      });
-      // Za Godina END//
+      // this.setState({
+      //   /*selected: false,*/
+      //   onlyYear: null
+      // });
     }
-    if (
-      this.state.showYearly === false &&
-      this.state.showMonthly === true &&
-      this.state.toggle === false &&
-      this.state.selected === true &&
-      selectedMonth != null &&
-      selectedMonth != "Months" &&
-      selectedYear != null &&
-      selectedYear != "Years"
-    ) {
-      // console.log(
-      //   "Filter in component did mount",
-      //   "Selected Month" + selectedMonth,
-      //   "Selected Year at Monthly" + selectedYear,
-      //   this.state.selected
-      // );
+  };
+
+  showMonthlyBtn = (/*e*/) => {
+    ///// Kako resenie e OK No da ne e suvisen povikov ???/////
+    this.getAllProductsInExp();
+    // document.getElementById("mySelectYears").selectedIndex = "0";
+    // document.getElementById("mySelectMonths").selectedIndex = "0"; //invoke.guardedCallBack ???///
+    this.setState({
+      toggle: false,
+      yearValue: "Years",
+      monthValue: "Months"
+    });
+  };
+
+  // Za Mesec, Mesec i Godina//
+  // onChange //
+  selectMValue = (e, isMonth) => {
+    console.log("MONTH VALUE IS SELECTED");
+    let that = this;
+    // let target = event.target.id;
+    // let value = target.value;
+    let inputId = event.target.id;
+    // console.log(inputId);
+    let value = event.target.value;
+    if (isMonth) {
+      this.setState(
+        {
+          monthValue: e.target.value
+        },
+        () => {
+          console.log("SortProductsBy CB");
+          // console.log(target);
+          // console.log(value);
+          // console.log(inputId);
+          // console.log(value);
+          console.log(event.target.id, event.target.value);
+          that.filterByMonthYear();
+        }
+      );
+    } else {
+      this.setState(
+        {
+          // [inputId]: value
+          // target,
+          // value
+          yearValue: e.target.value
+          // [event.target.id]: event.target.value
+          // m: e.target.value
+        },
+        () => {
+          console.log("SortProductsBy CB");
+          // console.log(target);
+          // console.log(value);
+          // console.log(inputId);
+          // console.log(value);
+          console.log(event.target.id, event.target.value);
+          that.filterByMonthYear();
+        }
+      );
+    }
+
+    console.log(e.target.value);
+  };
+
+  filterByMonthYear = () => {
+    // let selectedMonth = Number(this.state.monthValue);
+
+    let selectedMonth = Number(this.state.monthValue);
+    console.log("SelectedMonth at Months is SELECTED -", selectedMonth);
+    console.log("SelectedMonth + 1 at Months-", selectedMonth + 1);
+
+    let selectedYear = this.state.yearValue;
+    // let selectedYear = this.state.value;
+    console.log("SelectedYear at Months", selectedYear);
+
+    let dateFromYM = new Date(
+      `${selectedYear}-${selectedMonth} 00:00:00.000`
+      // `${selectedYear}-${selectedMonth}-01 00:00:00.000`
+    ).getTime();
+    console.log("dateFromYM", dateFromYM); // Sat Jan 01 2000 00:00:00?//
+    let dateToYM = new Date(
+      `${selectedYear}-${selectedMonth + 1} 00:00:00.000`
+      // `${selectedYear}-${selectedMonth + 1}-01 00:00:00.000`
+    ).getTime();
+    console.log("dateToYM", dateToYM); //Mon Jan 01 2001 00:00:00//
+    if (this.state.toggle === false) {
       this.setState({ loading: true });
+      console.log("Getting data");
       axios
         .get(
           `http://127.0.0.1:8082/api/v1/products/?purcdate_from=
@@ -261,83 +220,8 @@ class Expenses extends React.Component {
           this.setState({ loading: false });
           console.log(err, "ERROR at Expenses component");
         });
-      this.setState({
-        selected: false
-        // selectedMonth: null,
-        // selectedYear: null
-      });
-    } else if (
-      this.state.showYearly === false &&
-      this.state.showMonthly === true &&
-      this.state.toggle === false &&
-      this.state.selected === true &&
-      selectedMonth == null &&
-      selectedMonth == "Months" &&
-      onlyYear != null &&
-      onlyYear != "Years"
-      // selectedYear != null &&
-      // selectedYear != "Years"
-    ) {
-      this.setState({ loading: true });
-      axios
-        .get(
-          `http://127.0.0.1:8082/api/v1/products/?purcdate_from=
-          ${fromYear}&purcdate_to=${toYear}&sort=purchaseDate:desc`,
-          {
-            headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` }
-          }
-        )
-        .then(res => {
-          console.log("In TIMEOUT");
-          this.setState({ data: res.data, loading: false });
-          console.log(this.res.data);
-        })
-        .catch(err => {
-          this.setState({ loading: false });
-          console.log(err, "ERROR on Yarly at Expenses component");
-        });
-      this.setState({
-        selected: false,
-        onlyYear: null
-      });
-      // Za Godina END//
     }
-    // else if (
-    //   this.state.showYearly === false &&
-    //   this.state.showMonthly === true &&
-    //   this.state.toggle === false &&
-    //   this.state.selected === true &&
-    //   selectedMonth != null &&
-    //   selectedMonth != "..." &&
-    //   selectedMonth != "Month" &&
-    //   selectedYear === null
-    //   /*selectedYear != null &&*/
-    //   // selectedYear === "Years"
-    // ) {
-    //   this.setState({ loading: true });
-    //   axios
-    //     .get(
-    //       `http://127.0.0.1:8082/api/v1/products/?purcdate_from=${monthFromInAllY}&purcdate_to=${monthToInAllY}&sort=purchaseDate:desc` /*,
-    //                 { headers: {"Authorization" : `Bearer ${localStorage.getItem('jwt')}`}}*/
-    //     )
-    //     .then(res => {
-    //       this.setState({ data: res.data, loading: false });
-    //       console.log(this.state.data);
-    //     })
-    //     .catch(err => {
-    //       this.setState({ loading: false });
-    //       console.log(err, "ERROR at Expenses component");
-    //     });
-    //   this.setState({
-    //     selected: false
-    //     // selectedMonth: null,
-    //     // selectedYear: null
-    //   });
-    // }
-    else {
-      ("Probaj NOVO RESENIE!!!");
-    }
-  }
+  };
 
   render() {
     // Za options na selectbox od Year
@@ -360,43 +244,15 @@ class Expenses extends React.Component {
     }
     selOptionsYear.reverse();
 
-    // MESEC VO GODINI //
-    // const dbData = this.state.data;
-    // // console.log(dbData);
-    // // let dbYears = [];
-    // let dbYears = null;
-    // let dbMonth = null;
-    // for (let p = 0; p < dbData.length; p++) {
-    //   // dbYears.push(dbData[p].purchaseDate);
-    //   // dbYears = dbData[p].purchaseDate.slice(0, 10);
-    //   // dbYears = dbData[p].purchaseDate.slice(0, 4);
-    //   dbYears = dbData[p].purchaseDate;
-    //   // console.log(dbYears.length);
-    //   // console.log(dbYears);
-    //   if (dbYears.slice(0, 4).length === 4) {
-    //     console.log(dbYears.slice(0, 4));
-    //   }
-
-    //   // // dbMonth = dbYears.slice(5, 7);
-    //   // dbMonth = Number(dbYears.slice(5, 7));
-    //   // // console.log(dbMonth);
-    //   // if (/*dbMonth === "01"*/ dbMonth === 1) {
-    //   //   // Gore so this.setState({})
-    //   //   console.log(dbYears);
-    //   //   // console.log(dbData[p].purchaseDate.slice(0, 10));
-    //   // }
-    //   if(selectedMonth === dbMonth){
-    //     axios.get.length...
-    //   }
-    // }
-    // console.log(dbYears);
-
-    // const currentYear = new Date().getFullYear();
-    // console.log(currentYear);
-    // const fromMonth = new Date(currentYear, 0);
-    // console.log(fromMonth);
-    // const toMonth = new Date(currentYear /*+ 10*/, 4);
-    // console.log(toMonth);
+    let selYears = [];
+    for (let i = 1998; i <= year; i++) {
+      selYears.push(i);
+    }
+    selYears.reverse();
+    // console.log(selYears);
+    selYears.unshift("Years");
+    // console.log(selYears);
+    // console.log(selYears[0]);
 
     // December + 1 = 13?! //
     // Za options na selectbox od Month
@@ -453,61 +309,60 @@ class Expenses extends React.Component {
                   YEARLY
                 </button>
               </div>
-              {/* BUTTONS - MONTHLY/YEARLY END*/}
-
-              {this.state.showMonthly ? (
+              {this.state.toggle ? (
+                <p /*id="select-box-container"*/ id="years">
+                  <h2>Choose Year</h2>
+                  <select
+                    /*name="expenses-filter" className="select-box"*/
+                    id="mySelectYears"
+                    className="ex-select"
+                    onChange={this.selectYValue}
+                    value={this.state.yearValue}
+                  >
+                    {selYears.map((year, i) => (
+                      // console.log("In Select", i, year),
+                      <option key={year} value={year}>
+                        {year}
+                      </option>
+                    ))}
+                  </select>
+                </p>
+              ) : (
                 <p /*id="select-box-container"*/ id="years">
                   <h2>Choose Month</h2>
                   <select
                     /*name="expenses-filter" className="select-box"*/
                     id="mySelectMonths"
                     className="ex-select"
-                    onChange={this.selectMValue}
+                    onChange={e => this.selectMValue(e, true)}
+                    value={this.state.monthValue}
                   >
                     {/* <option value={"Months"}>Months</option> */}
-                    {monthsList.map(
-                      (month, i) => (
-                        console.log(i, month),
-                        (
-                          <option key={month} value={i}>
-                            {month}
-                          </option>
-                        )
-                      )
-                    )}
+                    {monthsList.map((month, i) => (
+                      // console.log(i, month),
+                      <option key={month} value={i}>
+                        {month}
+                      </option>
+                    ))}
                   </select>
                   <h2>Choose Year</h2>
                   <select
                     /*name="expenses-filter" className="select-box"*/
                     id="mySelectYears"
                     className="ex-select"
-                    onChange={this.selectYValue}
+                    onChange={e => this.selectMValue(e, false)}
+                    value={this.state.yearValue}
                   >
-                    <option
-                      // id="yStart"
-                      value={"Years"} /*onClick={this.onYears}*/
-                    >
-                      Years
-                    </option>
-                    {selOptionsYear}
+                    {selYears.map((year, i) => (
+                      // console.log(i, year),
+                      <option key={year} value={year}>
+                        {year}
+                      </option>
+                    ))}
                   </select>
                 </p>
-              ) : null}
-
-              {this.state.showYearly ? (
-                <p /*id="select-box-container"*/ id="years">
-                  <h2>Choose Year</h2>
-                  <select
-                    /*name="expenses-filter" className="select-box"*/
-                    id="mySelectYears"
-                    className="ex-select"
-                    onChange={this.selectYValue}
-                  >
-                    <option /*id="yStart"*/ value={"Years"}>Years</option>
-                    {selOptionsYear}
-                  </select>
-                </p>
-              ) : null}
+              )}
+              {/* ON YEARLY SECTION-END */}
             </div>
             <TableAll dataLoading={this.state.loading} data={this.state.data} />
           </div>

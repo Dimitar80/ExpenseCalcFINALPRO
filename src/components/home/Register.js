@@ -24,8 +24,8 @@ class Register extends React.Component {
 
   saveUserData = event => {
     this.setState({ [event.target.id]: event.target.value });
-    console.log(event.target.id);
-    console.log(event.target.value);
+    // console.log("event.target.id", event.target.id);
+    // console.log("event.target.value", event.target.value);
   };
   // Proverka za Register za Mailot(@...) i za passwordot... i davanje poraka za ako nesto missing!!!?)
   createUser = event => {
@@ -75,8 +75,6 @@ class Register extends React.Component {
               localStorage.setItem("email", res.data.email);
               localStorage.setItem("firstName", res.data.first_name);
               localStorage.setItem("lastName", res.data.last_name);
-              // localStorage.setItem("firstName", this.state.first_name);
-              // localStorage.setItem("lastName", this.state.last_name);
               this.setState({ redirect: true });
               alert("Registration form is successfully created");
               // this.props.history.push('/products') ???//
@@ -101,7 +99,7 @@ class Register extends React.Component {
     if (redirect) {
       return <Redirect to="/" />;
     }
-    // console.log(Number(this.state.date_of_birth));
+
     return (
       <React.Fragment>
         <div id="register">
