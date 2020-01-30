@@ -116,7 +116,6 @@ class ProLogin extends React.Component {
                 <p className="input-container">
                   <label className="text-label">Password</label>
                   <input
-                    //   type="password"
                     type={this.state.hidden ? "password" : "text"}
                     className="text-input"
                     id="password"
@@ -134,7 +133,6 @@ class ProLogin extends React.Component {
                     style={{ color: "#c6c6c6" }}
                     onClick={this.toggleShow}
                   ></i>
-                  {/* <button onClick={this.toggleShow}>Show/Hide</button> */}
                 </p>
                 <p className="input-msg" id="alert-msg">
                   {this.state.exsUserData}

@@ -41,6 +41,7 @@
 
 #boxtext {
   display: flex;
+  /* width: 330px; */
   flex-direction: column;
   padding-bottom: 20px;
 }
@@ -60,7 +61,7 @@
   display: flex;
   align-items: center;
   margin-left: auto;
-  margin-right: 60px;
+  margin-right: 56px;
   box-sizing: border-box;
   padding-bottom: 20px;
 }

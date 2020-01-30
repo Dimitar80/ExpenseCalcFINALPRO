@@ -64,7 +64,6 @@ class NewProduct extends React.Component {
         .catch(err => {
           console.log(err);
         });
-      // store.dispatch(didUpdate(true))
     }
   };
 

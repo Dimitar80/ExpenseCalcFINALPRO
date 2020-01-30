@@ -12,12 +12,8 @@ class Expenses extends React.Component {
       data: [],
       yearValue: "Years",
       monthValue: "Months",
-      // yearValueM: null,
-      selected: false,
       loading: false,
-      value: "",
-      m: "",
-      y: ""
+      value: ""
     };
   }
 
@@ -31,7 +27,7 @@ class Expenses extends React.Component {
       .then(res => {
         this.setState({
           data: res.data,
-          loading: false /*yearValue: "Years"*/
+          loading: false
         });
       })
       .catch(err => {
@@ -46,15 +42,9 @@ class Expenses extends React.Component {
   }
 
   showYearlyBtn = e => {
-    ///// Kako resenie e OK No da ne e suvisen povikov ???/////
-    // const index = selYears.findIndex(o => o.value === this.state.yearValue);
-    // console.log(index);
     this.getAllProductsInExp();
-    // document.getElementById("mySelectYears").selectedIndex = "0"; /// NAJDI ZA VO REACT ??? ///
-    ///// I da go vrati option- value={"Years"}
     this.setState({
       toggle: true,
-      // value:
       yearValue: "Years"
     });
   };
@@ -85,12 +75,9 @@ class Expenses extends React.Component {
     console.log("Choose Year - dateToOO", toYear); //Mon Dec 31 2001 23:59:59 default//
     if (onlyYear === "Years") {
       this.getAllProductsInExp();
-      // this.setState({
-      //   onlyYear: null
-      // });
     } else if (
       this.state.toggle === true &&
-      onlyYear != null &&
+      onlyYear != "" &&
       onlyYear != "Years"
     ) {
       this.setState({ loading: true });
@@ -111,18 +98,11 @@ class Expenses extends React.Component {
           this.setState({ loading: false });
           console.log(err, "ERROR on Yarly at Expenses component");
         });
-      // this.setState({
-      //   /*selected: false,*/
-      //   onlyYear: null
-      // });
     }
   };
 
   showMonthlyBtn = (/*e*/) => {
-    ///// Kako resenie e OK No da ne e suvisen povikov ???/////
     this.getAllProductsInExp();
-    // document.getElementById("mySelectYears").selectedIndex = "0";
-    // document.getElementById("mySelectMonths").selectedIndex = "0"; //invoke.guardedCallBack ???///
     this.setState({
       toggle: false,
       yearValue: "Years",
@@ -135,11 +115,6 @@ class Expenses extends React.Component {
   selectMValue = (e, isMonth) => {
     console.log("MONTH VALUE IS SELECTED");
     let that = this;
-    // let target = event.target.id;
-    // let value = target.value;
-    let inputId = event.target.id;
-    // console.log(inputId);
-    let value = event.target.value;
     if (isMonth) {
       this.setState(
         {
@@ -147,48 +122,31 @@ class Expenses extends React.Component {
         },
         () => {
           console.log("SortProductsBy CB");
-          // console.log(target);
-          // console.log(value);
-          // console.log(inputId);
-          // console.log(value);
-          console.log(event.target.id, event.target.value);
-          that.filterByMonthYear();
+          that.filterByMonthAndYear();
         }
       );
+      console.log(e.target.value);
     } else {
       this.setState(
         {
-          // [inputId]: value
-          // target,
-          // value
           yearValue: e.target.value
-          // [event.target.id]: event.target.value
-          // m: e.target.value
         },
         () => {
           console.log("SortProductsBy CB");
-          // console.log(target);
-          // console.log(value);
-          // console.log(inputId);
-          // console.log(value);
-          console.log(event.target.id, event.target.value);
-          that.filterByMonthYear();
+          // console.log(event.target.id, event.target.value);
+          that.filterByMonthAndYear();
         }
       );
     }
-
     console.log(e.target.value);
   };
 
-  filterByMonthYear = () => {
-    // let selectedMonth = Number(this.state.monthValue);
-
+  filterByMonthAndYear = () => {
     let selectedMonth = Number(this.state.monthValue);
     console.log("SelectedMonth at Months is SELECTED -", selectedMonth);
     console.log("SelectedMonth + 1 at Months-", selectedMonth + 1);
 
     let selectedYear = this.state.yearValue;
-    // let selectedYear = this.state.value;
     console.log("SelectedYear at Months", selectedYear);
 
     let dateFromYM = new Date(
@@ -201,7 +159,28 @@ class Expenses extends React.Component {
       // `${selectedYear}-${selectedMonth + 1}-01 00:00:00.000`
     ).getTime();
     console.log("dateToYM", dateToYM); //Mon Jan 01 2001 00:00:00//
-    if (this.state.toggle === false) {
+
+    if (selectedMonth === 0) {
+      console.log(selectedMonth, " 0 index of month is selected");
+      this.setState({ monthValue: "Months" });
+      console.log(this.state.monthValue);
+    } else if (
+      selectedMonth !== 0 &&
+      this.state.monthValue != "Months" &&
+      this.state.yearValue === "Years"
+    ) {
+      alert("Please select year too, to complete the request");
+    } else if (
+      this.state.yearValue === "Years" /*&& selectedMonth === "Months"*/
+    ) {
+      this.getAllProductsInExp();
+    } else if (
+      this.state.toggle === false &&
+      this.state.monthValue !== 0 &&
+      this.state.monthValue != "Months" &&
+      this.state.yearValue !== 0 &&
+      this.state.yearValue != "Years"
+    ) {
       this.setState({ loading: true });
       console.log("Getting data");
       axios
@@ -220,10 +199,41 @@ class Expenses extends React.Component {
           this.setState({ loading: false });
           console.log(err, "ERROR at Expenses component");
         });
+    } else if (
+      this.state.toggle === false &&
+      this.state.monthValue == "Months" &&
+      this.state.yearValue != "Years"
+      // this.state.monthValue === "0"
+    ) {
+      // let selectedYear = this.state.yearValue;
+      let OnlyfromYear = new Date(
+        `${selectedYear}-01-01 00:00:00.000`
+      ).getTime();
+      let OnlytoYear = new Date(`${selectedYear}-12-31 23:59:59.000`).getTime();
+      this.setState({ loading: true });
+      axios
+        .get(
+          `http://127.0.0.1:8082/api/v1/products/?purcdate_from=
+          ${OnlyfromYear}&purcdate_to=${OnlytoYear}&sort=purchaseDate:desc`,
+          {
+            headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` }
+          }
+        )
+        .then(res => {
+          console.log("In TIMEOUT");
+          this.setState({ data: res.data, loading: false });
+          console.log(this.res.data);
+        })
+        .catch(err => {
+          this.setState({ loading: false });
+          console.log(err, "ERROR on Yarly at Expenses component");
+        });
     }
   };
 
   render() {
+    console.log(this.state.monthValue);
+    console.log(this.state.yearValue);
     // Za options na selectbox od Year
     // console.log("Loading: ", this.state.loading);
     let today = new Date();
@@ -288,7 +298,6 @@ class Expenses extends React.Component {
               <h1>Expenses</h1>
             </div>
             <div id="experiod">
-              {/* BUTTONS - MONTHLY/YEARLY START*/}
               <div className="ex-period-btns">
                 <button
                   type="button" /*id='btnmonth'*/
@@ -313,7 +322,7 @@ class Expenses extends React.Component {
                 <p /*id="select-box-container"*/ id="years">
                   <h2>Choose Year</h2>
                   <select
-                    /*name="expenses-filter" className="select-box"*/
+                    /*name="expenses-filter"*/
                     id="mySelectYears"
                     className="ex-select"
                     onChange={this.selectYValue}
@@ -337,7 +346,6 @@ class Expenses extends React.Component {
                     onChange={e => this.selectMValue(e, true)}
                     value={this.state.monthValue}
                   >
-                    {/* <option value={"Months"}>Months</option> */}
                     {monthsList.map((month, i) => (
                       // console.log(i, month),
                       <option key={month} value={i}>
@@ -362,7 +370,6 @@ class Expenses extends React.Component {
                   </select>
                 </p>
               )}
-              {/* ON YEARLY SECTION-END */}
             </div>
             <TableAll dataLoading={this.state.loading} data={this.state.data} />
           </div>

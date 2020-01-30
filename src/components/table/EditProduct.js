@@ -31,8 +31,8 @@ class EditProduct extends React.Component {
       .then(res => {
         const ep = res.data;
         console.log(ep);
-        setTimeout(() => this.setState({ edata: ep, loading: false }), 1000);
-        // this.setState({ edata: ep, loading: false });
+        // setTimeout(() => this.setState({ edata: ep, loading: false }), 1000);
+        this.setState({ edata: ep, loading: false });
         console.log("Existing generated _id - " + this.state.edata[0]._id);
       })
       .catch(error => {

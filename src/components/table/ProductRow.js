@@ -12,12 +12,6 @@ class ProductRow extends React.Component {
     };
   }
 
-  // delBoxOpen = id => {
-  //   this.setState({ show: true /*rowIdToDelete: id*/ });
-  //   console.log("ID: ", id);
-  //   console.log("delBoxOpen: " + this.state.show);
-  // };
-
   render() {
     // console.log(this.props.del);
     // console.log(this.props.productId);
