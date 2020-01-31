@@ -146,8 +146,41 @@ class Expenses extends React.Component {
     console.log("SelectedMonth at Months is SELECTED -", selectedMonth);
     console.log("SelectedMonth + 1 at Months-", selectedMonth + 1);
 
-    let selectedYear = this.state.yearValue;
+    // let selectedYear = this.state.yearValue;
+    let selectedYear = Number(this.state.yearValue);
     console.log("SelectedYear at Months", selectedYear);
+
+    let decCurrY = new Date(`${selectedYear}-12-01 00:00:00.000`).getTime();
+    console.log("decCurrY", decCurrY);
+    let janNextY = new Date(`${selectedYear + 1}-01-01 00:00:00.000`).getTime();
+    console.log(janNextY);
+
+    if (selectedMonth === 12) {
+      console.log(
+        "Seleceted moth is December, please do some code",
+        dateFromYM
+      );
+      this.setState({ loading: true });
+      console.log("Getting data");
+      axios
+        .get(
+          `http://127.0.0.1:8082/api/v1/products/?purcdate_from=
+          ${decCurrY}&purcdate_to=${janNextY}&sort=purchaseDate:desc`,
+          {
+            headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` }
+          }
+        )
+        .then(res => {
+          this.setState({ data: res.data, loading: false });
+          console.log(this.state.data);
+        })
+        .catch(err => {
+          this.setState({ loading: false });
+          console.log(err, "ERROR at Expenses component");
+        });
+    } else {
+      console.log("Seleceted Month is not December");
+    }
 
     let dateFromYM = new Date(
       `${selectedYear}-${selectedMonth} 00:00:00.000`
@@ -162,8 +195,9 @@ class Expenses extends React.Component {
 
     if (selectedMonth === 0) {
       console.log(selectedMonth, " 0 index of month is selected");
-      this.setState({ monthValue: "Months" });
-      console.log(this.state.monthValue);
+      this.setState({ monthValue: "Months" }, () => {
+        console.log(this.state.monthValue);
+      });
     } else if (
       selectedMonth !== 0 &&
       this.state.monthValue != "Months" &&
@@ -203,6 +237,10 @@ class Expenses extends React.Component {
       this.state.toggle === false &&
       this.state.monthValue == "Months" &&
       this.state.yearValue != "Years"
+      // this.state.yearValue === selectedYear
+      // this.state.yearValue != null
+      // selectedYear
+      // this.state.yearValue != ""
       // this.state.monthValue === "0"
     ) {
       // let selectedYear = this.state.yearValue;
