@@ -10,6 +10,7 @@ class Expenses extends React.Component {
     this.state = {
       toggle: false,
       data: [],
+      unidata: [],
       yearValue: "Years",
       monthValue: "Months",
       loading: false,
@@ -25,10 +26,16 @@ class Expenses extends React.Component {
         headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` }
       })
       .then(res => {
-        this.setState({
-          data: res.data,
-          loading: false
-        });
+        this.setState(
+          {
+            unidata: res.data,
+            data: res.data,
+            loading: false
+          },
+          () => {
+            console.log(this.state.data);
+          }
+        );
       })
       .catch(err => {
         this.setState({ loading: false });
@@ -172,7 +179,7 @@ class Expenses extends React.Component {
         )
         .then(res => {
           this.setState({ data: res.data, loading: false });
-          console.log(this.state.data);
+          // console.log(this.state.data);
         })
         .catch(err => {
           this.setState({ loading: false });
@@ -280,18 +287,6 @@ class Expenses extends React.Component {
     // console.log(year);
     // let month = today.getMonth();
     // console.log(month);
-
-    let selOptionsYear = [];
-    for (let i = 1998; i <= year; i++) {
-      selOptionsYear.push(
-        <option key={i} value={i}>
-          {i}
-        </option>
-      );
-      // console.log(i);
-    }
-    selOptionsYear.reverse();
-
     let selYears = [];
     for (let i = 1998; i <= year; i++) {
       selYears.push(i);
@@ -299,10 +294,20 @@ class Expenses extends React.Component {
     selYears.reverse();
     // console.log(selYears);
     selYears.unshift("Years");
-    // console.log(selYears);
-    // console.log(selYears[0]);
 
-    // December + 1 = 13?! //
+    const userData = this.state.unidata;
+    const userYears = [];
+    if (userData.length > 0) {
+      for (let g = 0; g < userData.length; g++) {
+        userYears.push(userData[g].purchaseDate.slice(0, 4));
+        userYears.unshift("Years");
+      }
+    } else {
+      console.log("Loading... ");
+    }
+    const uniqueUserYears = [...new Set(userYears)];
+    // console.log(uniqueUserYears);
+
     // Za options na selectbox od Month
     let monthsList = [
       "Months",
@@ -366,7 +371,7 @@ class Expenses extends React.Component {
                     onChange={this.selectYValue}
                     value={this.state.yearValue}
                   >
-                    {selYears.map((year, i) => (
+                    {uniqueUserYears.map((year, i) => (
                       // console.log("In Select", i, year),
                       <option key={year} value={year}>
                         {year}
@@ -399,7 +404,7 @@ class Expenses extends React.Component {
                     onChange={e => this.selectMValue(e, false)}
                     value={this.state.yearValue}
                   >
-                    {selYears.map((year, i) => (
+                    {uniqueUserYears.map((year, i) => (
                       // console.log(i, year),
                       <option key={year} value={year}>
                         {year}
