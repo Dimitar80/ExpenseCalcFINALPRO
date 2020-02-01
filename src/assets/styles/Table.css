@@ -18,11 +18,14 @@
   text-align: start;
 }
 
-.desc {
-  background-color: chartreuse;
+.gr {
+  background-color: rgba(128, 128, 128, 0.247);
 }
-.asc {
-  background-color: crimson;
+.def {
+  background-color: #e5edf5;
+}
+.grR {
+  background-color: rgba(128, 128, 128, 0.082);
 }
 
 tbody:before {

@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../../assets/styles/shared.css";
+import "../../assets/styles/Table.css";
 
-// FUNKCIONALNA COMP-BIDEJKI E SAMO REPRESENT
+// FUNKCIONALNA COMP-BIDEJKI E SAMO REPRESENT!!!//
 class ProductRow extends React.Component {
   constructor(/*props*/) {
     super(/*props*/);
@@ -16,7 +17,7 @@ class ProductRow extends React.Component {
     // console.log(this.props.del);
     // console.log(this.props.productId);
     // console.log(this.props.productName);
-    // console.log(this.props.sorti);
+    // console.log(this.props.ppR, this.props.pdR);
     return (
       <React.Fragment>
         <tr /*{...this.props.key}*/>
@@ -24,8 +25,12 @@ class ProductRow extends React.Component {
           <td>{this.props.productName}</td>
           <td>{this.props.productType}</td>
           <td>{this.props.productDescription}</td>
-          <td>{this.props.purchaseDate}</td>
-          <td>{this.props.productPrice}</td>
+          <td className={this.props.pdR ? "grR" : "defR"}>
+            {this.props.purchaseDate}
+          </td>
+          <td className={this.props.ppR ? "grR" : "defR"}>
+            {this.props.productPrice}
+          </td>
           {this.props.EdDel ? (
             <td>
               <Link to={"/editproduct/" + this.props.productId}>

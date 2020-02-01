@@ -11,42 +11,17 @@ class ProductsNew extends React.Component {
   constructor() {
     super();
     this.state = {
-      // showProducts: true,
       showEditDeleteBtns: true,
       data: [],
       sort: "",
       didUpd: false,
       loading: false,
       povik: null,
-      id: false
-      // id: ""
+      id: false,
+      pD: false,
+      pP: false
     };
   }
-
-  SortProductsBy = event => {
-    let that = this;
-    this.setState(
-      {
-        sort: event.target.value
-      },
-      () => {
-        console.log("SortProductsBy CB");
-        that.getSortedProducts();
-      }
-    );
-  };
-
-  // SortProductsBy = event => {
-  //   this.setState({
-  //     sort: event.target.value
-  //     // didUpd: true,
-  //     // id: event.target.id
-  //     // id: true
-  //   });
-  //   this.getSortedProducts();
-  //   // console.log(event);
-  //   console.log("event target Value", event.target.value);
-  // };
 
   getProducts = () => {
     this.setState({ loading: true });
@@ -55,12 +30,6 @@ class ProductsNew extends React.Component {
         headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` }
       })
       .then(res => {
-        // console.log(data);
-        console.log("Data: ", res.data);
-        // setTimeout(
-        //   () => this.setState({ data: res.data, loading: false }),
-        //   500
-        // );
         this.setState({ data: res.data, loading: false });
       })
       .catch(err => {
@@ -72,9 +41,43 @@ class ProductsNew extends React.Component {
   componentDidMount() {
     console.log("Table data did mount");
     this.getProducts();
-    // console.log(this.state.data);
-    // console.log(this.state.sort);
   }
+
+  SortProductsBy = event => {
+    let that = this;
+    this.setState(
+      {
+        sort: event.target.value
+      },
+      () => {
+        // console.log("SortProductsBy CB");
+        if (
+          this.state.sort === "purchaseDate:asc" ||
+          this.state.sort === "purchaseDate:desc"
+        ) {
+          this.setState(
+            {
+              pD: true,
+              pP: false
+            },
+            () => {
+              console.log(this.state.pD);
+            }
+          );
+        } else if (
+          this.state.sort === "productPrice:asc" ||
+          this.state.sort === "productPrice:desc"
+        ) {
+          this.setState({
+            pP: true,
+            pD: false
+          });
+        }
+        console.log(this.state.sort);
+        that.getSortedProducts();
+      }
+    );
+  };
 
   getSortedProducts = () => {
     this.setState({ loading: true });
@@ -83,8 +86,6 @@ class ProductsNew extends React.Component {
         headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` }
       })
       .then(res => {
-        // console.log(data);
-        console.log("Data: ", res.data);
         this.setState({ data: res.data, loading: false });
       })
       .catch(err => {
@@ -96,10 +97,6 @@ class ProductsNew extends React.Component {
   render() {
     console.log("Component in render");
     const NavbarSur = this.props.component;
-    console.log(this.state.data);
-
-    const sorts = this.state.sort;
-    console.log(sorts);
 
     return (
       <React.Fragment>
@@ -134,8 +131,8 @@ class ProductsNew extends React.Component {
               data={this.state.data}
               showEdDel={this.state.showEditDeleteBtns}
               fgetProducts={this.getProducts}
-              sortS={this.state.sort}
-              _id={this.state.id}
+              pd={this.state.pD}
+              pp={this.state.pP}
             />
           </div>
           <div id="mainonebtn">

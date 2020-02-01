@@ -31,10 +31,10 @@ class Expenses extends React.Component {
             unidata: res.data,
             data: res.data,
             loading: false
-          },
-          () => {
-            console.log(this.state.data);
           }
+          // () => {
+          //   console.log(this.state.data);
+          // }
         );
       })
       .catch(err => {
@@ -44,7 +44,7 @@ class Expenses extends React.Component {
   };
 
   componentDidMount() {
-    console.log("Expenses did mount");
+    // console.log("Expenses did mount");
     this.getAllProductsInExp();
   }
 
@@ -163,10 +163,6 @@ class Expenses extends React.Component {
     console.log(janNextY);
 
     if (selectedMonth === 12) {
-      console.log(
-        "Seleceted moth is December, please do some code",
-        dateFromYM
-      );
       this.setState({ loading: true });
       console.log("Getting data");
       axios
@@ -179,7 +175,6 @@ class Expenses extends React.Component {
         )
         .then(res => {
           this.setState({ data: res.data, loading: false });
-          // console.log(this.state.data);
         })
         .catch(err => {
           this.setState({ loading: false });
@@ -191,12 +186,10 @@ class Expenses extends React.Component {
 
     let dateFromYM = new Date(
       `${selectedYear}-${selectedMonth} 00:00:00.000`
-      // `${selectedYear}-${selectedMonth}-01 00:00:00.000`
     ).getTime();
     console.log("dateFromYM", dateFromYM); // Sat Jan 01 2000 00:00:00?//
     let dateToYM = new Date(
       `${selectedYear}-${selectedMonth + 1} 00:00:00.000`
-      // `${selectedYear}-${selectedMonth + 1}-01 00:00:00.000`
     ).getTime();
     console.log("dateToYM", dateToYM); //Mon Jan 01 2001 00:00:00//
 
@@ -204,6 +197,32 @@ class Expenses extends React.Component {
       console.log(selectedMonth, " 0 index of month is selected");
       this.setState({ monthValue: "Months" }, () => {
         console.log(this.state.monthValue);
+        let OnlyfromYear = new Date(
+          `${selectedYear}-01-01 00:00:00.000`
+        ).getTime();
+        let OnlytoYear = new Date(
+          `${selectedYear}-12-31 23:59:59.000`
+        ).getTime();
+        this.setState({ loading: true });
+        axios
+          .get(
+            `http://127.0.0.1:8082/api/v1/products/?purcdate_from=
+            ${OnlyfromYear}&purcdate_to=${OnlytoYear}&sort=purchaseDate:desc`,
+            {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("jwt")}`
+              }
+            }
+          )
+          .then(res => {
+            console.log("In TIMEOUT");
+            this.setState({ data: res.data, loading: false });
+            console.log(this.res.data);
+          })
+          .catch(err => {
+            this.setState({ loading: false });
+            console.log(err, "ERROR on Yarly at Expenses component");
+          });
       });
     } else if (
       selectedMonth !== 0 &&
@@ -219,7 +238,7 @@ class Expenses extends React.Component {
       this.state.toggle === false &&
       this.state.monthValue !== 0 &&
       this.state.monthValue != "Months" &&
-      this.state.yearValue !== 0 &&
+      // this.state.yearValue !== 0 &&
       this.state.yearValue != "Years"
     ) {
       this.setState({ loading: true });
@@ -244,13 +263,7 @@ class Expenses extends React.Component {
       this.state.toggle === false &&
       this.state.monthValue == "Months" &&
       this.state.yearValue != "Years"
-      // this.state.yearValue === selectedYear
-      // this.state.yearValue != null
-      // selectedYear
-      // this.state.yearValue != ""
-      // this.state.monthValue === "0"
     ) {
-      // let selectedYear = this.state.yearValue;
       let OnlyfromYear = new Date(
         `${selectedYear}-01-01 00:00:00.000`
       ).getTime();

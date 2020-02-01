@@ -15,9 +15,8 @@ class TableAll extends React.Component {
       // showEditDelete: true,
       // loading: false,
       rowIdToDelete: null,
-      xmm: this.props.sortS,
-      vidi: false,
-      z: false
+      xmm: this.props.sortS
+      // z: false
       // show: true
     };
   }
@@ -50,61 +49,9 @@ class TableAll extends React.Component {
       });
   };
 
-  aman = () => {
-    if (this.props.sortS === "purchaseDate:asc") {
-      console.log("raboti za First Purchase - purchaseDate:asc");
-      this.setState({ z: true });
-    }
-  };
-
-  probe = () => {
-    if (this.props.sortS === "purchaseDate:asc") {
-      this.setState({ vidi: true });
-    }
-  };
-
   render() {
     // console.log(this.props);
     // console.log(this.state.show + " - od kade ide ova true?");
-    // console.log(this.props.data);
-
-    // console.log(this.props.sortS);
-    const sorted = this.props.sortS;
-    console.log(sorted);
-    // console.log(this.state.xmm == sorted);
-    // console.log(this.state.xmm);
-
-    // console.log(this.state._id);
-
-    if (this.props._id) {
-      console.log("BOJA");
-    }
-
-    // if (sorted === "purchaseDate:desc") {
-    //   console.log("raboti za Latest Purchase - purchaseDate:desc");
-    //   return (aman = "Purchase Date");
-    // }
-
-    // let aman = "";
-    // if (sorted === "purchaseDate:asc") {
-    //   console.log("raboti za First Purchase - purchaseDate:asc");
-    //   return (aman = "Purchase Date");
-    // }
-    // if (sorted === "purchaseDate:desc") {
-    //   console.log("raboti za Latest Purchase - purchaseDate:desc");
-    //   return (aman = "Purchase Date");
-    // }
-
-    // const lll = () => {
-    //   if (sorted === "purchaseDate:asc") {
-    //     console.log("raboti za First Purchase - purchaseDate:asc");
-    //     return <th style={{ backgroundColor: "orange" }}>Purchase Date</th>;
-    //   }
-    //   if (sorted === "purchaseDate:desc") {
-    //     console.log("raboti za Latest Purchase - purchaseDate:desc");
-    //     return <th style={{ backgroundColor: "green" }}>Purchase Date</th>;
-    //   }
-    // };
 
     return (
       // this.state.udata.length > 0 ?
@@ -116,23 +63,8 @@ class TableAll extends React.Component {
               <th>Product Name</th>
               <th>Product Type</th>
               <th>Product Description</th>
-              {/* {lll()} */}
-
-              {/* <th className={this.props._id ? "desc" : "asc"}>Purchase Date</th> */}
-              <th className={this.state.z ? "desc" : "asc"}>Purchase Date</th>
-              {/* <th>{aman}</th> */}
-
-              {/* <th className={this.state.vidi ? "desc" : "asc"}>
-                Purchase Date
-              </th> */}
-
-              {/* {sorted == "purchaseDate:desc" || sorted == "purchaseDate:asc" ? (
-                <th style={{ backgroundColor: "green" }}>Purchase Date</th>
-              ) : (
-                <th style={{ backgroundColor: "orange" }}>Purchase Date</th>
-              )} */}
-
-              <th>Product Price</th>
+              <th className={this.props.pd ? "gr" : "def"}>Purchase Date</th>
+              <th className={this.props.pp ? "gr" : "def"}>Product Price</th>
               {this.props.showEdDel ? <th>Edit / Delete</th> : <th></th>}
             </tr>
           </thead>
@@ -151,6 +83,11 @@ class TableAll extends React.Component {
         {/* </div> */}
       </React.Fragment>
       // : <h2>Loading data...</h2>
+      /*: <h2>Loading data...</h2>*/
+      /*: <h2>Loading data...</h2>*/
+      /*: <h2>Loading data...</h2>*/
+      /*: <h2>Loading data...</h2>*/
+      /*: <h2>Loading data...</h2>*/
       /*: <h2>Loading data...</h2>*/
      /*: <h2>Loading data...</h2>*/);
   }

@@ -3,7 +3,7 @@ import ProductRow from "./ProductRow";
 import NoDataFound from "../table/NoData";
 
 const TableBody = props => {
-  console.log("Table Body loading", props.dataLoading);
+  // console.log("Table Body loading", props.dataLoading);
   // console.log(props);
   if (props.dataLoading) {
     return <NoDataFound message={"Loading..."} />;
@@ -21,7 +21,8 @@ const TableBody = props => {
           productPrice={product.productPrice}
           EdDel={props.showEdDel}
           del={props.delBtnOpen}
-          // sorti={props.sortS}
+          ppR={props.pp}
+          pdR={props.pd}
         />
       );
     });
