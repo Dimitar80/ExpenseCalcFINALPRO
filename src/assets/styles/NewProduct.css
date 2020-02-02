@@ -34,14 +34,16 @@
 
 .form-container {
   display: flex;
+  /* flex-direction: row; */
   align-items: center; /* check*/
   justify-content: center; /*check*/
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   width: 73%;
   height: 650px;
-  margin: 0 auto 20px 5%;
+  margin: 0 auto 40px 5%;
   box-sizing: border-box;
   overflow-x: hidden;
+  /* justify-content: space-between; */
   /* max-width: 600px; */
   /* height: 450px; */
   /* padding: 40px 120px 40px 40px; */
@@ -50,8 +52,11 @@
 #fpage {
   display: flex;
   /* float: left; */
+  /* flex: 1 1 0%; */
+  white-space: nowrap;
   align-items: center;
-  justify-content: flex-start; /*flex-start*/
+  /* justify-content: flex-start;  */
+  /*flex-start*/
   width: 53%;
   height: 100%;
   background-color: #fff;
@@ -59,7 +64,8 @@
   padding: 0px 0px 0px 50px;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
+  overflow: hidden;
 }
 
 /* .input-container {
@@ -140,6 +146,8 @@
   width: 47%;
   height: 100%;
   display: flex;
+  flex: 0 0 auto;
+  /* float: right; */
   flex-direction: column;
   align-items: center;
   justify-content: center;

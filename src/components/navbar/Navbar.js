@@ -17,7 +17,6 @@ class Navbar extends React.Component {
     };
   }
 
-  // Kako raboti toggle-iranjeto koga ovie dve funkcii ne postojat/se iskomentirani???
   showProducts = () => {
     // alert("Products WORKS!")
     this.setState({
@@ -33,14 +32,6 @@ class Navbar extends React.Component {
       // redirect: true
     });
   };
-
-  // refExp = () => {
-  //   // this.props.povik();
-  //   console.log("Povik: ", this.props.povik);
-  //   // this.props.funOpt()
-  //   // this.setState({ uff: "Years" });
-  //   console.log("obnoven povik za expensess");
-  // };
 
   // SIgnOut Metods-START
   signOut = () => {
@@ -58,8 +49,6 @@ class Navbar extends React.Component {
     // console.log(this.state.toggle);
     // console.log(this.state.show);
 
-    // console.log(this.props.val);
-    // console.log(this.props.tes);
     // console.log(this.state.uff);
 
     // const { redirect } = this.state;

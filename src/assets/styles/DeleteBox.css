@@ -41,7 +41,7 @@
 
 #boxtext {
   display: flex;
-  /* width: 330px; */
+  width: 360px;
   flex-direction: column;
   padding-bottom: 20px;
 }
@@ -55,13 +55,16 @@
 #delbox p {
   font-size: 17px;
   color: #576574;
+  /* border: 1px solid gray; */
+  padding: 1.5px 5px 1.5px 5px;
+  background-color: rgba(128, 128, 128, 0.089);
 }
 
 #delBox-buttons {
   display: flex;
   align-items: center;
   margin-left: auto;
-  margin-right: 56px;
+  margin-right: 45px;
   box-sizing: border-box;
   padding-bottom: 20px;
 }

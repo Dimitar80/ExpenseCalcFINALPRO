@@ -3,6 +3,7 @@ import axios from "axios";
 import "../../assets/styles/Expenses.css";
 import "../../assets/styles/shared.css";
 import TableAll from "../table/TableAll";
+import ReactTooltip from "react-tooltip";
 
 class Expenses extends React.Component {
   constructor() {
@@ -229,6 +230,9 @@ class Expenses extends React.Component {
       this.state.monthValue != "Months" &&
       this.state.yearValue === "Years"
     ) {
+      // <ReactTooltip place="right" type="warning" effect="solid">
+      //   <p>"Please select year too, to complete the request"</p>
+      // </ReactTooltip>;
       alert("Please select year too, to complete the request");
     } else if (
       this.state.yearValue === "Years" /*&& selectedMonth === "Months"*/

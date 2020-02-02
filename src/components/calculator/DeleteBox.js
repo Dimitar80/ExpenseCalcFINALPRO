@@ -49,7 +49,7 @@ class DeleteBox extends React.Component {
             <div id="boxtext">
               <h2>Delete Product</h2>
               <p>
-                You are about to delete this product -{" "}
+                You are about to delete this product -
                 <span style={{ fontWeight: "900", fontSize: "18px" }}>
                   {pN}
                 </span>

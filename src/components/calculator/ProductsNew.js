@@ -43,6 +43,21 @@ class ProductsNew extends React.Component {
     this.getProducts();
   }
 
+  getSortedProducts = () => {
+    this.setState({ loading: true });
+    axios
+      .get(`http://127.0.0.1:8082/api/v1/products/?sort=${this.state.sort}`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` }
+      })
+      .then(res => {
+        this.setState({ data: res.data, loading: false });
+      })
+      .catch(err => {
+        this.setState({ loading: false });
+        console.log(err, "ERROR at Products component");
+      });
+  };
+
   SortProductsBy = event => {
     let that = this;
     this.setState(
@@ -61,7 +76,7 @@ class ProductsNew extends React.Component {
               pP: false
             },
             () => {
-              console.log(this.state.pD);
+              // console.log(this.state.pD);
             }
           );
         } else if (
@@ -73,25 +88,10 @@ class ProductsNew extends React.Component {
             pD: false
           });
         }
-        console.log(this.state.sort);
+        // console.log(this.state.sort);
         that.getSortedProducts();
       }
     );
-  };
-
-  getSortedProducts = () => {
-    this.setState({ loading: true });
-    axios
-      .get(`http://127.0.0.1:8082/api/v1/products/?sort=${this.state.sort}`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` }
-      })
-      .then(res => {
-        this.setState({ data: res.data, loading: false });
-      })
-      .catch(err => {
-        this.setState({ loading: false });
-        console.log(err, "ERROR at Products component");
-      });
   };
 
   render() {
