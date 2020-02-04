@@ -151,7 +151,7 @@ class Register extends React.Component {
                     }
                     style={{ color: "#c6c6c6" }}
                     onClick={this.toggleShow}
-                  ></i>
+                  />
                 </p>
                 <p className="input-container">
                   <label className="text-label">Date of Birth</label>

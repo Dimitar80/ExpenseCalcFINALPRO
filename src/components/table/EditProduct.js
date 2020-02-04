@@ -32,8 +32,12 @@ class EditProduct extends React.Component {
         const ep = res.data;
         console.log(ep);
         // setTimeout(() => this.setState({ edata: ep, loading: false }), 1000);
-        this.setState({ edata: ep, loading: false });
-        console.log("Existing generated _id - " + this.state.edata[0]._id);
+        this.setState({ edata: ep, loading: false }, () => {
+          console.log("Product data - " + this.state.edata[0]);
+          console.log("Existing generated _id - " + this.state.edata[0]._id);
+        });
+
+        // console.log("Product data - " + this.state.edata[0]);
       })
       .catch(error => {
         this.setState({ loading: false });
@@ -99,8 +103,10 @@ class EditProduct extends React.Component {
   };
 
   render() {
-    //   console.log(this.props);
-    console.log(this.state.edata);
+    // console.log(this.props);
+    // console.log(this.state.edata);
+    // console.log(this.props.match.params.id);
+
     const { redirect } = this.state;
     if (redirect) {
       return <Redirect to="/products" />;
@@ -203,108 +209,3 @@ class EditProduct extends React.Component {
   }
 }
 export default EditProduct;
-
-// render() {
-//   //   console.log(this.props);
-//   const { redirect } = this.state;
-//   if (redirect) {
-//     return <Redirect to="/products" />;
-//   }
-
-//   const NavbarSur = this.props.component;
-
-//   return this.state.edata.length > 0 ? (
-//     <React.Fragment>
-//       <NavbarSur toggle={false} />
-//       <div id="editproducts">
-//         <div id="epmain-container">
-//           <div id="epmaintitle">
-//             <h1>Edit Product</h1>
-//           </div>
-//           <div className="epform-container">
-//             <div id="epfpage">
-//               <form>
-//                 <p className="epinput-container">
-//                   <label className="eplabel">Product Name</label>
-//                   <input
-//                     type="text"
-//                     className="eptextfield"
-//                     id="productName"
-//                     onChange={this.saveInputValue}
-//                     defaultValue={this.state.edata[0].productName}
-//                   />
-//                 </p>
-//                 <p className="input-container">
-//                   <label className="eplabel">Product Type</label>
-//                   <input
-//                     type="text"
-//                     className="eptextfield"
-//                     id="productType"
-//                     onChange={this.saveInputValue}
-//                     defaultValue={this.state.edata[0].productType}
-//                   />
-//                 </p>
-//                 <p className="input-container">
-//                   <label className="eplabel">Product Description</label>
-//                   <input
-//                     type="text"
-//                     className="eptextfield"
-//                     id="productDescription"
-//                     onChange={this.saveInputValue}
-//                     defaultValue={this.state.edata[0].productDescription}
-//                   />
-//                 </p>
-//                 <p className="input-container">
-//                   <label className="eplabel">Purchase Date</label>
-//                   <input
-//                     type="date"
-//                     className="eptextfield"
-//                     id="purchaseDate"
-//                     onChange={this.saveInputValue}
-//                     defaultValue={this.state.edata[0].purchaseDate.slice(
-//                       0,
-//                       10
-//                     )}
-//                   />
-//                 </p>
-//                 <p className="input-container">
-//                   <label className="eplabel">Product Price</label>
-//                   <input
-//                     type="text"
-//                     className="eptextfield"
-//                     id="productPrice"
-//                     onChange={this.saveInputValue}
-//                     defaultValue={this.state.edata[0].productPrice}
-//                   />
-//                 </p>
-//                 <div id="btnsEp">
-//                   <button
-//                     type="button"
-//                     className="ep-button"
-//                     onClick={this.editProduct}
-//                   >
-//                     SAVE
-//                   </button>
-
-//                   <Link to="/products">
-//                     <button className="epcl-button">CLOSE</button>
-//                   </Link>
-//                 </div>
-//               </form>
-//             </div>
-//             <div id="ep-right-page">
-//               <p id="ep-simbol">
-//                 <i className="fas fa-plus-circle" />
-//               </p>
-//               <p id="ep-title">You are editing an existing product</p>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </React.Fragment>
-//   ) : (
-//     <h2>Loading data...</h2>
-//   );
-// }
-// }
-// export default EditProduct;

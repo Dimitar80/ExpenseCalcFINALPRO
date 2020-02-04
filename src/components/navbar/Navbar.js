@@ -62,10 +62,6 @@ class Navbar extends React.Component {
         {/* <header id='header'> */}
         <div id="header">
           <nav id="mainnav">
-            {/* <Link to="/">
-              <button id="bthome">HOME</button>
-            </Link> */}
-
             <Link
               to="/products" /*exact activeClassName="navbar-button active"*/
             >

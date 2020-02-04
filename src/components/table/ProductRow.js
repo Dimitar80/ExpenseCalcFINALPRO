@@ -18,6 +18,7 @@ class ProductRow extends React.Component {
     // console.log(this.props.productId);
     // console.log(this.props.productName);
     // console.log(this.props.ppR, this.props.pdR);
+
     return (
       <React.Fragment>
         <tr /*{...this.props.key}*/>

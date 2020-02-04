@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navbar from "./components/navbar/Navbar";
 import ProLogin from "./components/home/ProLogin";
 import Register from "./components/home/Register";
+import UpdateUser from "./components/navbar/UpdateUser";
 import Expenses from "./components/calculator/Expenses";
 import ProductsNew from "./components/calculator/ProductsNew";
 import NewProduct from "./components/newProduct/NewProduct";
@@ -43,6 +44,12 @@ const Routes = () => {
           exact
           path="/editproduct/:id"
           render={props => <EditProduct {...props} component={Navbar} />}
+        />
+        <Route
+          exact
+          path="/edituser/:id"
+          // render={() => <UpdateUser component={Navbar} />}
+          render={props => <UpdateUser {...props} component={Navbar} />}
         />
       </Switch>
     </Router>

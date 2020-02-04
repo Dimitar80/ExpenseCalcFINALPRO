@@ -56,7 +56,7 @@ class NewProduct extends React.Component {
           }
         )
         .then(res => {
-          console.log(res);
+          // console.log(res);
           console.log("NEW PRODUCT IS CREATED");
           this.setState({ redirect: true });
           alert("New Product is created successfully");

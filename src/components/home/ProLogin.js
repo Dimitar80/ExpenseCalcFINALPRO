@@ -61,6 +61,7 @@ class ProLogin extends React.Component {
           localStorage.setItem("email", res.data.email);
           localStorage.setItem("firstName", res.data.first_name);
           localStorage.setItem("lastName", res.data.last_name);
+          localStorage.setItem("_id", res.data.id);
           this.setState({ redirect: true });
         })
         .catch(err => {
@@ -132,7 +133,7 @@ class ProLogin extends React.Component {
                     }
                     style={{ color: "#c6c6c6" }}
                     onClick={this.toggleShow}
-                  ></i>
+                  />
                 </p>
                 <p className="input-msg" id="alert-msg">
                   {this.state.exsUserData}
