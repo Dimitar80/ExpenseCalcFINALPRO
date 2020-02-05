@@ -19,11 +19,10 @@ const SignOut = props => {
       <div id="bck-screen">
         <div id="so-box">
           <div id="so-text">
-            <h2>Sign Out </h2>
             <div id="so-userS">
               <img src="../../assets/img/DPPHOTO.jpg" alt="profileimg" />
               <div id="so-userInfo">
-                <div id="edelUser">
+                {/* <div id="edelUser">
                   <Link
                     to={"/edituser/" + localStorage.getItem("_id")}
                     // to={`/edituser/${localStorage.getItem("_id")}`}
@@ -34,7 +33,7 @@ const SignOut = props => {
                   <button id="delUser" onClick={props.delOnOff}>
                     Delete User
                   </button>
-                </div>
+                </div> */}
                 <p>
                   <span style={{ fontWeight: "600", fontSize: "18px" }}>
                     {localStorage.getItem("firstName") +
@@ -44,12 +43,15 @@ const SignOut = props => {
                 </p>
                 <p>{localStorage.getItem("email")}</p>
               </div>
+              <Link
+                to={"/edituser/" + localStorage.getItem("_id")}
+                // to={`/edituser/${localStorage.getItem("_id")}`}
+                style={{ textDecoration: "none" }}
+              >
+                {/* <button id="edUser">Edit User</button> */}
+                Manage your Account settings
+              </Link>
             </div>
-            <p>
-              You are about to sign out. Are you sure you
-              <br />
-              want to continue?
-            </p>
           </div>
           <div id="btns">
             <button id="socancel" onClick={props.clBtn}>

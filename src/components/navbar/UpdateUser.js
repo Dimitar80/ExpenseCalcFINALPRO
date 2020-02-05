@@ -59,8 +59,8 @@ class UpdateUser extends React.Component {
 
   saveInputValue = event => {
     this.setState({ [event.target.id]: event.target.value });
-    console.log(event.target.id);
-    console.log(event.target.value);
+    // console.log(event.target.id);
+    // console.log(event.target.value);
   };
 
   // put/patch
@@ -77,7 +77,7 @@ class UpdateUser extends React.Component {
       alert(
         "All fields must be filled out for successfully Edit-ed User data!"
       );
-      event.preventDefault();
+      // event.preventDefault();
     } else {
       axios
         .put(
@@ -134,7 +134,7 @@ class UpdateUser extends React.Component {
             <div className="epform-container">
               <div id="epfpage">
                 {this.state.edata.length > 0 ? (
-                  <form>
+                  <div>
                     <p className="epinput-container">
                       <label className="eplabel">First Name</label>
                       <input
@@ -165,26 +165,6 @@ class UpdateUser extends React.Component {
                         defaultValue={this.state.edata[0].email}
                       />
                     </p>
-                    {/* <p className="input-container">
-                      <label className="eplabel">Password</label>
-                      <input
-                        type={this.state.hidden ? "password" : "text"}
-                        className="eptextfield"
-                        id="password"
-                        onChange={this.saveInputValue}
-                        defaultValue={this.state.edata[0].password}
-                      />
-                      <i
-                        id="reg"
-                        className={
-                          this.state.hidden
-                            ? "fas fa-eye-slash reg-icon"
-                            : "fas fa-eye reg-icon"
-                        }
-                        style={{ color: "#c6c6c6" }}
-                        onClick={this.toggleShow}
-                      />
-                    </p> */}
                     <p className="input-container">
                       <label className="eplabel">Date of Birth</label>
                       <input
@@ -221,17 +201,17 @@ class UpdateUser extends React.Component {
                     <div id="btnsEp">
                       <button
                         type="button"
-                        className="ep-button"
+                        className="eu-button"
                         onClick={this.editUser}
                       >
                         SAVE
                       </button>
-
                       <Link to="/products">
-                        <button className="epcl-button">CLOSE</button>
+                        <button className="eu-cl-button">CLOSE</button>
                       </Link>
                     </div>
-                  </form>
+                    <button id="delete-user-btn">DELETE USER</button>
+                  </div>
                 ) : (
                   <h2>Loading...</h2>
                 )}
