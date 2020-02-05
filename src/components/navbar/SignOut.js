@@ -4,21 +4,37 @@ import "../../assets/styles/shared.css";
 import { Link, Redirect } from "react-router-dom";
 
 const SignOut = props => {
-  console.log(localStorage.getItem("_id"));
+  // console.log(localStorage.getItem("_id"));
+  console.log(props);
   function logOut() {
     localStorage.clear();
     props.sO();
+
+    // function showDelUser(){
+
+    // }
   }
   return (
     <div id="signout">
       <div id="bck-screen">
         <div id="so-box">
           <div id="so-text">
-            <h2>Sign Out {/*or Edit your account*/} </h2>
+            <h2>Sign Out </h2>
             <div id="so-userS">
               <img src="../../assets/img/DPPHOTO.jpg" alt="profileimg" />
               <div id="so-userInfo">
-                <p>Edit your account </p>
+                <div id="edelUser">
+                  <Link
+                    to={"/edituser/" + localStorage.getItem("_id")}
+                    // to={`/edituser/${localStorage.getItem("_id")}`}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <button id="edUser">Edit User</button>
+                  </Link>
+                  <button id="delUser" onClick={props.delOnOff}>
+                    Delete User
+                  </button>
+                </div>
                 <p>
                   <span style={{ fontWeight: "600", fontSize: "18px" }}>
                     {localStorage.getItem("firstName") +
@@ -26,23 +42,7 @@ const SignOut = props => {
                       localStorage.getItem("lastName")}
                   </span>
                 </p>
-                <Link
-                  to={"/edituser/" + localStorage.getItem("_id")}
-                  // to={`/edituser/${localStorage.getItem("_id")}`}
-                  style={{ textDecoration: "none" }} /*onClick={props.clBtn}*/
-                >
-                  <p>
-                    <span
-                      style={{
-                        fontWeight: "0",
-                        fontSize: "15px",
-                        color: "blue"
-                      }}
-                    >
-                      {localStorage.getItem("email")}
-                    </span>
-                  </p>
-                </Link>
+                <p>{localStorage.getItem("email")}</p>
               </div>
             </div>
             <p>

@@ -3,7 +3,7 @@ import axios from "axios";
 import "../../assets/styles/Expenses.css";
 import "../../assets/styles/shared.css";
 import TableAll from "../table/TableAll";
-import ReactTooltip from "react-tooltip";
+// import ReactTooltip from "react-tooltip";
 
 class Expenses extends React.Component {
   constructor() {

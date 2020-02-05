@@ -3,6 +3,7 @@ import "../../assets/styles/Navbar.css";
 import "../../assets/styles/shared.css";
 import { Link, Redirect } from "react-router-dom";
 import SignOut from "./SignOut";
+import DeleteUser from "./DeleteUser";
 
 // Navbar 'sreden'
 class Navbar extends React.Component {
@@ -13,7 +14,8 @@ class Navbar extends React.Component {
       signOut: false,
       uff: this.props.tes,
       // show: false
-      redirect: false
+      redirect: false,
+      delShow: false
     };
   }
 
@@ -38,11 +40,19 @@ class Navbar extends React.Component {
     this.setState({ signOut: !this.state.signOut });
   };
 
+  delOut = () => {
+    this.setState({ delShow: !this.state.delShow, signOut: false });
+  };
+
   closeBt = () => {
     console.log("Function called");
     this.setState({ signOut: false });
   };
   // SignOut Methods-END
+  closeDelUser = () => {
+    console.log("Function called");
+    this.setState({ delShow: false });
+  };
 
   render() {
     // console.log(this.state.signOut);
@@ -95,8 +105,13 @@ class Navbar extends React.Component {
               // ajdi={this.state.rowIdToDelete}}
               clBtn={this.closeBt}
               sO={this.signOut}
+              delOnOff={this.delOut}
             />
           ) : null}
+          {this.state.delShow ? (
+            <DeleteUser clDelUser={this.closeDelUser} />
+          ) : null}
+
           <div id="user">
             <img src="../../assets/img/DPPHOTO.jpg" alt="profileimg" />
 

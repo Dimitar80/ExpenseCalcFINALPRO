@@ -1,10 +1,9 @@
 import React from "react";
-import axios from "axios";
-import "../../assets/styles/DeleteBox.css";
+import "../../assets/styles/DeleteRow.css";
 import "../../assets/styles/shared.css";
-import { Redirect } from "react-router-dom";
+// import { Redirect } from "react-router-dom";
 
-class DeleteBox extends React.Component {
+class DeleteRow extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -76,4 +75,4 @@ class DeleteBox extends React.Component {
   }
 }
 
-export default DeleteBox;
+export default DeleteRow;

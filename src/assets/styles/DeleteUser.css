@@ -1,6 +1,6 @@
-/*DP09-01-2020*/
+/*DP05-02-2020*/
 
-#signout {
+#delproducts {
   width: 100%;
   height: 100%;
   display: flex;
@@ -10,7 +10,7 @@
   /* align-content: center; */
 }
 
-#bck-screen {
+#back-screen {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -25,11 +25,10 @@
   margin: 0px;
 }
 
-#so-box {
+#delbox {
   position: fixed;
   width: 450px;
-  /* height: 225px; */
-  height: 270px;
+  height: 225px;
   box-sizing: border-box;
   background-color: #fff;
   display: flex;
@@ -40,40 +39,40 @@
   margin: 0px;
 }
 
-#so-text {
+#boxtext {
   display: flex;
+  width: 360px;
   flex-direction: column;
   padding-bottom: 20px;
 }
 
-#so-box h2 {
+#delbox h2 {
   font-size: 19px;
   color: #576574;
   font-weight: bold;
-  margin-bottom: 0px;
-  width: 80px;
   /* margin-right: auto; */
 }
-#so-box p {
+#delbox p {
   font-size: 17px;
   color: #576574;
+  /* border: 1px solid gray; */
+  padding: 1.5px 5px 1.5px 5px;
+  background-color: rgba(128, 128, 128, 0.089);
 }
 
-#btns {
+#delBox-buttons {
   display: flex;
   align-items: center;
-  /* width: 100%; */
   margin-left: auto;
-  margin-right: 65px;
+  margin-right: 45px;
   box-sizing: border-box;
   padding-bottom: 20px;
 }
 
-#so-box #socancel,
-#sodelete {
+#delbox #cancel,
+#delete {
   font-size: 15px;
   font-weight: 600;
-  /* width: 110px; */
   color: #576574;
   background-color: #fff;
   border: none;
@@ -84,65 +83,8 @@
   box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.17);
   cursor: pointer;
 }
-#so-box #sodelete {
+#delbox #delete {
   background-color: #576574;
   color: #fff;
   /* font-weight: 500; */
-}
-
-/*#user img*/
-#so-userS img {
-  width: 70px;
-  height: 70px;
-  border-radius: 50px;
-  margin: 20px auto 0px;
-  /* margin: 32px auto 0px; */
-  /* margin-right: 10px; */
-  /* margin-left: auto; */
-}
-#so-userInfo h2,
-p {
-  margin: 0px;
-}
-#so-userInfo {
-  float: right;
-  display: flex;
-  flex-direction: column;
-  /* background-color: rgba(255, 0, 0, 0.342); */
-  margin: 20px auto 15px;
-  /* width: 50%; */
-}
-
-/* #so-userS {
-  float: left;
-  flex-direction: column;
-} */
-
-/* #edelUser {
-  width: 140px;
-} */
-
-#edUser {
-  width: 85px;
-  /* height: 16px; */
-  margin: 2px 10px 5px 0px;
-  padding: 3px 0px 3px 0px;
-  font-size: 14px;
-  cursor: pointer;
-  background-color: rgb(50, 103, 216);
-  border: none;
-  outline: none;
-  color: white;
-}
-#delUser {
-  width: 85px;
-  /* height: 16px; */
-  margin: 2px 0px 5px 0px;
-  padding: 3px 0px 3px 0px;
-  font-size: 14px;
-  cursor: pointer;
-  background-color: rgb(214, 52, 52);
-  border: none;
-  outline: none;
-  color: white;
 }

@@ -3,7 +3,7 @@ import axios from "axios";
 import "../../assets/styles/shared.css";
 import "../../assets/styles/Table.css";
 // import { Redirect } from "react-router-dom";
-import DeleteBox from "../calculator/DeleteBox";
+import DeleteRow from "../calculator/DeleteRow";
 import TableBody from "./TableBody";
 
 class TableAll extends React.Component {
@@ -73,7 +73,7 @@ class TableAll extends React.Component {
           </tbody>
         </table>
         {this.state.show && (
-          <DeleteBox
+          <DeleteRow
             ajdi={this.state.rowIdToDelete}
             clBtn={this.closeBt}
             delRow={this.deleteRow}
@@ -83,7 +83,7 @@ class TableAll extends React.Component {
         {/* </div> */}
       </React.Fragment>
       // : <h2>Loading data...</h2>
-      /*: <h2>Loading data...</h2>*/
+
       /*: <h2>Loading data...</h2>*/
       /*: <h2>Loading data...</h2>*/
      /*: <h2>Loading data...</h2>*/);
