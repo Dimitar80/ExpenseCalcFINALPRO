@@ -84,6 +84,8 @@ class TableAll extends React.Component {
       </React.Fragment>
       // : <h2>Loading data...</h2>
       /*: <h2>Loading data...</h2>*/
+      /*: <h2>Loading data...</h2>*/
+      /*: <h2>Loading data...</h2>*/
      /*: <h2>Loading data...</h2>*/);
   }
 }
