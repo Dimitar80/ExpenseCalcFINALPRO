@@ -1,7 +1,8 @@
 import React from "react";
+import axios from "axios";
 import "../../assets/styles/DeleteUser.css";
 import "../../assets/styles/shared.css";
-// import { Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 class DeleteUser extends React.Component {
   constructor(props) {
@@ -9,37 +10,40 @@ class DeleteUser extends React.Component {
     this.state = {
       // data: this.props.ajdi
       toggle: true,
-      rowIdToDelete: null
-      // redirect: false
-      // show: this.props.show
+      rowIdToDelete: null,
+      redirect: false
     };
   }
 
-  // keyPressed(event) {
-  //   if (event.key === "Enter") {
-  //     // this.submitMessage()
-  //     this.props.delRow(this.props.ajdi);
-  //     alert("Enter is functioning");
-  //   }
-  // }
+  delDocsAndUser = () => {
+    const id = this.props.userId;
+    axios
+      .delete("http://127.0.0.1:8082/api/v1/products/user/" + id, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` }
+      })
+      .then(res => {
+        alert("This User files are successfully deleted from data base");
+        this.setState({ redirect: true });
+        console.log("Deleted: ", res);
+        // this.props.fgetProducts(); // Povik do baza-nov call!!!???
+      })
+      .catch(error => {
+        console.log(error + " Greska");
+      });
+  };
 
   render() {
     // console.log(this.props);
-    // console.log(this.state.data)
-    // console.log(this.state.show);
-    // console.log(this.state.toggle);
-    const id = this.props.ajdi;
-    // console.log(this.props.proba[0].productName, "TESTIS");
-    // console.log(this.props.proba, "TESTIS");
 
-    const names = this.props.proba;
+    // const id = this.props.userId;
+    // console.log(id);
+    const { redirect } = this.state;
+    if (redirect) {
+      return <Redirect to="/products" />;
+    }
 
-    // let pN = null;
-    // for (let i = 0; i < names.length; i++) {
-    //   if (names[i]._id == id) {
-    //     pN = names[i].productName;
-    //   }
-    // }
+    const userFullName = this.props.fullName;
+    console.log(userFullName);
 
     return (
       <div id="delproducts">
@@ -49,9 +53,9 @@ class DeleteUser extends React.Component {
               <h2>Delete User</h2>
               <p>
                 You are about to delete this User Account with all files created
-                by this user-
+                by this user -{" "}
                 <span style={{ fontWeight: "900", fontSize: "18px" }}>
-                  {/* {pN} */} USER
+                  {userFullName}
                 </span>
                 <br />
                 Are you sure you want to continue?
@@ -63,8 +67,9 @@ class DeleteUser extends React.Component {
               </button>
               <button
                 id="delete"
-                onClick={() => this.props.delRow(id)}
-                /*onKeyPress={this.keyPressed}*/
+                /*onClick={() => this.props.delRow(id)}*/ onClick={
+                  this.delDocsAndUser
+                }
               >
                 DELETE
               </button>

@@ -124,7 +124,7 @@ class EditProduct extends React.Component {
               <div id="epfpage">
                 {this.state.edata.length > 0 ? (
                   <form>
-                    <p className="epinput-container">
+                    <p className="input-container">
                       <label className="eplabel">Product Name</label>
                       <input
                         type="text"

@@ -135,7 +135,7 @@ class ProLogin extends React.Component {
                     onClick={this.toggleShow}
                   />
                 </p>
-                <p className="input-msg" id="alert-msg">
+                <p id="alert-msg">
                   {this.state.exsUserData}
                   {this.state.error}
                 </p>

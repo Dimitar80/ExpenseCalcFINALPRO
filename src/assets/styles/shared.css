@@ -34,9 +34,9 @@ body {
   /* width: 420px; */
 }
 
-/* input-container */
 .input-container {
   width: 340px;
+  margin: 0px;
 }
 
 /* label */

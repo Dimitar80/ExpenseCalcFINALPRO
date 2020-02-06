@@ -17,7 +17,7 @@ const SignOut = props => {
   return (
     <div id="signout">
       <div id="bck-screen">
-        <div id="so-box">
+        <div id="so-dd-box">
           <div id="so-text">
             <div id="so-userS">
               <img src="../../assets/img/DPPHOTO.jpg" alt="profileimg" />
@@ -35,7 +35,14 @@ const SignOut = props => {
                   </button>
                 </div> */}
                 <p>
-                  <span style={{ fontWeight: "600", fontSize: "18px" }}>
+                  <span
+                    style={{
+                      fontWeight: "550",
+                      fontSize: "18px",
+                      marginTop: 5,
+                      padding: 0
+                    }}
+                  >
                     {localStorage.getItem("firstName") +
                       " " +
                       localStorage.getItem("lastName")}
@@ -46,18 +53,23 @@ const SignOut = props => {
               <Link
                 to={"/edituser/" + localStorage.getItem("_id")}
                 // to={`/edituser/${localStorage.getItem("_id")}`}
-                style={{ textDecoration: "none" }}
+                style={{
+                  textDecoration: "none",
+                  display: "flex",
+                  alignItems: "center",
+                  margin: "16px auto ",
+                  width: "240px"
+                }}
               >
-                {/* <button id="edUser">Edit User</button> */}
-                Manage your Account settings
+                <button id="edUser">Manage your Account settings</button>
               </Link>
             </div>
           </div>
-          <div id="btns">
-            <button id="socancel" onClick={props.clBtn}>
+          <div id="signout-btns">
+            <button id="so-cancel" onClick={props.clBtn}>
               CANCEL
             </button>
-            <button id="sodelete" onClick={logOut}>
+            <button id="so-signout" onClick={logOut}>
               SIGN OUT
             </button>
           </div>

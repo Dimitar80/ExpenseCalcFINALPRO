@@ -86,6 +86,11 @@ class TableAll extends React.Component {
 
       /*: <h2>Loading data...</h2>*/
       /*: <h2>Loading data...</h2>*/
+      /*: <h2>Loading data...</h2>*/
+      /*: <h2>Loading data...</h2>*/
+      /*: <h2>Loading data...</h2>*/
+      /*: <h2>Loading data...</h2>*/
+      /*: <h2>Loading data...</h2>*/
      /*: <h2>Loading data...</h2>*/);
   }
 }

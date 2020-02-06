@@ -20,18 +20,15 @@ class Navbar extends React.Component {
   }
 
   showProducts = () => {
-    // alert("Products WORKS!")
     this.setState({
       toggle: false
     });
   };
 
   showExpenses = () => {
-    // alert("Expenses WORKS!")
     this.props.povik;
     this.setState({
       toggle: true
-      // redirect: true
     });
   };
 
@@ -40,31 +37,25 @@ class Navbar extends React.Component {
     this.setState({ signOut: !this.state.signOut });
   };
 
-  delOut = () => {
-    this.setState({ delShow: !this.state.delShow, signOut: false });
-  };
+  // delOut = () => {
+  //   this.setState({ delShow: !this.state.delShow, signOut: false });
+  // };
 
   closeBt = () => {
     console.log("Function called");
     this.setState({ signOut: false });
   };
   // SignOut Methods-END
-  closeDelUser = () => {
-    console.log("Function called");
-    this.setState({ delShow: false });
-  };
+
+  // closeDelUser = () => {
+  //   console.log("Function called");
+  //   this.setState({ delShow: false });
+  // };
 
   render() {
     // console.log(this.state.signOut);
     // console.log(this.state.toggle);
     // console.log(this.state.show);
-
-    // console.log(this.state.uff);
-
-    // const { redirect } = this.state;
-    // if (redirect) {
-    //   return <Redirect to="/expenses" />;
-    // }
 
     return (
       <React.Fragment>
@@ -99,22 +90,17 @@ class Navbar extends React.Component {
               </button>
             </Link>
           </nav>
-          {/* SignOut - Display */}
+
           {this.state.signOut ? (
             <SignOut
               // ajdi={this.state.rowIdToDelete}}
               clBtn={this.closeBt}
               sO={this.signOut}
-              delOnOff={this.delOut}
             />
-          ) : null}
-          {this.state.delShow ? (
-            <DeleteUser clDelUser={this.closeDelUser} />
           ) : null}
 
           <div id="user">
             <img src="../../assets/img/DPPHOTO.jpg" alt="profileimg" />
-
             <h3 id="touch" onClick={this.signOut}>
               {localStorage.getItem("firstName") +
                 " " +

@@ -54,6 +54,7 @@
 }
 #delbox p {
   font-size: 17px;
+  margin: 12px auto 12px;
   color: #576574;
   /* border: 1px solid gray; */
   padding: 1.5px 5px 1.5px 5px;
@@ -65,8 +66,9 @@
   align-items: center;
   margin-left: auto;
   margin-right: 45px;
+  margin-bottom: 25px;
   box-sizing: border-box;
-  padding-bottom: 20px;
+  /* padding-bottom: 20px; */
 }
 
 #delbox #cancel,

@@ -1,6 +1,6 @@
 /* newproducts - flex container -parent element */
 
-#editproducts {
+#update-user {
   width: 100%;
   height: 100%;
   font-family: "Roboto", sans-serif;
@@ -11,14 +11,14 @@
   align-content: center;
 }
 
-#epmain-container {
+#user-main-container {
   width: 97%;
   height: calc(100% - 170px);
   /* padding-right: 120px; */
   /* padding-left: 120px; */
 }
 
-#epmaintitle {
+#user-maintitle {
   width: 90%;
   display: flex;
   /* justify-content: space-between; */
@@ -26,19 +26,19 @@
   margin: 20px auto 20px auto;
 }
 
-#epmaintitle h1 {
+#user-maintitle h1 {
   font-size: 22px;
   font-weight: bold;
   color: #000000;
 }
 
-.epform-container {
+.user-form-container {
   display: flex;
   align-items: center; /* check*/
   justify-content: center; /*check*/
   flex-wrap: wrap;
   width: 73%;
-  height: 650px;
+  height: 680px;
   margin: 0 auto 40px 5%;
   box-sizing: border-box;
   overflow-x: hidden;
@@ -46,7 +46,7 @@
   /* padding: 40px 120px 40px 40px; */
 }
 
-#epfpage {
+#user-fpage {
   display: flex;
   align-items: center;
   justify-content: flex-start; /*flex-start*/
@@ -59,10 +59,6 @@
   border-bottom-left-radius: 10px;
   overflow-x: hidden;
 }
-
-/* .input-container {
-      width: 100%;
-  } */
 
 .eplabel {
   width: 100%;
@@ -148,7 +144,7 @@
   padding: 0px;
 }
 
-#ep-right-page {
+#user-right-page {
   width: 47%;
   height: 100%;
   display: flex;
@@ -164,13 +160,13 @@
   overflow-x: hidden;
 }
 
-#ep-right-page #ep-simbol {
+#user-right-page #user-simbol {
   display: inline-block;
   margin: 0px 0px 0px 0px;
   font-size: 40px;
 }
 
-#ep-right-page #ep-title {
+#user-right-page #user-title {
   display: inline-block;
   margin: 15px 0px 0px 0px;
   font-size: 18px;

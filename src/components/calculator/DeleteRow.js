@@ -1,7 +1,6 @@
 import React from "react";
 import "../../assets/styles/DeleteRow.css";
 import "../../assets/styles/shared.css";
-// import { Redirect } from "react-router-dom";
 
 class DeleteRow extends React.Component {
   constructor(props) {
@@ -10,18 +9,8 @@ class DeleteRow extends React.Component {
       // data: this.props.ajdi
       toggle: true,
       rowIdToDelete: null
-      // redirect: false
-      // show: this.props.show
     };
   }
-
-  // keyPressed(event) {
-  //   if (event.key === "Enter") {
-  //     // this.submitMessage()
-  //     this.props.delRow(this.props.ajdi);
-  //     alert("Enter is functioning");
-  //   }
-  // }
 
   render() {
     // console.log(this.props);
@@ -48,7 +37,7 @@ class DeleteRow extends React.Component {
             <div id="boxtext">
               <h2>Delete Product</h2>
               <p>
-                You are about to delete this product -
+                You are about to delete this product -{" "}
                 <span style={{ fontWeight: "900", fontSize: "18px" }}>
                   {pN}
                 </span>
@@ -60,11 +49,7 @@ class DeleteRow extends React.Component {
               <button id="cancel" onClick={this.props.clBtn}>
                 CANCEL
               </button>
-              <button
-                id="delete"
-                onClick={() => this.props.delRow(id)}
-                /*onKeyPress={this.keyPressed}*/
-              >
+              <button id="delete" onClick={() => this.props.delRow(id)}>
                 DELETE
               </button>
             </div>

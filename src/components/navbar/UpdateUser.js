@@ -3,17 +3,13 @@ import axios from "axios";
 import { Link, Redirect } from "react-router-dom";
 import "../../assets/styles/UpdateUser.css";
 import "../../assets/styles/shared.css";
+import DeleteUser from "./DeleteUser";
 
 class UpdateUser extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       edata: [],
-      //   productName: null,
-      //   productType: null,
-      //   productDescription: null,
-      //   purchaseDate: null,
-      //   productPrice: null,
       first_name: null,
       last_name: null,
       email: null,
@@ -24,7 +20,8 @@ class UpdateUser extends React.Component {
       country: null,
       hidden: true,
       redirect: false,
-      loading: false
+      loading: false,
+      deleteShow: false
     };
   }
 
@@ -39,13 +36,13 @@ class UpdateUser extends React.Component {
       )
       .then(res => {
         const ep = res.data;
-        console.log(ep);
+        // console.log(ep);
         this.setState({ edata: ep, loading: false });
-        console.log("Existing generated _id - " + this.state.edata[0]._id);
-        console.log(
-          "Existing date_of_birth - " + this.state.edata[0].date_of_birth
-        );
-        console.log("Existing telephone - " + this.state.edata[0].telephone);
+        // console.log("Existing generated _id - " + this.state.edata[0]._id);
+        // console.log(
+        //   "Existing date_of_birth - " + this.state.edata[0].date_of_birth
+        // );
+        // console.log("Existing telephone - " + this.state.edata[0].telephone);
       })
       .catch(error => {
         this.setState({ loading: false });
@@ -113,9 +110,17 @@ class UpdateUser extends React.Component {
     }
   };
 
+  delOn = () => {
+    this.setState({ deleteShow: !this.state.deleteShow /*signOut: false*/ });
+  };
+
+  delOf = () => {
+    this.setState({ deleteShow: false });
+  };
+
   render() {
     // console.log(this.props);
-    // console.log(this.state.edata);
+
     // console.log(this.props.match.params.id);
     // console.log(localStorage.getItem("_id"));
     const { redirect } = this.state;
@@ -123,19 +128,20 @@ class UpdateUser extends React.Component {
       return <Redirect to="/" />;
     }
     const NavbarSur = this.props.component;
+    // console.log(NavbarSur);
     return (
       <React.Fragment>
         <NavbarSur toggle={false} />
-        <div id="editproducts">
-          <div id="epmain-container">
-            <div id="epmaintitle">
+        <div id="update-user">
+          <div id="user-main-container">
+            <div id="user-maintitle">
               <h1>Edit User Data</h1>
             </div>
-            <div className="epform-container">
-              <div id="epfpage">
+            <div className="user-form-container">
+              <div id="user-fpage">
                 {this.state.edata.length > 0 ? (
                   <div>
-                    <p className="epinput-container">
+                    <p className="input-container">
                       <label className="eplabel">First Name</label>
                       <input
                         type="text"
@@ -210,21 +216,30 @@ class UpdateUser extends React.Component {
                         <button className="eu-cl-button">CLOSE</button>
                       </Link>
                     </div>
-                    <button id="delete-user-btn">DELETE USER</button>
+                    <button id="delete-user-btn" onClick={this.delOn}>
+                      DELETE USER
+                    </button>
                   </div>
                 ) : (
                   <h2>Loading...</h2>
                 )}
               </div>
-              <div id="ep-right-page">
-                <p id="ep-simbol">
+              <div id="user-right-page">
+                <p id="user-simbol">
                   <i className="fas fa-plus-circle" />
                 </p>
-                <p id="ep-title">You are editing an existing User data</p>
+                <p id="user-title">You are editing an existing User data</p>
               </div>
             </div>
           </div>
         </div>
+        {this.state.deleteShow ? (
+          <DeleteUser
+            clDelUser={this.delOf}
+            userId={this.state.edata[0]._id}
+            fullName={`${this.state.edata[0].first_name} ${this.state.edata[0].last_name}`}
+          />
+        ) : null}
       </React.Fragment>
     );
   }

@@ -6,47 +6,34 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* flex-wrap: wrap; */
-  /* align-content: center; */
 }
 
-/* height: calc(100% - 170px); */
-/* #bck-screen {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-  background-color: rgba(66, 66, 66, 0.5);
-  width: 100%;
-  height: 100%;
+#so-dd-box {
   position: fixed;
-  top: 0;
-  left: 0;
-  margin: 0px;
-} */
-
-#so-box {
-  position: fixed;
-  width: 280px;
+  top: 50;
+  /* position: absolute; */
+  width: auto;
+  padding: 0px 20px 0px 20px;
+  box-shadow: 0px 0px 2px 0.1px #88888991;
   /* height: 225px; */
-  height: 400px;
+  height: 320px;
   box-sizing: border-box;
-  background-color: rgb(218, 212, 212);
+  background-color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  border-radius: 10px;
+  border-radius: 5px;
   margin: 0px;
 }
 
 #so-text {
   display: flex;
   flex-direction: column;
-  padding-bottom: 20px;
+  /* padding-bottom: 20px; */
 }
 
-#so-box h2 {
+#so-dd-box h2 {
   font-size: 19px;
   color: #576574;
   font-weight: bold;
@@ -54,42 +41,45 @@
   width: 80px;
   /* margin-right: auto; */
 }
-#so-box p {
+#so-dd-box p {
   font-size: 17px;
   color: #576574;
 }
 
-#btns {
+#signout-btns {
   display: flex;
   align-items: center;
+  width: 240px;
   /* width: 100%; */
-  /* margin-left: auto;
-  margin-right: 65px; */
+  margin: 10px auto 0px;
   box-sizing: border-box;
-  padding-bottom: 20px;
+  /* padding-bottom: 20px; */
 }
 
-#so-box #socancel,
-#sodelete {
+#so-dd-box #so-cancel,
+#so-signout {
   font-size: 15px;
-  font-weight: 600;
-  /* width: 110px; */
+  /* font-weight: 500; */
+  width: 115px;
   color: #576574;
   background-color: #fff;
   border: none;
   outline: none;
-  margin-left: 8px;
-  padding: 8px 18px 8px 18px;
-  border-radius: 3px;
-  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.17);
+  padding: 6px 0px 6px 0px;
+  border-radius: 2px;
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.24);
   cursor: pointer;
 }
-#so-box #sodelete {
+#so-dd-box #so-signout {
   background-color: #576574;
   color: #fff;
+  margin-left: 10px;
   /* font-weight: 500; */
 }
-
+#so-userS {
+  width: 100%;
+  border-bottom: 1px solid rgb(190, 183, 183);
+}
 /*#user img*/
 #so-userS img {
   display: flex;
@@ -97,7 +87,7 @@
   width: 65px;
   height: 65px;
   border-radius: 50px;
-  margin: 20px auto 0px;
+  margin: 0px auto 0px;
   /* margin: 32px auto 0px; */
   /* margin-right: 10px; */
   /* margin-left: auto; */
@@ -108,6 +98,7 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+  border-bottom: 1px solid rgb(190, 183, 183);
   /* background-color: rgba(255, 0, 0, 0.342); */
   /* margin: 20px auto 15px; */
   /* width: 50%; */
@@ -117,39 +108,24 @@
   display: flex;
   align-items: center;
   /* text-align: center; */
-  color: red;
-  margin: 10px auto 5px;
+  color: #576574;
+  margin: 0px auto 5px;
+  font-weight: 0;
 }
-
-/* #so-userS {
-  float: left;
-  flex-direction: column;
-} */
-
-/* #edelUser {
-  width: 140px;
-} */
 
 #edUser {
-  width: 85px;
-  /* height: 16px; */
-  margin: 2px 10px 5px 0px;
-  padding: 3px 0px 3px 0px;
-  font-size: 14px;
+  /* display: flex;
+  align-items: center; */
+  /* flex-wrap: wrap; */
+  /* margin: 15px auto 15px; */
+  /* padding: 5px auto 5px; */
+  /* text-align: center; */
+  width: 240px;
+  height: 30px;
+  font-size: 16px;
   cursor: pointer;
   background-color: rgb(50, 103, 216);
-  border: none;
-  outline: none;
-  color: white;
-}
-#delUser {
-  width: 85px;
-  /* height: 16px; */
-  margin: 2px 0px 5px 0px;
-  padding: 3px 0px 3px 0px;
-  font-size: 14px;
-  cursor: pointer;
-  background-color: rgb(214, 52, 52);
+  border-radius: 3px;
   border: none;
   outline: none;
   color: white;
