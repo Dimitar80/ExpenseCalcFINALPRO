@@ -47,11 +47,6 @@ class Navbar extends React.Component {
   };
   // SignOut Methods-END
 
-  // closeDelUser = () => {
-  //   console.log("Function called");
-  //   this.setState({ delShow: false });
-  // };
-
   render() {
     // console.log(this.state.signOut);
     // console.log(this.state.toggle);
@@ -91,21 +86,23 @@ class Navbar extends React.Component {
             </Link>
           </nav>
 
-          {this.state.signOut ? (
-            <SignOut
-              // ajdi={this.state.rowIdToDelete}}
-              clBtn={this.closeBt}
-              sO={this.signOut}
-            />
-          ) : null}
-
-          <div id="user">
+          <div id="user" class="dropdown">
             <img src="../../assets/img/DPPHOTO.jpg" alt="profileimg" />
+            {/* <div class="dropdown"> */}
             <h3 id="touch" onClick={this.signOut}>
               {localStorage.getItem("firstName") +
                 " " +
                 localStorage.getItem("lastName")}
             </h3>
+            <div class="dropdown-content">
+              {this.state.signOut ? (
+                <SignOut
+                  // ajdi={this.state.rowIdToDelete}}
+                  clBtn={this.closeBt}
+                  sO={this.signOut}
+                />
+              ) : null}
+            </div>
           </div>
         </div>
         {/* </header> */}

@@ -17,18 +17,34 @@ class DeleteUser extends React.Component {
 
   delDocsAndUser = () => {
     const id = this.props.userId;
+    const userot = this.props.fullName;
+    console.log(userot);
     axios
       .delete("http://127.0.0.1:8082/api/v1/products/user/" + id, {
         headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` }
       })
       .then(res => {
-        alert("This User files are successfully deleted from data base");
-        this.setState({ redirect: true });
+        // alert("This User files are successfully deleted from data base");
+        // this.setState({ redirect: true });
         console.log("Deleted: ", res);
         // this.props.fgetProducts(); // Povik do baza-nov call!!!???
+        console.log(res.data);
+        axios
+          .delete("http://127.0.0.1:8081/api/v1/auth/" + id, {
+            headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` }
+          })
+          .then(res => {
+            alert(`User Account for ${userot} is successfully deleted`);
+            // localStorage.clear();
+            this.setState({ redirect: true });
+            // this.props.history.push('/products') ???//
+          })
+          .catch(err => {
+            console.log(err + "Greska za Del User!");
+          });
       })
       .catch(error => {
-        console.log(error + " Greska");
+        console.log(error + " Greska za Del User files!");
       });
   };
 
@@ -39,7 +55,7 @@ class DeleteUser extends React.Component {
     // console.log(id);
     const { redirect } = this.state;
     if (redirect) {
-      return <Redirect to="/products" />;
+      return <Redirect to="/register" />;
     }
 
     const userFullName = this.props.fullName;
