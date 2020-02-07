@@ -1,2 +1,2 @@
 # ExpenseCalcFINALPRO
-ExpenseCalcFINALPRO-react/redux
+ExpenseCalcFINALPRO-react
