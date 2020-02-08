@@ -89,7 +89,13 @@ class Navbar extends React.Component {
           <div id="user" class="dropdown">
             <img src="../../assets/img/DPPHOTO.jpg" alt="profileimg" />
             {/* <div class="dropdown"> */}
-            <h3 id="touch" onClick={this.signOut}>
+            <h3
+              id="touch"
+              className={
+                !this.state.signOut ? "user-cl active-user-cl" : "user-cl"
+              }
+              onClick={this.signOut}
+            >
               {localStorage.getItem("firstName") +
                 " " +
                 localStorage.getItem("lastName")}

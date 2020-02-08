@@ -113,7 +113,7 @@
 
 #user h3 {
   font-size: 18px;
-  color: #576574;
+  /* color: #576574; */
   margin-left: 15px;
   margin-bottom: 0px;
   margin-top: 0px;
@@ -127,6 +127,28 @@
 }
 #touch:hover {
   color: red;
+}
+.user-cl {
+  /* width: 140px;
+  height: 50px;
+  border: 0;
+  border-radius: 5px; */
+  /* background: #c9e5dd; */
+  color: red;
+  /* font-size: 15px;
+  font-weight: bold;
+  outline: 0;
+  margin-right: 5px; */
+  cursor: pointer;
+}
+
+.active-user-cl {
+  /* background: #1dd1a1; */
+  color: #576574;
+  /* font-size: 15px;
+  font-weight: bold;
+  outline: 0; */
+  cursor: pointer;
 }
 .dropdown {
   position: relative;

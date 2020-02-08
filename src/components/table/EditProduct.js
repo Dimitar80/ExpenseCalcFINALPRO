@@ -158,6 +158,7 @@ class EditProduct extends React.Component {
                       <label className="eplabel">Purchase Date</label>
                       <input
                         type="date"
+                        max="2999-12-31"
                         className="eptextfield"
                         id="purchaseDate"
                         onChange={this.saveInputValue}

@@ -175,6 +175,7 @@ class UpdateUser extends React.Component {
                       <label className="eplabel">Date of Birth</label>
                       <input
                         type="date"
+                        max="2999-12-31"
                         className="eptextfield"
                         id="date_of_birth"
                         onChange={this.saveInputValue}

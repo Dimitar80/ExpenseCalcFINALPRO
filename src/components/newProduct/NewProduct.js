@@ -118,8 +118,8 @@ class NewProduct extends React.Component {
                   <p className="input-container">
                     <label className="nplabel">Purchase Date</label>
                     <input
-                      type="text"
-                      placeholder="year-month-day"
+                      type="date"
+                      max="2999-12-31"
                       className="nptextfield"
                       id="purchaseDate"
                       onChange={this.saveInputValue}
