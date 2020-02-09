@@ -15,14 +15,9 @@ class DeleteRow extends React.Component {
   render() {
     // console.log(this.props);
     // console.log(this.state.data)
-    // console.log(this.state.show);
-    // console.log(this.state.toggle);
     const id = this.props.ajdi;
     // console.log(this.props.proba[0].productName, "TESTIS");
-    // console.log(this.props.proba, "TESTIS");
-
     const names = this.props.proba;
-
     let pN = null;
     for (let i = 0; i < names.length; i++) {
       if (names[i]._id == id) {

@@ -16,7 +16,7 @@ class TableAll extends React.Component {
       // loading: false,
       rowIdToDelete: null,
       xmm: this.props.sortS
-      // z: false
+
       // show: true
     };
   }
@@ -42,7 +42,6 @@ class TableAll extends React.Component {
         this.setState({ show: false });
         console.log("Deleted: ", res);
         this.props.fgetProducts(); // Povik do baza-nov call!!!???
-        console.log(this.props.fgetProducts);
       })
       .catch(error => {
         console.log(error + " Greska");
@@ -84,7 +83,6 @@ class TableAll extends React.Component {
       </React.Fragment>
       // : <h2>Loading data...</h2>
 
-      /*: <h2>Loading data...</h2>*/
       /*: <h2>Loading data...</h2>*/
       /*: <h2>Loading data...</h2>*/
       /*: <h2>Loading data...</h2>*/

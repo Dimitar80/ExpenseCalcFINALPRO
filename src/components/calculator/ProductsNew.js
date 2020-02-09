@@ -4,6 +4,7 @@ import "../../assets/styles/ProductsNew.css";
 import "../../assets/styles/shared.css";
 import { Link } from "react-router-dom";
 import TableAll from "../table/TableAll";
+import DeleteRow from "../calculator/DeleteRow";
 
 // document.body.style.backgroundColor = 'blue';
 
@@ -126,6 +127,14 @@ class ProductsNew extends React.Component {
                 </select>
               </div>
             </div>
+            <div id="mainonebtn">
+              <Link
+                to="/newproduct"
+                style={{ textDecoration: "none", color: "#fff" }}
+              >
+                <button id="btnnewproduct">NEW PRODUCT</button>
+              </Link>
+            </div>
             <TableAll
               dataLoading={this.state.loading}
               data={this.state.data}
@@ -135,14 +144,22 @@ class ProductsNew extends React.Component {
               pp={this.state.pP}
             />
           </div>
-          <div id="mainonebtn">
+          {/* <div id="mainonebtn">
             <Link
               to="/newproduct"
               style={{ textDecoration: "none", color: "#fff" }}
             >
               <button id="btnnewproduct">NEW PRODUCT</button>
             </Link>
-          </div>
+          </div> */}
+          {/* {this.state.show && (
+            <DeleteRow
+              ajdi={this.state.rowIdToDelete}
+              clBtn={this.closeBt}
+              delRow={this.deleteRow}
+              proba={this.props.data}
+            />
+          )} */}
         </div>
       </React.Fragment>
     );

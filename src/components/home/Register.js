@@ -158,6 +158,7 @@ class Register extends React.Component {
                   <input
                     className="text-input"
                     type="date"
+                    max="2999-12-31"
                     id="date_of_birth"
                     onChange={this.saveUserData}
                   />
@@ -195,7 +196,6 @@ class Register extends React.Component {
               Or if you already have an account,
               <Link
                 to="/"
-                // activestyle={{ color: "red" }}
                 style={{
                   textDecoration: "none",
                   color: "#8d8d8d",

@@ -149,6 +149,32 @@ class Expenses extends React.Component {
     console.log(e.target.value);
   };
 
+  yearToYear = () => {
+    let selectedYear = Number(this.state.yearValue);
+    let OnlyfromYear = new Date(`${selectedYear}-01-01 00:00:00.000`).getTime();
+    let OnlytoYear = new Date(`${selectedYear}-12-31 23:59:59.000`).getTime();
+    this.setState({ loading: true });
+    axios
+      .get(
+        `http://127.0.0.1:8082/api/v1/products/?purcdate_from=
+      ${OnlyfromYear}&purcdate_to=${OnlytoYear}&sort=purchaseDate:desc`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`
+          }
+        }
+      )
+      .then(res => {
+        console.log("In TIMEOUT");
+        this.setState({ data: res.data, loading: false });
+        console.log(this.res.data);
+      })
+      .catch(err => {
+        this.setState({ loading: false });
+        console.log(err, "ERROR on Yarly at Expenses component");
+      });
+  };
+
   filterByMonthAndYear = () => {
     let selectedMonth = Number(this.state.monthValue);
     console.log("SelectedMonth at Months is SELECTED -", selectedMonth);
@@ -181,9 +207,10 @@ class Expenses extends React.Component {
           this.setState({ loading: false });
           console.log(err, "ERROR at Expenses component");
         });
-    } else {
-      console.log("Seleceted Month is not December");
     }
+    // else {
+    //   console.log("Seleceted Month is not December");
+    // }
 
     let dateFromYM = new Date(
       `${selectedYear}-${selectedMonth} 00:00:00.000`
@@ -194,38 +221,44 @@ class Expenses extends React.Component {
     ).getTime();
     console.log("dateToYM", dateToYM); //Mon Jan 01 2001 00:00:00//
 
-    if (selectedMonth === 0) {
+    if (
+      /*selectedMonth === 0 && this.state.yearValue === "Years"*/
+      selectedMonth === 0 &&
+      this.state.yearValue !== "Years"
+    ) {
       console.log(selectedMonth, " 0 index of month is selected");
       this.setState({ monthValue: "Months" }, () => {
-        console.log(this.state.monthValue);
-        let OnlyfromYear = new Date(
-          `${selectedYear}-01-01 00:00:00.000`
-        ).getTime();
-        let OnlytoYear = new Date(
-          `${selectedYear}-12-31 23:59:59.000`
-        ).getTime();
-        this.setState({ loading: true });
-        axios
-          .get(
-            `http://127.0.0.1:8082/api/v1/products/?purcdate_from=
-            ${OnlyfromYear}&purcdate_to=${OnlytoYear}&sort=purchaseDate:desc`,
-            {
-              headers: {
-                Authorization: `Bearer ${localStorage.getItem("jwt")}`
-              }
-            }
-          )
-          .then(res => {
-            console.log("In TIMEOUT");
-            this.setState({ data: res.data, loading: false });
-            console.log(this.res.data);
-          })
-          .catch(err => {
-            this.setState({ loading: false });
-            console.log(err, "ERROR on Yarly at Expenses component");
-          });
+        // console.log(this.state.monthValue);
+        this.yearToYear();
+        // let OnlyfromYear = new Date(
+        //   `${selectedYear}-01-01 00:00:00.000`
+        // ).getTime();
+        // let OnlytoYear = new Date(
+        //   `${selectedYear}-12-31 23:59:59.000`
+        // ).getTime();
+        // this.setState({ loading: true });
+        // axios
+        //   .get(
+        //     `http://127.0.0.1:8082/api/v1/products/?purcdate_from=
+        //     ${OnlyfromYear}&purcdate_to=${OnlytoYear}&sort=purchaseDate:desc`,
+        //     {
+        //       headers: {
+        //         Authorization: `Bearer ${localStorage.getItem("jwt")}`
+        //       }
+        //     }
+        //   )
+        //   .then(res => {
+        //     console.log("In TIMEOUT");
+        //     this.setState({ data: res.data, loading: false });
+        //     console.log(this.res.data);
+        //   })
+        //   .catch(err => {
+        //     this.setState({ loading: false });
+        //     console.log(err, "ERROR on Yarly at Expenses component");
+        //   });
       });
-    } else if (
+    }
+    if (
       selectedMonth !== 0 &&
       this.state.monthValue != "Months" &&
       this.state.yearValue === "Years"
@@ -234,8 +267,11 @@ class Expenses extends React.Component {
       //   <p>"Please select year too, to complete the request"</p>
       // </ReactTooltip>;
       alert("Please select year too, to complete the request");
+      this.getAllProductsInExp();
     } else if (
-      this.state.yearValue === "Years" /*&& selectedMonth === "Months"*/
+      this.state.yearValue === "Years"
+      // &&
+      // this.state.monthValue === "Months"
     ) {
       this.getAllProductsInExp();
     } else if (
@@ -246,7 +282,6 @@ class Expenses extends React.Component {
       this.state.yearValue != "Years"
     ) {
       this.setState({ loading: true });
-      console.log("Getting data");
       axios
         .get(
           `http://127.0.0.1:8082/api/v1/products/?purcdate_from=
@@ -265,31 +300,33 @@ class Expenses extends React.Component {
         });
     } else if (
       this.state.toggle === false &&
-      this.state.monthValue == "Months" &&
-      this.state.yearValue != "Years"
+      this.state.yearValue !== "Years" &&
+      this.state.monthValue == "Months"
     ) {
-      let OnlyfromYear = new Date(
-        `${selectedYear}-01-01 00:00:00.000`
-      ).getTime();
-      let OnlytoYear = new Date(`${selectedYear}-12-31 23:59:59.000`).getTime();
-      this.setState({ loading: true });
-      axios
-        .get(
-          `http://127.0.0.1:8082/api/v1/products/?purcdate_from=
-          ${OnlyfromYear}&purcdate_to=${OnlytoYear}&sort=purchaseDate:desc`,
-          {
-            headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` }
-          }
-        )
-        .then(res => {
-          console.log("In TIMEOUT");
-          this.setState({ data: res.data, loading: false });
-          console.log(this.res.data);
-        })
-        .catch(err => {
-          this.setState({ loading: false });
-          console.log(err, "ERROR on Yarly at Expenses component");
-        });
+      this.yearToYear();
+      // let selectedYear = Number(this.state.yearValue);
+      // let OnlyfromYear = new Date(
+      //   `${selectedYear}-01-01 00:00:00.000`
+      // ).getTime();
+      // let OnlytoYear = new Date(`${selectedYear}-12-31 23:59:59.000`).getTime();
+      // this.setState({ loading: true });
+      // axios
+      //   .get(
+      //     `http://127.0.0.1:8082/api/v1/products/?purcdate_from=
+      //     ${OnlyfromYear}&purcdate_to=${OnlytoYear}&sort=purchaseDate:desc`,
+      //     {
+      //       headers: { Authorization: `Bearer ${localStorage.getItem("jwt")}` }
+      //     }
+      //   )
+      //   .then(res => {
+      //     console.log("In TIMEOUT");
+      //     this.setState({ data: res.data, loading: false });
+      //     console.log(this.res.data);
+      //   })
+      //   .catch(err => {
+      //     this.setState({ loading: false });
+      //     console.log(err, "ERROR on Yarly at Expenses component");
+      //   });
     }
   };
 
@@ -317,7 +354,7 @@ class Expenses extends React.Component {
     if (userData.length > 0) {
       for (let g = 0; g < userData.length; g++) {
         userYears.push(userData[g].purchaseDate.slice(0, 4));
-        userYears.unshift("Years");
+        // userYears.unshift("Years");
       }
     } else {
       console.log("Loading... ");
@@ -388,6 +425,7 @@ class Expenses extends React.Component {
                     onChange={this.selectYValue}
                     value={this.state.yearValue}
                   >
+                    <option value="Years">Years</option>
                     {uniqueUserYears.map((year, i) => (
                       // console.log("In Select", i, year),
                       <option key={year} value={year}>
@@ -421,6 +459,7 @@ class Expenses extends React.Component {
                     onChange={e => this.selectMValue(e, false)}
                     value={this.state.yearValue}
                   >
+                    <option value="Years">Years</option>
                     {uniqueUserYears.map((year, i) => (
                       // console.log(i, year),
                       <option key={year} value={year}>
@@ -431,7 +470,12 @@ class Expenses extends React.Component {
                 </p>
               )}
             </div>
-            <TableAll dataLoading={this.state.loading} data={this.state.data} />
+            <TableAll
+              dataLoading={this.state.loading}
+              data={this.state.data}
+              mesec={Number(this.state.monthValue)}
+              godina={this.state.yearValue}
+            />
           </div>
           <div id="saldo">
             <h2>

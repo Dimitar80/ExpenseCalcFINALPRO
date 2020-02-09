@@ -86,21 +86,21 @@ class Navbar extends React.Component {
             </Link>
           </nav>
 
-          <div id="user" class="dropdown">
+          <div id="user" className="dropdown">
             <img src="../../assets/img/DPPHOTO.jpg" alt="profileimg" />
-            {/* <div class="dropdown"> */}
             <h3
               id="touch"
               className={
                 !this.state.signOut ? "user-cl active-user-cl" : "user-cl"
               }
+              // onMouseEnter ={this.signOut}
               onClick={this.signOut}
             >
               {localStorage.getItem("firstName") +
                 " " +
                 localStorage.getItem("lastName")}
             </h3>
-            <div class="dropdown-content">
+            <div className="dropdown-content">
               {this.state.signOut ? (
                 <SignOut
                   // ajdi={this.state.rowIdToDelete}}
